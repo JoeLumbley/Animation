@@ -20,6 +20,41 @@ ensuring a consistent and seamless experience for all users.
 ## Time-Based Motion
 
 
+Time-based motion is a technique used in game development to ensure that game objects move at a consistent speed, regardless of the frame rate.
+
+This is important because if an object's movement is tied to the frame rate, it can appear to move slower or faster on different devices or under different conditions.
+
+## DeltaTime
+
+```
+
+
+        DeltaTime = CurrentFrame - LastFrame 'Calculate delta time
+
+
+```
+
+
+
+To implement time-based motion, we use the elapsed time since the last frame was drawn (DeltaTime) to calculate the distance that the rectangle should move based on its speed (Velocity * DeltaTime).
+
+
+
+
+
+```
+
+        RectPostion.X += Velocity * DeltaTime.TotalSeconds 'Δs = V * Δt
+
+
+```
+
+This ensures that our rectangle moves at a consistent speed regardless of the frame rate.
+
+For example, if the frame rate is low, DeltaTime will be larger, and our rectangle will move a larger distance in that frame to compensate for the lower frame rate.
+
+
+
 ```
 
     Private Velocity As Single = 250.0F
