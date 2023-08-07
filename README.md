@@ -36,7 +36,7 @@ This is important because if an object's movement is tied to the frame rate, it 
 
 
 
-To implement time-based motion, we use the elapsed time since the last frame was drawn (DeltaTime) to calculate the distance that the rectangle should move based on its speed (Velocity * DeltaTime).
+To implement time-based motion, we use the elapsed time since the last frame was drawn (DeltaTime) to calculate the distance that the rectangle should move based on its Velocity * DeltaTime.
 
 
 
