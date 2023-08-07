@@ -20,9 +20,9 @@ ensuring a consistent and seamless experience for all users.
 ## Time-Based Motion
 
 
-Time-based motion is a technique used in game development to ensure that game objects move at a consistent speed, regardless of the frame rate.
+We are using Time-based motion to ensure that our rectangle moves at a consistent speed, regardless of the frame rate.
 
-This is important because if an object's movement is tied to the frame rate, it can appear to move slower or faster on different devices or under different conditions.
+This is important because if our rectangle's movement is tied to the frame rate, it can appear to move slower or faster on different devices or under different conditions.
 
 ## DeltaTime
 
