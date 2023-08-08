@@ -58,9 +58,9 @@ For example, if the frame rate is low, DeltaTime will be larger,
 
 Distance = Velocity * DeltaTime
 
-0.58415 = 250 * 0.0023366 - 427FPS
+0.58415 = 250 * 0.0023366 - 428.1 FPS = 1 / 0.0023366
 
-6.44235 = 250 * 0.0257694 - 39FPS
+6.44235 = 250 * 0.0257694 - 38.8 FPS = 1 / 0.0257694
 
 and our rectangle will move a larger distance in that frame to compensate.
 
