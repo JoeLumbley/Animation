@@ -27,7 +27,7 @@ To implement time-based motion, we use.
 DeltaTime is the time since the last frame was drawn.
 
 ```
-        DeltaTime = CurrentFrame - LastFrame
+DeltaTime = CurrentFrame - LastFrame
 ```
 
 ### Velocity
@@ -38,7 +38,7 @@ Velocity is the speed we want our rectangle to move, measured in pixels per seco
 We can adjust this value to change the speed of our rectangle.
 
 ```
-    Private Velocity As Single = 250.0F
+Private Velocity As Single = 250.0F
 ```
 
 
@@ -48,22 +48,45 @@ We calculate the distance that our rectangle should move based on its Velocity *
 
 
 ```
-        RectPostion.X += Velocity * DeltaTime.TotalSeconds 'Δs = V * Δt
+RectPostion.X += Velocity * DeltaTime.TotalSeconds 'Δs = V * Δt
 ```
 
 This ensures that our rectangle moves at a consistent speed regardless of the frame rate.
 
 
-For example, if the frame rate is low, DeltaTime will be larger, and our rectangle will move a larger distance in that frame to compensate for the lower frame rate.
+For example, if the frame rate is low, DeltaTime will be larger,
 
-Distance   =   Velocity * DeltaTime
+Distance = Velocity * DeltaTime
 
-  6.44235  =    250   * 0.0257694
+0.58415 = 250 * 0.0023366 - 427FPS
+
+6.44235 = 250 * 0.0257694 - 39FPS
+
+and our rectangle will move a larger distance in that frame to compensate.
+
+
+
   
-323.161163 =    250   * 1.2926446
+  
 
 
 
+```
+Rect.X = Math.Round(RectPostion.X)
+```
 
 
+Rect.X = RectPostion.X
+
+70 = 69.7753143
+
+383 = 382.522064
+
+630 = 630.4418
+
+573 = 573.354
+
+8 = 8.075825
+
+276 = 275.7165
 
