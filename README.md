@@ -56,13 +56,15 @@ This ensures that our rectangle moves at a consistent speed regardless of the fr
 
 For example, if the frame rate is low, DeltaTime will be larger,
 
+and our rectangle will move a larger distance in that frame to compensate.
+
 Distance = Velocity * DeltaTime
 
-0.58415 = 250 * 0.0023366 - 428.1 FPS = 1 / 0.0023366
+0.58415 = 250 * 0.0023366 (428.1 FPS High)
 
-6.44235 = 250 * 0.0257694 - 38.8 FPS = 1 / 0.0257694
+6.44235 = 250 * 0.0257694 (38.8 FPS Low)
 
-and our rectangle will move a larger distance in that frame to compensate.
+
 
 
 
