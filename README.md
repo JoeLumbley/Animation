@@ -46,33 +46,31 @@ Private Velocity As Single = 250.0F
 
 We calculate the distance that our rectangle should move based on its Velocity * DeltaTime.
 
-
-```
-RectPostion.X += Velocity * DeltaTime.TotalSeconds 'Δs = V * Δt
-```
+Distance = Velocity * DeltaTime
 
 This ensures that our rectangle moves at a consistent speed regardless of the frame rate.
-
 
 For example, if the frame rate is low, DeltaTime will be larger,
 
 and our rectangle will move a larger distance in that frame to compensate.
 
-Distance = Velocity * DeltaTime
+| Frames per Second | DeltaTime | Distance |
+| --- | --- | --- |
+| 428.1 High | 0.0023366 Seconds | 0.58415 Pixels|
+| 38.8 Low | 0.0257694 Seconds | 6.44235 Pixels|
 
-0.58415 = 250 * 0.0023366 (428.1 FPS High)
+### RectPostion.X
+```
+Private RectPostion As New Vector2(Rect.X, Rect.Y)
+```
 
-6.44235 = 250 * 0.0257694 (38.8 FPS Low)
-
-
-
-
-
+```
+RectPostion.X += Velocity * DeltaTime.TotalSeconds 'Δs = V * Δt
+```
   
-  
 
 
-
+### Rect.X
 ```
 Rect.X = Math.Round(RectPostion.X)
 ```
