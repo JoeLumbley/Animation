@@ -65,7 +65,7 @@ For example, if the frame rate is low, DeltaTime will be larger, and our rectang
 ```
 Private RectPostion As New Vector2(Rect.X, Rect.Y)
 ```
-We are using a Vector2 because it can store floating-point values, which allows for more precise positioning of the rectangle.
+We are using a Vector2 because it can store floating-point values, which allows for more precise positioning of our rectangle.
 
 69.7753143 a floating-point number
 
