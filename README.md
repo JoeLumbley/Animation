@@ -87,21 +87,17 @@ The += operator is used to update the value of RectPostion.X in place, adding th
 ```
 Private Rect As New Rectangle(0, 100, 300, 300)
 ```
-RectPosition is a Vector2 that represents the position of the rectangle.
 ```
 Rect.X = Math.Round(RectPostion.X)
 ```
-We use Math.Round to round the X component of RectPosition to the nearest integer value. We want to ensure that the position of our rectangle is always aligned with the pixels on the screen. The integer value is then used to draw our rectangle on our form using the DrawRectangle function.
+We use Math.Round to round the X component of RectPosition to the nearest integer value. We want to ensure that the position of our rectangle is always aligned with the pixels on the screen to avoid visual artifacts such as blurring or jagged edges.
 
+70 = 69.7753143
 
-Math.Round(RectPosition.X) is used to round the X-coordinate of a Rectangle object's position to the nearest integer value. This can be useful in situations where you want to ensure that the position of the rectangle is always aligned with the pixels on the screen.
-
-
-The code Rect.X = Math.Round(RectPosition.X) is used to round the X-coordinate of a Rectangle object's position to the nearest integer value. This can be useful in situations where you want to ensure that the position of the rectangle is always aligned with the pixels on the screen.
-
-For example, if you are animating a sprite on a computer screen, you may want to ensure that the sprite's position is always aligned with the pixels on the screen to avoid visual artifacts such as blurring or jagged edges. By rounding the X-coordinate of the sprite's position to the nearest integer value, you can ensure that it is always aligned with the pixels on the screen.
-
-The Math.Round function is used to perform the rounding operation, taking the X-coordinate of the rectangle's position (RectPosition.X) as its input and returning the nearest integer value. This value is then assigned to the X property of the Rectangle object (Rect.X) to update its position.
+```
+FillRectangle(Brushes.Purple, Rect)
+```
+The integer value is then used to draw our rectangle on our form using the FillRectangle function.
 
 Rect.X = RectPostion.X
 
