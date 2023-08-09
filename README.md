@@ -99,17 +99,5 @@ FillRectangle(Brushes.Purple, Rect)
 ```
 The integer value is then used to draw our rectangle on our form using the FillRectangle function.
 
-Rect.X = RectPostion.X
 
-70 = 69.7753143
-
-383 = 382.522064
-
-630 = 630.4418
-
-573 = 573.354
-
-8 = 8.075825
-
-276 = 275.7165
 
