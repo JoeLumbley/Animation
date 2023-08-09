@@ -65,10 +65,21 @@ For example, if the frame rate is low, DeltaTime will be larger, and our rectang
 ```
 Private RectPostion As New Vector2(Rect.X, Rect.Y)
 ```
+We are using a Vector2 because it can store floating-point values, which allows for more precise positioning of the rectangle.
+
+69.7753143 a floating-point number
+
+This is important for our animation as the position of our rectangle is updated rapidly and with high precision.
+
+We use vector arithmetic to calculate the new position of our rectangle based on its current position and its velocity.
 
 ```
 RectPostion.X += Velocity * DeltaTime.TotalSeconds 'Δs = V * Δt
 ```
+
+The += operator is used to update the value of RectPostion.X in place, adding the result of velocity * deltaTime to its current value. 
+
+
   
 
 
