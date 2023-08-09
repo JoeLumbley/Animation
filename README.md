@@ -48,7 +48,7 @@ We can adjust this value to change the speed of our rectangle.
 
 ### Distance
 
-We calculate the distance that our rectangle should move based on its velocity multiplied DeltaTime.
+We calculate the distance that our rectangle should move based on its velocity multiplied by DeltaTime.
 
 Distance = Velocity * DeltaTime
 
