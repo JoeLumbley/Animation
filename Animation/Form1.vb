@@ -107,7 +107,7 @@ Public Class Form1
 
                                       Loop
 
-                                      End
+                                      'End
 
                                   Catch ex As Exception
 
@@ -198,7 +198,7 @@ Public Class Form1
 
         DeltaTime = CurrentFrame - LastFrame 'Calculate delta time
 
-        LastFrame = Now 'Update last frame time
+        LastFrame = CurrentFrame 'Update last frame time
 
     End Sub
 
