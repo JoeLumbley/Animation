@@ -23,7 +23,9 @@ To implement time-based motion, we use.
 
 
 ### DeltaTime
-
+```
+Private DeltaTime As TimeSpan
+```
 DeltaTime is the time since the last frame was drawn.
 
 ```
@@ -32,27 +34,27 @@ DeltaTime = CurrentFrame - LastFrame
 
 ### Velocity
 
+```
+Private Velocity As Single = 250.0F
+```
+
 Velocity is the speed we want our rectangle to move, measured in pixels per second.
 
 
 We can adjust this value to change the speed of our rectangle.
 
-```
-Private Velocity As Single = 250.0F
-```
+
 
 
 ### Distance
 
-We calculate the distance that our rectangle should move based on its Velocity * DeltaTime.
+We calculate the distance that our rectangle should move based on its velocity multiplied DeltaTime.
 
 Distance = Velocity * DeltaTime
 
 This ensures that our rectangle moves at a consistent speed regardless of the frame rate.
 
-For example, if the frame rate is low, DeltaTime will be larger,
-
-and our rectangle will move a larger distance in that frame to compensate.
+For example, if the frame rate is low, DeltaTime will be larger, and our rectangle will move a larger distance in that frame to compensate.
 
 | Frames per Second | DeltaTime | Distance |
 | --- | --- | --- |
