@@ -87,12 +87,11 @@ The += operator is used to update the value of RectPostion.X in place, adding th
 ```
 Private Rect As New Rectangle(0, 100, 300, 300)
 ```
+We use Math.Round to round the X component of RectPosition to the nearest integer value.
 ```
 Rect.X = Math.Round(RectPostion.X)
 ```
-We use Math.Round to round the X component of RectPosition to the nearest integer value.
-
-In this example:
+Example:
 
 69.7753143 is our floating-point number.
 
