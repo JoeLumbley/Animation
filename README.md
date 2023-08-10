@@ -48,13 +48,13 @@ We can adjust this value to change the speed of our rectangle.
 
 ### Distance
 
-We calculate the distance that our rectangle should move based on its velocity multiplied by DeltaTime.
+We calculate the distance that our rectangle should move based on its velocity multiplied by deltaTime.
 
 Distance = Velocity * DeltaTime
 
 This ensures that our rectangle moves at a consistent speed regardless of the frame rate.
 
-For example, if the frame rate is low, DeltaTime will be larger, and our rectangle will move a larger distance in that frame to compensate.
+For example, if the frame rate is low, deltaTime will be larger, and our rectangle will move a larger distance in that frame to compensate.
 
 | Frames per Second | DeltaTime | Distance |
 | --- | --- | --- |
@@ -67,7 +67,7 @@ Private RectPostion As New Vector2(Rect.X, Rect.Y)
 ```
 We are using a Vector2 because it can store floating-point values, which allows for more precise positioning of our rectangle.
 
-69.7753143 a floating-point number
+69.7753143 is a floating-point number.
 
 This is important for our animation as the position of our rectangle is updated rapidly and with high precision.
 
@@ -92,7 +92,11 @@ Rect.X = Math.Round(RectPostion.X)
 ```
 We use Math.Round to round the X component of RectPosition to the nearest integer value.
 
-70 = 69.7753143
+In this example:
+
+69.7753143 is our floating-point number.
+
+70 is the nearest integer value.
 
 This ensures that the position of our rectangle is always aligned with the pixels on the screen.
 
