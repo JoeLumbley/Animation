@@ -69,6 +69,10 @@ RectPosition is a Vector2 that represents the position of our rectangle.
 Private RectPostion As New Vector2(Rect.X, Rect.Y)
 ```
 
+![Vec2XY_2](https://github.com/JoeLumbley/Animation/assets/77564255/fe99bc1f-6f92-4c4c-a312-993342d145c0)
+
+
+
 We are using a Vector2 because it can store single-precision floating-point values, which allows for more precise positioning of our rectangle.
 
 Example:
