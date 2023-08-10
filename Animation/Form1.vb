@@ -107,8 +107,6 @@ Public Class Form1
 
                                       Loop
 
-                                      'End
-
                                   Catch ex As Exception
 
                                       Debug.WriteLine(ex.ToString())
