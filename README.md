@@ -90,26 +90,18 @@ Private Rect As New Rectangle(0, 100, 300, 300)
 ```
 Rect.X = Math.Round(RectPostion.X)
 ```
-We use Math.Round to round the X component of RectPosition to the nearest integer value. We want to ensure that the position of our rectangle is always aligned with the pixels on the screen to avoid visual artifacts such as blurring or jagged edges.
+We use Math.Round to round the X component of RectPosition to the nearest integer value.
 
 70 = 69.7753143
+
+This ensures that the position of our rectangle is always aligned with the pixels on the screen.
+
+We do this to avoid visual artifacts such as blurring or jagged edges.
 
 ```
 FillRectangle(Brushes.Purple, Rect)
 ```
 The integer value is then used to draw our rectangle on our form using the FillRectangle function.
 
-Rect.X = RectPostion.X
 
-70 = 69.7753143
-
-383 = 382.522064
-
-630 = 630.4418
-
-573 = 573.354
-
-8 = 8.075825
-
-276 = 275.7165
 
