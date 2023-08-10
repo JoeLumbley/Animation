@@ -62,9 +62,13 @@ For example, if the frame rate is low, deltaTime will be larger, and our rectang
 | 38.8 Low | 0.0257694 Seconds | 6.44235 Pixels|
 
 ### RectPostion.X
+
+RectPosition is a Vector2 that represents the position of our rectangle.
+
 ```
 Private RectPostion As New Vector2(Rect.X, Rect.Y)
 ```
+
 We are using a Vector2 because it can store single-precision floating-point values, which allows for more precise positioning of our rectangle.
 
 Example:
@@ -89,23 +93,30 @@ The += operator is used to update the value of RectPostion.X in place, adding th
 ```
 Private Rect As New Rectangle(0, 100, 300, 300)
 ```
-We use Math.Round to round the X component of RectPosition to the nearest integer value.
-```
-Rect.X = Math.Round(RectPostion.X)
-```
-Example:
-
-The value of RectPostion.X is 69.7753143.
-
-The nearest integer value is 70 and that is the value we set Rect.X to.
+When drawing our rectangle to the screen we use the integer representation of its position rather than the Vector2 representation.
 
 This ensures that the position of our rectangle is always aligned with the pixels on the screen.
 
 We do this to avoid visual artifacts such as blurring or jagged edges.
 
+We use Math.Round to round the X component of RectPosition to the nearest integer value.
+
+```
+Rect.X = Math.Round(RectPostion.X)
+```
+
+Example:
+
+The value of RectPostion.X is 69.7753143
+
+The nearest integer value is 70
+
+So we set Rect.X to 70
+
 ```
 FillRectangle(Brushes.Purple, Rect)
 ```
+
 The integer value is then used to draw our rectangle on our form using the FillRectangle function.
 
 
