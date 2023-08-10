@@ -93,9 +93,9 @@ Rect.X = Math.Round(RectPostion.X)
 ```
 Example:
 
-69.7753143 is our floating-point number.
+The value of RectPostion.X is 69.7753143.
 
-70 is the nearest integer value.
+The nearest integer value is 70 and that is the value we set Rect.X to.
 
 This ensures that the position of our rectangle is always aligned with the pixels on the screen.
 
