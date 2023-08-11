@@ -282,7 +282,11 @@ Public Class Form1
 
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
 
+        'Place the FPS display at the bottom of the client area.
         FPS_Postion.Y = ClientRectangle.Bottom - 75
+
+        'Center our rectangle vertically in the client area of our form.
+        Rect.Y = ClientRectangle.Height \ 2 - Rect.Height \ 2
 
     End Sub
 
