@@ -48,13 +48,13 @@ We can adjust this value to change the speed of our rectangle.
 
 ### Distance
 
-We calculate the distance that our rectangle should move based on its velocity multiplied by DeltaTime.
+We calculate the distance that our rectangle should move based on its velocity multiplied by deltaTime.
 
 Distance = Velocity * DeltaTime
 
 This ensures that our rectangle moves at a consistent speed regardless of the frame rate.
 
-For example, if the frame rate is low, DeltaTime will be larger, and our rectangle will move a larger distance in that frame to compensate.
+For example, if the frame rate is low, deltaTime will be larger, and our rectangle will move a larger distance in that frame to compensate.
 
 | Frames per Second | DeltaTime | Distance |
 | --- | --- | --- |
@@ -62,20 +62,30 @@ For example, if the frame rate is low, DeltaTime will be larger, and our rectang
 | 38.8 Low | 0.0257694 Seconds | 6.44235 Pixels|
 
 ### RectPostion.X
+
+RectPosition is a Vector2 that represents the position of our rectangle.
+
 ```
 Private RectPostion As New Vector2(Rect.X, Rect.Y)
 ```
-We are using a Vector2 because it can store floating-point values, which allows for more precise positioning of our rectangle.
 
-69.7753143 a floating-point number
+![Vec2XY_3](https://github.com/JoeLumbley/Animation/assets/77564255/3ac4b43b-50f6-45ce-ae1b-34bd28714d6e)
+
+
+
+We are using a Vector2 because it can store single-precision floating-point values, which allows for more precise positioning of our rectangle.
+
+Example:
+
+69.7753143 is a single-precision floating-point number (Single).
 
 This is important for our animation as the position of our rectangle is updated rapidly and with high precision.
-
-We use vector arithmetic to calculate the new position of our rectangle based on its current position and its velocity.
 
 ```
 RectPostion.X += Velocity * DeltaTime.TotalSeconds 'Δs = V * Δt
 ```
+
+We use vector arithmetic to calculate the new position of our rectangle based on its current position and its velocity.
 
 The += operator is used to update the value of RectPostion.X in place, adding the result of velocity * deltaTime to its current value. 
 
@@ -87,20 +97,30 @@ The += operator is used to update the value of RectPostion.X in place, adding th
 ```
 Private Rect As New Rectangle(0, 100, 300, 300)
 ```
-```
-Rect.X = Math.Round(RectPostion.X)
-```
-We use Math.Round to round the X component of RectPosition to the nearest integer value.
-
-70 = 69.7753143
+When drawing our rectangle to the screen we use the integer representation of its position rather than the Vector2 representation.
 
 This ensures that the position of our rectangle is always aligned with the pixels on the screen.
 
 We do this to avoid visual artifacts such as blurring or jagged edges.
 
+We use Math.Round to round the X component of RectPosition to the nearest integer value.
+
+```
+Rect.X = Math.Round(RectPostion.X)
+```
+
+Example:
+
+The value of RectPostion.X is 69.7753143
+
+The nearest integer value is 70
+
+So we set Rect.X to 70
+
 ```
 FillRectangle(Brushes.Purple, Rect)
 ```
+
 The integer value is then used to draw our rectangle on our form using the FillRectangle function.
 
 
