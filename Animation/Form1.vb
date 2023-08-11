@@ -214,19 +214,7 @@ Public Class Form1
     End Sub
 
     Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
-
-        With Buffer.Graphics
-
-            .Clear(Color.Black)
-
-            .FillRectangle(Brushes.Purple, Rect)
-
-            .DrawString("Code with Joe", CWJFont, Brushes.White, Rect, AlineCenterMiddle)
-
-            'Draw frames per second display.
-            .DrawString(FPS.ToString & " FPS", FPSFont, Brushes.MediumOrchid, FPS_Postion)
-
-        End With
+        DrawFrame()
 
         'Show buffer on form.
         Buffer.Render(e.Graphics)
@@ -256,6 +244,21 @@ Public Class Form1
 
         UpdateFrameCounter()
 
+    End Sub
+
+    Private Sub DrawFrame()
+        With Buffer.Graphics
+
+            .Clear(Color.Black)
+
+            .FillRectangle(Brushes.Purple, Rect)
+
+            .DrawString("Code with Joe", CWJFont, Brushes.White, Rect, AlineCenterMiddle)
+
+            'Draw frames per second display.
+            .DrawString(FPS.ToString & " FPS", FPSFont, Brushes.MediumOrchid, FPS_Postion)
+
+        End With
     End Sub
 
     Private Sub UpdateFrameCounter()
