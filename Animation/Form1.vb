@@ -215,14 +215,18 @@ Public Class Form1
 
     Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
 
-        Buffer.Graphics.Clear(Color.Black)
+        With Buffer.Graphics
 
-        Buffer.Graphics.FillRectangle(Brushes.Purple, Rect)
+            .Clear(Color.Black)
 
-        Buffer.Graphics.DrawString("Code with Joe", CWJFont, Brushes.White, Rect, AlineCenterMiddle)
+            .FillRectangle(Brushes.Purple, Rect)
 
-        'Draw frames per second display.
-        Buffer.Graphics.DrawString(FPS.ToString & " FPS", FPSFont, Brushes.MediumOrchid, FPS_Postion)
+            .DrawString("Code with Joe", CWJFont, Brushes.White, Rect, AlineCenterMiddle)
+
+            'Draw frames per second display.
+            .DrawString(FPS.ToString & " FPS", FPSFont, Brushes.MediumOrchid, FPS_Postion)
+
+        End With
 
         'Show buffer on form.
         Buffer.Render(e.Graphics)
@@ -240,7 +244,7 @@ Public Class Form1
             'Bug Fix
             .CompositingMode = Drawing2D.CompositingMode.SourceOver 'Don't Change.
             'To fix draw string error with anti aliasing: "Parameters not valid."
-            'I set the compositing mode to source over.
+            'Set the compositing mode to source over.
 
             .TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAliasGridFit
             .SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
