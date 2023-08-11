@@ -170,6 +170,17 @@ Public Class Form1
 
     End Sub
 
+    Private Sub UpdateDeltaTime()
+        'Delta time (Δt) is the elapsed time since the last frame.
+
+        CurrentFrame = Now
+
+        DeltaTime = CurrentFrame - LastFrame 'Calculate delta time
+
+        LastFrame = CurrentFrame 'Update last frame time
+
+    End Sub
+
     Private Sub MoveRectangle()
 
         'Move the rectangle to the right.
@@ -189,17 +200,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateDeltaTime()
-        'Delta time (Δt) is the elapsed time since the last frame.
-
-        CurrentFrame = Now
-
-        DeltaTime = CurrentFrame - LastFrame 'Calculate delta time
-
-        LastFrame = CurrentFrame 'Update last frame time
-
-    End Sub
-
     Private Sub InitializeBuffer()
 
         'Set context to the context of this app.
@@ -214,6 +214,7 @@ Public Class Form1
     End Sub
 
     Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
+
         DrawFrame()
 
         'Show buffer on form.
@@ -247,6 +248,7 @@ Public Class Form1
     End Sub
 
     Private Sub DrawFrame()
+
         With Buffer.Graphics
 
             .Clear(Color.Black)
@@ -259,6 +261,7 @@ Public Class Form1
             .DrawString(FPS.ToString & " FPS", FPSFont, Brushes.MediumOrchid, FPS_Postion)
 
         End With
+
     End Sub
 
     Private Sub UpdateFrameCounter()
