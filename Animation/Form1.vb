@@ -68,7 +68,7 @@ Public Class Form1
 
     Private DeltaTime As TimeSpan = CurrentFrame - LastFrame 'Initialize delta time to 0
 
-    Private Velocity As Single = 250.0F
+    Private Velocity As Single = 100.0F
 
     Private ReadOnly AlineCenter As New StringFormat With {.Alignment = StringAlignment.Center}
 
@@ -115,53 +115,6 @@ Public Class Form1
 
                               End Sub)
 
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        InitializeApp()
-
-    End Sub
-
-    Private Sub InitializeApp()
-
-        InitializeForm()
-
-        InitializeBuffer()
-
-        InitializeTimer1()
-
-    End Sub
-
-    Private Sub InitializeForm()
-
-        Text = "Animation - Code with Joe"
-
-        SetStyle(ControlStyles.UserPaint, True)
-
-        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
-
-        SetStyle(ControlStyles.AllPaintingInWmPaint, True)
-
-    End Sub
-
-    Private Sub InitializeTimer1()
-
-        'For a capped frame rate use timer and set interval.
-        'Set tick rate to 60 ticks per second. 1 second = 1000 milliseconds.
-        Timer1.Interval = 15 '16.66666666666667 ms = 1000 ms / 60 ticks
-
-        'Timer1.Start()
-
-    End Sub
-
-    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        'Every tick of timer do the following...
-
-        UpdateFrame()
-
-        Refresh() 'Calls OnPaint Event
-
-    End Sub
-
     Private Sub UpdateFrame()
 
         UpdateDeltaTime()
@@ -200,6 +153,59 @@ Public Class Form1
 
     End Sub
 
+    Private Sub DrawFrame()
+
+        With Buffer.Graphics
+
+            .CompositingMode = Drawing2D.CompositingMode.SourceCopy
+            .PixelOffsetMode = Drawing2D.PixelOffsetMode.None
+
+            .Clear(Color.Black)
+
+            .FillRectangle(Brushes.Green, Rect)
+
+            .CompositingMode = Drawing2D.CompositingMode.SourceOver
+            .TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAliasGridFit
+            .SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
+            .CompositingQuality = Drawing2D.CompositingQuality.HighQuality
+            .InterpolationMode = Drawing2D.InterpolationMode.Bicubic
+            .PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
+
+            .DrawString("Code with Joe", CWJFont, Brushes.White, Rect, AlineCenterMiddle)
+
+            'Draw frames per second display.
+            .DrawString(FPS.ToString & " FPS", FPSFont, Brushes.MediumOrchid, FPS_Postion)
+
+        End With
+
+    End Sub
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        InitializeApp()
+
+    End Sub
+
+    Private Sub InitializeApp()
+
+        InitializeForm()
+
+        InitializeBuffer()
+
+    End Sub
+
+    Private Sub InitializeForm()
+
+        Text = "Animation - Code with Joe"
+
+        SetStyle(ControlStyles.UserPaint, True)
+
+        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
+
+        SetStyle(ControlStyles.AllPaintingInWmPaint, True)
+
+    End Sub
+
     Private Sub InitializeBuffer()
 
         'Set context to the context of this app.
@@ -227,42 +233,10 @@ Public Class Form1
         'Create new buffer.
         Buffer = Context.Allocate(CreateGraphics(), ClientRectangle)
 
-        'Use these settings when drawing to the backbuffer.
-        With Buffer.Graphics
-
-            'Bug Fix
-            .CompositingMode = Drawing2D.CompositingMode.SourceOver 'Don't Change.
-            'To fix draw string error with anti aliasing: "Parameters not valid."
-            'Set the compositing mode to source over.
-
-            .TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAliasGridFit
-            .SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-            .CompositingQuality = Drawing2D.CompositingQuality.HighQuality
-            .InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
-            .PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
-
-        End With
-
         UpdateFrameCounter()
 
     End Sub
 
-    Private Sub DrawFrame()
-
-        With Buffer.Graphics
-
-            .Clear(Color.Black)
-
-            .FillRectangle(Brushes.Purple, Rect)
-
-            .DrawString("Code with Joe", CWJFont, Brushes.White, Rect, AlineCenterMiddle)
-
-            'Draw frames per second display.
-            .DrawString(FPS.ToString & " FPS", FPSFont, Brushes.MediumOrchid, FPS_Postion)
-
-        End With
-
-    End Sub
 
     Private Sub UpdateFrameCounter()
 
