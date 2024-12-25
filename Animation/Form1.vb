@@ -128,7 +128,7 @@ Public Class Form1
 
     Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
 
-        AllocateBuffer(e)
+        AllocateBuffer()
 
         DrawFrame()
 
@@ -154,13 +154,38 @@ Public Class Form1
         MoveRectangle()
 
     End Sub
+    Private Sub InitializeBuffer()
 
-    Private Sub AllocateBuffer(e As PaintEventArgs)
+        'Set context to the context of this app.
+        Context = BufferedGraphicsManager.Current
+
+        'Set buffer size to the primary working area.
+        Context.MaximumBuffer = Screen.PrimaryScreen.WorkingArea.Size
+
+        AllocateBuffer()
+
+        ''Create buffer.
+        'Buffer = Context.Allocate(CreateGraphics(), ClientRectangle)
+
+        'With Buffer.Graphics
+
+        '    .CompositingMode = Drawing2D.CompositingMode.SourceOver
+        '    .TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAliasGridFit
+        '    .SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
+        '    .CompositingQuality = Drawing2D.CompositingQuality.HighQuality
+        '    .InterpolationMode = Drawing2D.InterpolationMode.Bicubic
+        '    .PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
+
+        'End With
+
+    End Sub
+
+    Private Sub AllocateBuffer()
 
         ' Allocate the buffer if it hasn't been allocated yet
         If Buffer Is Nothing Then
 
-            Buffer = Context.Allocate(e.Graphics, ClientRectangle)
+            Buffer = Context.Allocate(CreateGraphics(), ClientRectangle)
 
             With Buffer.Graphics
 
@@ -261,29 +286,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub InitializeBuffer()
-
-        'Set context to the context of this app.
-        Context = BufferedGraphicsManager.Current
-
-        'Set buffer size to the primary working area.
-        Context.MaximumBuffer = Screen.PrimaryScreen.WorkingArea.Size
-
-        'Create buffer.
-        Buffer = Context.Allocate(CreateGraphics(), ClientRectangle)
-
-        With Buffer.Graphics
-
-            .CompositingMode = Drawing2D.CompositingMode.SourceOver
-            .TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAliasGridFit
-            .SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-            .CompositingQuality = Drawing2D.CompositingQuality.HighQuality
-            .InterpolationMode = Drawing2D.InterpolationMode.Bicubic
-            .PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
-
-        End With
-
-    End Sub
 
     Private Sub UpdateFrameCounter()
 
