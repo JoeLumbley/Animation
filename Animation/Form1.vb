@@ -27,13 +27,6 @@
 'OUT OF Or IN CONNECTION WITH THE SOFTWARE Or THE USE Or OTHER DEALINGS IN THE
 'SOFTWARE.
 
-'Monica is our an AI assistant.
-'https://monica.im/
-
-'I'm making a video to explain the code on my YouTube channel.
-'https://www.youtube.com/@codewithjoe6074
-'
-
 Imports System.Drawing.Drawing2D
 Imports System.Numerics
 
@@ -273,4 +266,5 @@ Public Class Form1
 
 End Class
 
-
+' Monica is our an AI assistant.
+' https://monica.im/
