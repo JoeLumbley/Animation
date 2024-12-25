@@ -83,8 +83,6 @@ Public Class Form1
         ' Center our rectangle vertically in the client area of our form.
         RectPostion.Y = ClientRectangle.Height \ 2 - Rect.Height \ 2
 
-        Rect.Y = RectPostion.Y
-
         DisposeBuffer()
 
     End Sub
@@ -167,7 +165,7 @@ Public Class Form1
 
             .FillRectangle(Brushes.Black, RectPostion.X, RectPostion.Y, Rect.Width, Rect.Height)
 
-            .DrawString("Code with Joe", CWJFont, Brushes.White, Rect, AlineCenterMiddle)
+            .DrawString("Code with Joe", CWJFont, Brushes.White, New RectangleF(RectPostion.X, RectPostion.Y, Rect.Width, Rect.Height), AlineCenterMiddle)
 
             ' Draw frames per second display.
             .DrawString(FPS.ToString & " FPS", FPSFont, Brushes.Black, FPS_Postion)
@@ -216,7 +214,7 @@ Public Class Form1
 
         End If
 
-        Rect.X = Math.Round(RectPostion.X)
+        'Rect.X = Math.Round(RectPostion.X)
 
     End Sub
 
