@@ -34,9 +34,7 @@
 'https://www.youtube.com/@codewithjoe6074
 '
 
-'Imports System.Threading
 Imports System.Numerics
-'Imports System.ComponentModel
 
 Public Class Form1
 
@@ -74,8 +72,6 @@ Public Class Form1
 
     Private ReadOnly AlineCenterMiddle As New StringFormat With {.Alignment = StringAlignment.Center,
                                                                  .LineAlignment = StringAlignment.Center}
-
-    'Private GameLoopCancellationToken As New CancellationTokenSource()
 
     Private ReadOnly CWJFont As New Font(FontFamily.GenericSansSerif, 38)
 
