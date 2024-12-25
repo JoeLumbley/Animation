@@ -34,6 +34,7 @@
 'https://www.youtube.com/@codewithjoe6074
 '
 
+Imports System.Drawing.Drawing2D
 Imports System.Numerics
 
 Public Class Form1
@@ -91,27 +92,29 @@ Public Class Form1
 
         Rect.Y = RectPostion.Y
 
-        If Buffer IsNot Nothing Then
+        DisposeBuffer()
 
-            'Release memory used by buffer.
-            Buffer.Dispose()
-            Buffer = Nothing
+        'If Buffer IsNot Nothing Then
 
-            'Create new buffer.
-            Buffer = Context.Allocate(CreateGraphics(), ClientRectangle)
+        '    'Release memory used by buffer.
+        '    Buffer.Dispose()
+        '    Buffer = Nothing
 
-            With Buffer.Graphics
+        '    'Create new buffer.
+        '    Buffer = Context.Allocate(CreateGraphics(), ClientRectangle)
 
-                .CompositingMode = Drawing2D.CompositingMode.SourceOver
-                .TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAliasGridFit
-                .SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-                .CompositingQuality = Drawing2D.CompositingQuality.HighQuality
-                .InterpolationMode = Drawing2D.InterpolationMode.Bicubic
-                .PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
+        '    With Buffer.Graphics
 
-            End With
+        '        .CompositingMode = Drawing2D.CompositingMode.SourceOver
+        '        .TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAliasGridFit
+        '        .SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
+        '        .CompositingQuality = Drawing2D.CompositingQuality.HighQuality
+        '        .InterpolationMode = Drawing2D.InterpolationMode.Bicubic
+        '        .PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
 
-        End If
+        '    End With
+
+        'End If
 
     End Sub
 
@@ -125,7 +128,7 @@ Public Class Form1
 
     Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
 
-        MyBase.OnPaint(e)
+        AllocateBuffer(e)
 
         DrawFrame()
 
@@ -133,6 +136,8 @@ Public Class Form1
         Buffer.Render(e.Graphics)
 
         UpdateFrameCounter()
+
+        MyBase.OnPaint(e)
 
     End Sub
 
@@ -150,6 +155,29 @@ Public Class Form1
 
     End Sub
 
+    Private Sub AllocateBuffer(e As PaintEventArgs)
+
+        ' Allocate the buffer if it hasn't been allocated yet
+        If Buffer Is Nothing Then
+
+            Buffer = Context.Allocate(e.Graphics, ClientRectangle)
+
+            With Buffer.Graphics
+
+                .CompositingMode = Drawing2D.CompositingMode.SourceOver
+                .TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
+                .SmoothingMode = Drawing2D.SmoothingMode.HighQuality
+                .PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
+                .CompositingQuality = Drawing2D.CompositingQuality.HighQuality
+                .InterpolationMode = InterpolationMode.HighQualityBicubic
+                .TextContrast = SmoothingMode.HighQuality
+
+            End With
+
+        End If
+
+    End Sub
+
     Private Sub DrawFrame()
 
         With Buffer.Graphics
@@ -164,6 +192,20 @@ Public Class Form1
             .DrawString(FPS.ToString & " FPS", FPSFont, Brushes.White, FPS_Postion)
 
         End With
+
+    End Sub
+
+    Private Sub DisposeBuffer()
+
+        If Buffer IsNot Nothing Then
+
+            Buffer.Dispose()
+
+            Buffer = Nothing ' Set to Nothing to avoid using a disposed object
+
+            ' The buffer will be reallocated in OnPaint
+
+        End If
 
     End Sub
 
