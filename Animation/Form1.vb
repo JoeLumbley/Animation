@@ -77,21 +77,29 @@ Public Class Form1
 
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
 
-        ' Place the FPS display at the bottom of the client area.
-        FPS_Postion.Y = ClientRectangle.Bottom - 75
+        If Not WindowState = FormWindowState.Minimized Then
 
-        ' Center our rectangle vertically in the client area of our form.
-        RectPostion.Y = ClientRectangle.Height \ 2 - Rect.Height \ 2
+            ' Place the FPS display at the bottom of the client area.
+            FPS_Postion.Y = ClientRectangle.Bottom - 75
 
-        DisposeBuffer()
+            ' Center our rectangle vertically in the client area of our form.
+            RectPostion.Y = ClientRectangle.Height \ 2 - Rect.Height \ 2
+
+            DisposeBuffer()
+
+        End If
 
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
-        UpdateFrame()
+        If Not WindowState = FormWindowState.Minimized Then
 
-        Invalidate()
+            UpdateFrame()
+
+            Invalidate() ' Calls OnPaint Sub
+
+        End If
 
     End Sub
 
@@ -231,11 +239,15 @@ Public Class Form1
 
     Private Sub InitializeForm()
 
+        CenterToScreen()
+
         SetStyle(ControlStyles.OptimizedDoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
 
         SetStyle(ControlStyles.AllPaintingInWmPaint, True)
 
         Text = "Animation - Code with Joe"
+
+        Me.WindowState = FormWindowState.Maximized
 
     End Sub
 
