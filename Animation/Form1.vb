@@ -170,7 +170,7 @@ Public Class Form1
             .DrawString("Code with Joe", CWJFont, Brushes.White, Rect, AlineCenterMiddle)
 
             ' Draw frames per second display.
-            .DrawString(FPS.ToString & " FPS", FPSFont, Brushes.White, FPS_Postion)
+            .DrawString(FPS.ToString & " FPS", FPSFont, Brushes.Black, FPS_Postion)
 
         End With
 
