@@ -123,6 +123,7 @@ Public Class Form1
         MoveRectangle()
 
     End Sub
+
     Private Sub InitializeBuffer()
 
         ' Set context to the context of this app.
@@ -213,8 +214,6 @@ Public Class Form1
             RectPostion.X = ClientRectangle.Left - Rect.Width
 
         End If
-
-        'Rect.X = Math.Round(RectPostion.X)
 
     End Sub
 
