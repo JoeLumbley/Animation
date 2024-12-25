@@ -84,37 +84,15 @@ Public Class Form1
 
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
 
-        'Place the FPS display at the bottom of the client area.
+        ' Place the FPS display at the bottom of the client area.
         FPS_Postion.Y = ClientRectangle.Bottom - 75
 
-        'Center our rectangle vertically in the client area of our form.
+        ' Center our rectangle vertically in the client area of our form.
         RectPostion.Y = ClientRectangle.Height \ 2 - Rect.Height \ 2
 
         Rect.Y = RectPostion.Y
 
         DisposeBuffer()
-
-        'If Buffer IsNot Nothing Then
-
-        '    'Release memory used by buffer.
-        '    Buffer.Dispose()
-        '    Buffer = Nothing
-
-        '    'Create new buffer.
-        '    Buffer = Context.Allocate(CreateGraphics(), ClientRectangle)
-
-        '    With Buffer.Graphics
-
-        '        .CompositingMode = Drawing2D.CompositingMode.SourceOver
-        '        .TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAliasGridFit
-        '        .SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-        '        .CompositingQuality = Drawing2D.CompositingQuality.HighQuality
-        '        .InterpolationMode = Drawing2D.InterpolationMode.Bicubic
-        '        .PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
-
-        '    End With
-
-        'End If
 
     End Sub
 
@@ -132,7 +110,7 @@ Public Class Form1
 
         DrawFrame()
 
-        'Show buffer on form.
+        ' Show buffer on form.
         Buffer.Render(e.Graphics)
 
         UpdateFrameCounter()
@@ -143,7 +121,7 @@ Public Class Form1
 
     Protected Overrides Sub OnPaintBackground(ByVal e As PaintEventArgs)
 
-        'Intentionally left blank. Do not remove.
+        ' Intentionally left blank. Do not remove.
 
     End Sub
 
@@ -156,33 +134,18 @@ Public Class Form1
     End Sub
     Private Sub InitializeBuffer()
 
-        'Set context to the context of this app.
+        ' Set context to the context of this app.
         Context = BufferedGraphicsManager.Current
 
-        'Set buffer size to the primary working area.
+        ' Set buffer size to the primary working area.
         Context.MaximumBuffer = Screen.PrimaryScreen.WorkingArea.Size
 
         AllocateBuffer()
-
-        ''Create buffer.
-        'Buffer = Context.Allocate(CreateGraphics(), ClientRectangle)
-
-        'With Buffer.Graphics
-
-        '    .CompositingMode = Drawing2D.CompositingMode.SourceOver
-        '    .TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAliasGridFit
-        '    .SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-        '    .CompositingQuality = Drawing2D.CompositingQuality.HighQuality
-        '    .InterpolationMode = Drawing2D.InterpolationMode.Bicubic
-        '    .PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
-
-        'End With
 
     End Sub
 
     Private Sub AllocateBuffer()
 
-        ' Allocate the buffer if it hasn't been allocated yet
         If Buffer Is Nothing Then
 
             Buffer = Context.Allocate(CreateGraphics(), ClientRectangle)
@@ -213,7 +176,7 @@ Public Class Form1
 
             .DrawString("Code with Joe", CWJFont, Brushes.White, Rect, AlineCenterMiddle)
 
-            'Draw frames per second display.
+            ' Draw frames per second display.
             .DrawString(FPS.ToString & " FPS", FPSFont, Brushes.White, FPS_Postion)
 
         End With
@@ -235,27 +198,27 @@ Public Class Form1
     End Sub
 
     Private Sub UpdateDeltaTime()
-        'Delta time (Δt) is the elapsed time since the last frame.
+        ' Delta time (Δt) is the elapsed time since the last frame.
 
         CurrentFrame = Now
 
-        DeltaTime = CurrentFrame - LastFrame 'Calculate delta time
+        DeltaTime = CurrentFrame - LastFrame ' Calculate delta time
 
-        LastFrame = CurrentFrame 'Update last frame time
+        LastFrame = CurrentFrame ' Update last frame time
 
     End Sub
 
     Private Sub MoveRectangle()
 
-        'Move the rectangle to the right.
+        ' Move the rectangle to the right.
         RectPostion.X += Velocity * DeltaTime.TotalSeconds 'Δs = V * Δt
-        'Displacement = Velocity x Delta Time
+        ' Displacement = Velocity x Delta Time
 
-        'Wraparound
-        'When the rectangle exits the right side of the client area.
+        ' Wraparound
+        ' When the rectangle exits the right side of the client area.
         If RectPostion.X > ClientRectangle.Right Then
 
-            'The rectangle reappears on the left side the client area.
+            ' The rectangle reappears on the left side the client area.
             RectPostion.X = ClientRectangle.Left - Rect.Width
 
         End If
@@ -285,7 +248,6 @@ Public Class Form1
         Text = "Animation - Code with Joe"
 
     End Sub
-
 
     Private Sub UpdateFrameCounter()
 
