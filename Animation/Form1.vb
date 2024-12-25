@@ -162,14 +162,14 @@ Public Class Form1
 
         With Buffer.Graphics
 
-            .Clear(Color.WhiteSmoke)
+            .Clear(Color.Black)
 
-            .FillRectangle(Brushes.Black, RectPostion.X, RectPostion.Y, Rect.Width, Rect.Height)
+            .FillRectangle(Brushes.Purple, RectPostion.X, RectPostion.Y, Rect.Width, Rect.Height)
 
             .DrawString("Code with Joe", CWJFont, Brushes.White, New RectangleF(RectPostion.X, RectPostion.Y, Rect.Width, Rect.Height), AlineCenterMiddle)
 
             ' Draw frames per second display.
-            .DrawString(FPS.ToString & " FPS", FPSFont, Brushes.Black, FPS_Postion)
+            .DrawString(FPS.ToString & " FPS", FPSFont, Brushes.MediumOrchid, FPS_Postion)
 
         End With
 
