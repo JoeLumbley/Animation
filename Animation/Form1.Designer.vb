@@ -26,6 +26,9 @@ Partial Class Form1
         Timer1 = New Timer(components)
         SuspendLayout()
         ' 
+        ' Timer1
+        ' 
+        ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(10F, 25F)

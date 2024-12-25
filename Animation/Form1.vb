@@ -34,9 +34,9 @@
 'https://www.youtube.com/@codewithjoe6074
 '
 
-Imports System.Threading
+'Imports System.Threading
 Imports System.Numerics
-Imports System.ComponentModel
+'Imports System.ComponentModel
 
 Public Class Form1
 
@@ -58,7 +58,7 @@ Public Class Form1
 
     Private FPS_Postion As New Point(0, 0)
 
-    Private Rect As New Rectangle(0, 100, 300, 300)
+    Private Rect As New Rectangle(0, 100, 256, 256)
 
     Private RectPostion As New Vector2(Rect.X, Rect.Y)
 
@@ -75,51 +75,99 @@ Public Class Form1
     Private ReadOnly AlineCenterMiddle As New StringFormat With {.Alignment = StringAlignment.Center,
                                                                  .LineAlignment = StringAlignment.Center}
 
-    Private GameLoopCancellationToken As New CancellationTokenSource()
+    'Private GameLoopCancellationToken As New CancellationTokenSource()
 
     Private ReadOnly CWJFont As New Font(FontFamily.GenericSansSerif, 38)
 
-    'For uncapped frame rate use GameLoopTask
-    Private GameLoopTask As Task =
-        Task.Factory.StartNew(Sub()
-                                  Try
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-                                      Thread.CurrentThread.Priority = ThreadPriority.Normal
+        InitializeApp()
 
-                                      Do While Not GameLoopCancellationToken.IsCancellationRequested
+    End Sub
 
-                                          UpdateFrame()
+    Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
 
-                                          'Refresh the form to trigger a redraw.
-                                          If Not Me.IsDisposed AndAlso Me.IsHandleCreated Then
+        'Place the FPS display at the bottom of the client area.
+        FPS_Postion.Y = ClientRectangle.Bottom - 75
 
-                                              Me.Invoke(Sub() Me.Refresh())
+        'Center our rectangle vertically in the client area of our form.
+        RectPostion.Y = ClientRectangle.Height \ 2 - Rect.Height \ 2
 
-                                          End If
+        Rect.Y = RectPostion.Y
 
-                                          ' Wait for next frame
-                                          Thread.Sleep(TimeSpan.Zero)
+        If Buffer IsNot Nothing Then
 
-                                          'Thread.Sleep(TimeSpan.Zero), the thread relinquishes the
-                                          'remainder of its time slice to any thread of equal priority
-                                          'that is ready to run. If there are no other threads of equal
-                                          'priority that are ready to run, execution of the current thread is not suspended.
+            'Release memory used by buffer.
+            Buffer.Dispose()
+            Buffer = Nothing
 
-                                      Loop
+            'Create new buffer.
+            Buffer = Context.Allocate(CreateGraphics(), ClientRectangle)
 
-                                  Catch ex As Exception
+            With Buffer.Graphics
 
-                                      Debug.WriteLine(ex.ToString())
+                .CompositingMode = Drawing2D.CompositingMode.SourceOver
+                .TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAliasGridFit
+                .SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
+                .CompositingQuality = Drawing2D.CompositingQuality.HighQuality
+                .InterpolationMode = Drawing2D.InterpolationMode.Bicubic
+                .PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
 
-                                  End Try
+            End With
 
-                              End Sub)
+        End If
+
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+
+        UpdateFrame()
+
+        Invalidate()
+
+    End Sub
+
+    Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
+
+        MyBase.OnPaint(e)
+
+        DrawFrame()
+
+        'Show buffer on form.
+        Buffer.Render(e.Graphics)
+
+        UpdateFrameCounter()
+
+    End Sub
+
+    Protected Overrides Sub OnPaintBackground(ByVal e As PaintEventArgs)
+
+        'Intentionally left blank. Do not remove.
+
+    End Sub
 
     Private Sub UpdateFrame()
 
         UpdateDeltaTime()
 
         MoveRectangle()
+
+    End Sub
+
+    Private Sub DrawFrame()
+
+        With Buffer.Graphics
+
+            .Clear(Color.WhiteSmoke)
+
+            .FillRectangle(Brushes.Black, RectPostion.X, RectPostion.Y, Rect.Width, Rect.Height)
+
+            .DrawString("Code with Joe", CWJFont, Brushes.White, Rect, AlineCenterMiddle)
+
+            'Draw frames per second display.
+            .DrawString(FPS.ToString & " FPS", FPSFont, Brushes.White, FPS_Postion)
+
+        End With
 
     End Sub
 
@@ -153,56 +201,25 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DrawFrame()
-
-        With Buffer.Graphics
-
-            .CompositingMode = Drawing2D.CompositingMode.SourceCopy
-            .PixelOffsetMode = Drawing2D.PixelOffsetMode.None
-
-            .Clear(Color.Black)
-
-            .FillRectangle(Brushes.Green, Rect)
-
-            .CompositingMode = Drawing2D.CompositingMode.SourceOver
-            .TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAliasGridFit
-            .SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-            .CompositingQuality = Drawing2D.CompositingQuality.HighQuality
-            .InterpolationMode = Drawing2D.InterpolationMode.Bicubic
-            .PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
-
-            .DrawString("Code with Joe", CWJFont, Brushes.White, Rect, AlineCenterMiddle)
-
-            'Draw frames per second display.
-            .DrawString(FPS.ToString & " FPS", FPSFont, Brushes.MediumOrchid, FPS_Postion)
-
-        End With
-
-    End Sub
-
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        InitializeApp()
-
-    End Sub
-
     Private Sub InitializeApp()
 
         InitializeForm()
 
         InitializeBuffer()
 
+        Timer1.Interval = 10
+
+        Timer1.Start()
+
     End Sub
 
     Private Sub InitializeForm()
 
-        Text = "Animation - Code with Joe"
-
-        SetStyle(ControlStyles.UserPaint, True)
-
-        SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
+        SetStyle(ControlStyles.OptimizedDoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
 
         SetStyle(ControlStyles.AllPaintingInWmPaint, True)
+
+        Text = "Animation - Code with Joe"
 
     End Sub
 
@@ -217,26 +234,18 @@ Public Class Form1
         'Create buffer.
         Buffer = Context.Allocate(CreateGraphics(), ClientRectangle)
 
-    End Sub
+        With Buffer.Graphics
 
-    Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
+            .CompositingMode = Drawing2D.CompositingMode.SourceOver
+            .TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAliasGridFit
+            .SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
+            .CompositingQuality = Drawing2D.CompositingQuality.HighQuality
+            .InterpolationMode = Drawing2D.InterpolationMode.Bicubic
+            .PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
 
-        DrawFrame()
-
-        'Show buffer on form.
-        Buffer.Render(e.Graphics)
-
-        'Release memory used by buffer.
-        Buffer.Dispose()
-        Buffer = Nothing
-
-        'Create new buffer.
-        Buffer = Context.Allocate(CreateGraphics(), ClientRectangle)
-
-        UpdateFrameCounter()
+        End With
 
     End Sub
-
 
     Private Sub UpdateFrameCounter()
 
@@ -257,28 +266,6 @@ Public Class Form1
             StartTime = Now
 
         End If
-
-    End Sub
-
-    Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
-
-        'Place the FPS display at the bottom of the client area.
-        FPS_Postion.Y = ClientRectangle.Bottom - 75
-
-        'Center our rectangle vertically in the client area of our form.
-        Rect.Y = ClientRectangle.Height \ 2 - Rect.Height \ 2
-
-    End Sub
-
-    Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
-
-        GameLoopCancellationToken.Cancel(True)
-
-    End Sub
-
-    Protected Overrides Sub OnPaintBackground(ByVal e As PaintEventArgs)
-
-        'Intentionally left blank. Do not remove.
 
     End Sub
 
