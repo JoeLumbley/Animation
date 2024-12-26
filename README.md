@@ -1,11 +1,9 @@
 # Animation
+**Animation** is the process of creating the illusion of movement by displaying a series of static images rapidly.
 
-Animation is the art of creating the illusion of motion by displaying a series of static images in quick succession.
+In our app, we animate a rectangle moving to the right. 
 
-In our app, we use animation to make it appear as though our rectangle is moving towards the right.
-
-
-
+The animation is designed to be frame-independent, meaning it will run smoothly regardless of the device's frame rate.
 
 ![001](https://github.com/JoeLumbley/Animation/assets/77564255/63b4a8fb-5097-4887-8d16-1b09fb8a209a)
 
@@ -15,9 +13,11 @@ In our app, we use animation to make it appear as though our rectangle is moving
 
 # Code Walkthrough
 
-## Overview
+This code demonstrates how to create a simple animation in a Windows Forms application using Visual Basic .NET.
 
-This code demonstrates how to create a simple animation in a Windows Forms application using Visual Basic .NET. The animation consists of a rectangle that moves horizontally across the screen, giving the illusion of motion. This lesson will break down the code line by line, making it easy for beginners to understand.
+The animation consists of a rectangle that moves horizontally across the screen, giving the illusion of motion. 
+
+This lesson will break down the code line by line, making it easy for beginners to understand.
 
 ## Table of Contents
 
