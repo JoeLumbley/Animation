@@ -15,7 +15,7 @@ This code demonstrates how to create a simple animation in a Windows Forms appli
 
 The animation consists of a rectangle that moves horizontally across the screen, giving the illusion of motion. 
 
-This lesson will break down the code line by line, making it easy for beginners to understand.
+This walkthrough will break down the code line by line.
 
 ## Table of Contents
 
