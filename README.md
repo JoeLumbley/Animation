@@ -1,11 +1,9 @@
 # Animation
 **Animation** is the process of creating the illusion of movement by displaying a series of static images rapidly.
 
-In our app, we animate a rectangle moving to the right. 
-
-The animation is designed to be frame-independent, meaning it will run smoothly regardless of the device's frame rate.
 
 ![001](https://github.com/JoeLumbley/Animation/assets/77564255/63b4a8fb-5097-4887-8d16-1b09fb8a209a)
+
 
 
 
