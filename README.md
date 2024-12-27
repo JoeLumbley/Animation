@@ -2,8 +2,8 @@
 **Animation** is the process of creating the illusion of movement by displaying a series of static images rapidly.
 
 
-![001](https://github.com/JoeLumbley/Animation/assets/77564255/63b4a8fb-5097-4887-8d16-1b09fb8a209a)
 
+![003](https://github.com/user-attachments/assets/5679d72b-eb92-4403-b09b-a552a5b54f89)
 
 
 
