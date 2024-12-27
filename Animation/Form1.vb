@@ -46,7 +46,7 @@ Public Class Form1
 
     Private FPS As Integer = 0
 
-    Private ReadOnly FPSFont As New Font(FontFamily.GenericSansSerif, 25)
+    Private ReadOnly FPSFont As New Font("Segoe UI", 25)
 
     Private FPS_Postion As New Point(0, 0)
 
@@ -60,14 +60,14 @@ Public Class Form1
 
     Private DeltaTime As TimeSpan = CurrentFrame - LastFrame 'Initialize delta time to 0
 
-    Private Velocity As Single = 100.0F
+    Private Velocity As Single = 25.0F
 
     Private ReadOnly AlineCenter As New StringFormat With {.Alignment = StringAlignment.Center}
 
     Private ReadOnly AlineCenterMiddle As New StringFormat With {.Alignment = StringAlignment.Center,
                                                                  .LineAlignment = StringAlignment.Center}
 
-    Private ReadOnly CWJFont As New Font(FontFamily.GenericSansSerif, 38)
+    Private ReadOnly CWJFont As New Font("Segoe UI", 30)
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -89,19 +89,6 @@ Public Class Form1
 
     End Sub
 
-    Private Sub ResizeRectangle()
-
-        ' Center our rectangle vertically in the client area of our form.
-        RectPostion.Y = ClientRectangle.Height \ 2 - Rect.Height \ 2
-
-    End Sub
-
-    Private Sub ResizeFPS()
-
-        ' Place the FPS display at the bottom of the client area.
-        FPS_Postion.Y = ClientRectangle.Bottom - 75
-
-    End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
@@ -282,6 +269,20 @@ Public Class Form1
             StartTime = Now
 
         End If
+
+    End Sub
+
+    Private Sub ResizeRectangle()
+
+        ' Center our rectangle vertically in the client area of our form.
+        RectPostion.Y = ClientRectangle.Height \ 2 - Rect.Height \ 2
+
+    End Sub
+
+    Private Sub ResizeFPS()
+
+        ' Place the FPS display at the bottom of the client area.
+        FPS_Postion.Y = ClientRectangle.Bottom - 75
 
     End Sub
 
