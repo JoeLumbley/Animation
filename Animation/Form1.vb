@@ -79,8 +79,7 @@ Public Class Form1
 
         If Not WindowState = FormWindowState.Minimized Then
 
-            ' Place the FPS display at the bottom of the client area.
-            FPS_Postion.Y = ClientRectangle.Bottom - 75
+            ResizeFPS()
 
             ' Center our rectangle vertically in the client area of our form.
             RectPostion.Y = ClientRectangle.Height \ 2 - Rect.Height \ 2
@@ -88,6 +87,13 @@ Public Class Form1
             DisposeBuffer()
 
         End If
+
+    End Sub
+
+    Private Sub ResizeFPS()
+
+        ' Place the FPS display at the bottom of the client area.
+        FPS_Postion.Y = ClientRectangle.Bottom - 75
 
     End Sub
 
