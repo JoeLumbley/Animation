@@ -81,12 +81,18 @@ Public Class Form1
 
             ResizeFPS()
 
-            ' Center our rectangle vertically in the client area of our form.
-            RectPostion.Y = ClientRectangle.Height \ 2 - Rect.Height \ 2
+            ResizeRectangle()
 
             DisposeBuffer()
 
         End If
+
+    End Sub
+
+    Private Sub ResizeRectangle()
+
+        ' Center our rectangle vertically in the client area of our form.
+        RectPostion.Y = ClientRectangle.Height \ 2 - Rect.Height \ 2
 
     End Sub
 
