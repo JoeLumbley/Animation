@@ -29,17 +29,7 @@
 
 Imports System.Drawing.Drawing2D
 
-Imports System.Numerics
-
 Public Class Form1
-
-    'Public Structure RectangleDouble
-    '    Public X As Double
-    '    Public Y As Double
-    '    Public Width As Double
-    '    Public Height As Double
-    'End Structure
-
 
     Public Structure RectangleDouble
         Public X As Double
