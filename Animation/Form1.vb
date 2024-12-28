@@ -44,7 +44,28 @@ Public Class Form1
             Me.Width = width
             Me.Height = height
         End Sub
+
+        ' Function to get the nearest integer value of X
+        Public Function GetNearestX() As Integer
+            Return Math.Round(X)
+        End Function
+
+        ' Function to get the nearest integer value of Y
+        Public Function GetNearestY() As Integer
+            Return Math.Round(Y)
+        End Function
+
+        ' Function to get the nearest integer value of Width
+        Public Function GetNearestWidth() As Integer
+            Return Math.Round(Width)
+        End Function
+
+        ' Function to get the nearest integer value of Height
+        Public Function GetNearestHeight() As Integer
+            Return Math.Round(Height)
+        End Function
     End Structure
+
 
     Private Rect As New RectangleDouble(0, 0, 256, 256)
 
@@ -66,18 +87,13 @@ Public Class Form1
 
     Private FPS_Postion As New Point(0, 0)
 
-    'Private Rect As New Rectangle(0, 100, 256, 256)
-
-
-
-
     Private CurrentFrame As DateTime = Now 'Get current time.
 
     Private LastFrame As DateTime = CurrentFrame 'Initialize last frame time to current time.
 
     Private DeltaTime As TimeSpan = CurrentFrame - LastFrame 'Initialize delta time to 0
 
-    Private Velocity As Double = 25.0F
+    Private Velocity As Double = 64.0F
 
     Private ReadOnly AlineCenter As New StringFormat With {.Alignment = StringAlignment.Center}
 
@@ -170,11 +186,11 @@ Public Class Form1
 
                 .CompositingMode = Drawing2D.CompositingMode.SourceOver
                 .TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
-                .SmoothingMode = Drawing2D.SmoothingMode.HighQuality
-                .PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
-                .CompositingQuality = Drawing2D.CompositingQuality.HighQuality
-                .InterpolationMode = InterpolationMode.HighQualityBicubic
-                .TextContrast = SmoothingMode.HighQuality
+                '.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
+                '.PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
+                '.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
+                '.InterpolationMode = InterpolationMode.HighQualityBicubic
+                '.TextContrast = SmoothingMode.HighQuality
 
             End With
 
@@ -188,9 +204,9 @@ Public Class Form1
 
             .Clear(Color.Black)
 
-            .FillRectangle(Brushes.Purple, New RectangleF(Rect.X, Rect.Y, Rect.Width, Rect.Height))
+            .FillRectangle(Brushes.Purple, Rect.GetNearestX, Rect.GetNearestY, Rect.GetNearestWidth, Rect.GetNearestHeight)
 
-            .DrawString("Code with Joe", CWJFont, Brushes.White, New RectangleF(Rect.X, Rect.Y, Rect.Width, Rect.Height), AlineCenterMiddle)
+            '.DrawString("Code with Joe", CWJFont, Brushes.White, New RectangleF(Rect.X, Rect.Y, Rect.Width, Rect.Height), AlineCenterMiddle)
 
             ' Draw frames per second display.
             .DrawString(FPS.ToString & " FPS", FPSFont, Brushes.MediumOrchid, FPS_Postion)
