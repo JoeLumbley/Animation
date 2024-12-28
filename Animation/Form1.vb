@@ -28,6 +28,7 @@
 'SOFTWARE.
 
 Imports System.Drawing.Drawing2D
+
 Imports System.Numerics
 
 Public Class Form1
@@ -52,7 +53,13 @@ Public Class Form1
 
     Private Rect As New Rectangle(0, 100, 256, 256)
 
-    Private RectPostion As New Vector2(Rect.X, Rect.Y)
+    Public Structure PointDouble
+        Public X As Double
+        Public Y As Double
+    End Structure
+
+
+    Private RectPostion As PointDouble
 
     Private CurrentFrame As DateTime = Now 'Get current time.
 
@@ -60,7 +67,7 @@ Public Class Form1
 
     Private DeltaTime As TimeSpan = CurrentFrame - LastFrame 'Initialize delta time to 0
 
-    Private Velocity As Single = 25.0F
+    Private Velocity As Double = 25.0F
 
     Private ReadOnly AlineCenter As New StringFormat With {.Alignment = StringAlignment.Center}
 
@@ -171,7 +178,7 @@ Public Class Form1
 
             .Clear(Color.Black)
 
-            .FillRectangle(Brushes.Purple, RectPostion.X, RectPostion.Y, Rect.Width, Rect.Height)
+            .FillRectangle(Brushes.Purple, New RectangleF(RectPostion.X, RectPostion.Y, Rect.Width, Rect.Height))
 
             .DrawString("Code with Joe", CWJFont, Brushes.White, New RectangleF(RectPostion.X, RectPostion.Y, Rect.Width, Rect.Height), AlineCenterMiddle)
 
