@@ -268,7 +268,7 @@ Public Class Form1
 
         SetStyle(ControlStyles.OptimizedDoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
 
-        SetStyle(ControlStyles.AllPaintingInWmPaint, True)
+        SetStyle(ControlStyles.UserPaint, True)
 
         Text = "Animation - Code with Joe"
 
