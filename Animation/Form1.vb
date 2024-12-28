@@ -186,11 +186,6 @@ Public Class Form1
 
                 .CompositingMode = Drawing2D.CompositingMode.SourceOver
                 .TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
-                '.SmoothingMode = Drawing2D.SmoothingMode.AntiAlias
-                '.PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
-                '.CompositingQuality = Drawing2D.CompositingQuality.HighQuality
-                '.InterpolationMode = InterpolationMode.HighQualityBicubic
-                '.TextContrast = SmoothingMode.HighQuality
 
             End With
 
@@ -205,8 +200,6 @@ Public Class Form1
             .Clear(Color.Black)
 
             .FillRectangle(Brushes.Purple, Rect.GetNearestX, Rect.GetNearestY, Rect.GetNearestWidth, Rect.GetNearestHeight)
-
-            '.DrawString("Code with Joe", CWJFont, Brushes.White, New RectangleF(Rect.X, Rect.Y, Rect.Width, Rect.Height), AlineCenterMiddle)
 
             ' Draw frames per second display.
             .DrawString(FPS.ToString & " FPS", FPSFont, Brushes.MediumOrchid, FPS_Postion)
