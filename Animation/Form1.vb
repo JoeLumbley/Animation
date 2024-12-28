@@ -266,9 +266,9 @@ Public Class Form1
 
         CenterToScreen()
 
-        SetStyle(ControlStyles.OptimizedDoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
-
         SetStyle(ControlStyles.UserPaint, True)
+
+        SetStyle(ControlStyles.OptimizedDoubleBuffer Or ControlStyles.AllPaintingInWmPaint, True)
 
         Text = "Animation - Code with Joe"
 
