@@ -33,6 +33,31 @@ Imports System.Numerics
 
 Public Class Form1
 
+    'Public Structure RectangleDouble
+    '    Public X As Double
+    '    Public Y As Double
+    '    Public Width As Double
+    '    Public Height As Double
+    'End Structure
+
+
+    Public Structure RectangleDouble
+        Public X As Double
+        Public Y As Double
+        Public Width As Double
+        Public Height As Double
+
+        ' Constructor to initialize the structure with specific values
+        Public Sub New(x As Double, y As Double, width As Double, height As Double)
+            Me.X = x
+            Me.Y = y
+            Me.Width = width
+            Me.Height = height
+        End Sub
+    End Structure
+
+    Private Rect As New RectangleDouble(0, 0, 256, 256)
+
     Private Context As New BufferedGraphicsContext
 
     Private Buffer As BufferedGraphics
@@ -51,15 +76,10 @@ Public Class Form1
 
     Private FPS_Postion As New Point(0, 0)
 
-    Private Rect As New Rectangle(0, 100, 256, 256)
-
-    Public Structure PointDouble
-        Public X As Double
-        Public Y As Double
-    End Structure
+    'Private Rect As New Rectangle(0, 100, 256, 256)
 
 
-    Private RectPostion As PointDouble
+
 
     Private CurrentFrame As DateTime = Now 'Get current time.
 
@@ -178,9 +198,9 @@ Public Class Form1
 
             .Clear(Color.Black)
 
-            .FillRectangle(Brushes.Purple, New RectangleF(RectPostion.X, RectPostion.Y, Rect.Width, Rect.Height))
+            .FillRectangle(Brushes.Purple, New RectangleF(Rect.X, Rect.Y, Rect.Width, Rect.Height))
 
-            .DrawString("Code with Joe", CWJFont, Brushes.White, New RectangleF(RectPostion.X, RectPostion.Y, Rect.Width, Rect.Height), AlineCenterMiddle)
+            .DrawString("Code with Joe", CWJFont, Brushes.White, New RectangleF(Rect.X, Rect.Y, Rect.Width, Rect.Height), AlineCenterMiddle)
 
             ' Draw frames per second display.
             .DrawString(FPS.ToString & " FPS", FPSFont, Brushes.MediumOrchid, FPS_Postion)
@@ -217,15 +237,15 @@ Public Class Form1
     Private Sub MoveRectangle()
 
         ' Move the rectangle to the right.
-        RectPostion.X += Velocity * DeltaTime.TotalSeconds 'Δs = V * Δt
+        Rect.X += Velocity * DeltaTime.TotalSeconds 'Δs = V * Δt
         ' Displacement = Velocity x Delta Time
 
         ' Wraparound
         ' When the rectangle exits the right side of the client area.
-        If RectPostion.X > ClientRectangle.Right Then
+        If Rect.X > ClientRectangle.Right Then
 
             ' The rectangle reappears on the left side the client area.
-            RectPostion.X = ClientRectangle.Left - Rect.Width
+            Rect.X = ClientRectangle.Left - Rect.Width
 
         End If
 
@@ -282,7 +302,7 @@ Public Class Form1
     Private Sub ResizeRectangle()
 
         ' Center our rectangle vertically in the client area of our form.
-        RectPostion.Y = ClientRectangle.Height \ 2 - Rect.Height \ 2
+        Rect.Y = ClientRectangle.Height \ 2 - Rect.Height \ 2
 
     End Sub
 
