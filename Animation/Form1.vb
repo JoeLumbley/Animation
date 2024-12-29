@@ -64,7 +64,6 @@ Public Class Form1
         End Function
     End Structure
 
-
     Private Rect As New RectangleDouble(0, 0, 256, 256)
 
     Private Context As New BufferedGraphicsContext
