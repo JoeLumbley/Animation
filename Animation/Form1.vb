@@ -27,8 +27,6 @@
 'OUT OF Or IN CONNECTION WITH THE SOFTWARE Or THE USE Or OTHER DEALINGS IN THE
 'SOFTWARE.
 
-Imports System.Drawing.Drawing2D
-
 Public Class Form1
 
     Public Structure RectangleDouble
