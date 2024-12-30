@@ -29,43 +29,6 @@
 
 Public Class Form1
 
-    'Public Structure RectangleDouble
-    '    Public X As Double
-    '    Public Y As Double
-    '    Public Width As Double
-    '    Public Height As Double
-
-    '    ' Constructor to initialize the structure with specific values
-    '    Public Sub New(x As Double, y As Double, width As Double, height As Double)
-    '        Me.X = x
-    '        Me.Y = y
-    '        Me.Width = width
-    '        Me.Height = height
-    '    End Sub
-
-    '    ' Function to get the nearest integer value of X
-    '    Public Function GetNearestX() As Integer
-    '        Return Math.Round(X)
-    '    End Function
-
-    '    ' Function to get the nearest integer value of Y
-    '    Public Function GetNearestY() As Integer
-    '        Return Math.Round(Y)
-    '    End Function
-
-    '    ' Function to get the nearest integer value of Width
-    '    Public Function GetNearestWidth() As Integer
-    '        Return Math.Round(Width)
-    '    End Function
-
-    '    ' Function to get the nearest integer value of Height
-    '    Public Function GetNearestHeight() As Integer
-    '        Return Math.Round(Height)
-    '    End Function
-    'End Structure
-
-
-
     ' The RectangleDouble structure represents a rectangle with double-precision coordinates and dimensions.
     ' It provides methods to round its attributes to the nearest integer values.
     Public Structure RectangleDouble
