@@ -73,26 +73,11 @@ Public Class Form1
         End Function
     End Structure
 
-
     Private Rect As New RectangleDouble(0, 0, 256, 256)
 
     Private Context As New BufferedGraphicsContext
 
     Private Buffer As BufferedGraphics
-
-    Private FrameCount As Integer = 0
-
-    Private StartTime As DateTime = Now 'Get current time.
-
-    Private TimeElapsed As TimeSpan
-
-    Private SecondsElapsed As Double = 0
-
-    Private FPS As Integer = 0
-
-    Private ReadOnly FPSFont As New Font("Segoe UI", 25)
-
-    Private FPS_Postion As New Point(0, 0)
 
     Private CurrentFrame As DateTime = Now 'Get current time.
 
@@ -102,12 +87,58 @@ Public Class Form1
 
     Private Velocity As Double = 64.0F
 
+    Private Structure DisplayStructure
+        Public Location As Point
+        Public Text As String
+        Public Font As Font
+        Public Value As Integer
+
+        Public Sub New(location As Point, text As String, font As Font, value As Double)
+            Me.Location = location
+            Me.Text = text
+            Me.Font = font
+            Me.Value = value
+        End Sub
+    End Structure
+
+    Private FPSDisplay As New DisplayStructure(New Point(0, 0), "", New Font("Segoe UI", 25), 0.0F)
+
+    Private Structure FrameCounterStructure
+        Public FrameCount As Integer
+        Public StartTime As DateTime
+        Public TimeElapsed As TimeSpan
+        Public SecondsElapsed As Double
+
+        Public Sub New(frameCount As Integer, startTime As Date, timeElapsed As TimeSpan, secondsElapsed As Double)
+            Me.FrameCount = frameCount
+            Me.StartTime = startTime
+            Me.TimeElapsed = timeElapsed
+            Me.SecondsElapsed = secondsElapsed
+        End Sub
+    End Structure
+
+    Private FrameCounter As New FrameCounterStructure(0, Now, TimeSpan.Zero, 0)
+
+    'Private FrameCount As Integer = 0
+
+    'Private StartTime As DateTime = Now 'Get current time.
+
+    'Private TimeElapsed As TimeSpan
+
+    'Private SecondsElapsed As Double = 0
+
+    'Private FPS As Integer = 0
+
+    'Private ReadOnly FPSFont As New Font("Segoe UI", 25)
+
+    'Private FPS_Postion As New Point(0, 0)
+
+    Private ReadOnly CWJFont As New Font("Segoe UI", 30)
+
     Private ReadOnly AlineCenter As New StringFormat With {.Alignment = StringAlignment.Center}
 
     Private ReadOnly AlineCenterMiddle As New StringFormat With {.Alignment = StringAlignment.Center,
                                                                  .LineAlignment = StringAlignment.Center}
-
-    Private ReadOnly CWJFont As New Font("Segoe UI", 30)
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -209,7 +240,7 @@ Public Class Form1
             .FillRectangle(Brushes.Purple, Rect.GetNearestX, Rect.GetNearestY, Rect.GetNearestWidth, Rect.GetNearestHeight)
 
             ' Draw frames per second display.
-            .DrawString(FPS.ToString & " FPS", FPSFont, Brushes.MediumOrchid, FPS_Postion)
+            .DrawString(FPSDisplay.Value.ToString & " FPS", FPSDisplay.Font, Brushes.MediumOrchid, FPSDisplay.Location)
 
         End With
 
@@ -285,21 +316,21 @@ Public Class Form1
 
     Private Sub UpdateFrameCounter()
 
-        TimeElapsed = Now.Subtract(StartTime)
+        FrameCounter.TimeElapsed = Now.Subtract(FrameCounter.StartTime)
 
-        SecondsElapsed = TimeElapsed.TotalSeconds
+        FrameCounter.SecondsElapsed = FrameCounter.TimeElapsed.TotalSeconds
 
-        If SecondsElapsed < 1 Then
+        If FrameCounter.SecondsElapsed < 1 Then
 
-            FrameCount += 1
+            FrameCounter.FrameCount += 1
 
         Else
 
-            FPS = FrameCount
+            FPSDisplay.Value = FrameCounter.FrameCount
 
-            FrameCount = 0
+            FrameCounter.FrameCount = 0
 
-            StartTime = Now
+            FrameCounter.StartTime = Now
 
         End If
 
@@ -315,7 +346,7 @@ Public Class Form1
     Private Sub ResizeFPS()
 
         ' Place the FPS display at the bottom of the client area.
-        FPS_Postion.Y = ClientRectangle.Bottom - 75
+        FPSDisplay.Location.Y = ClientRectangle.Bottom - 75
 
     End Sub
 
