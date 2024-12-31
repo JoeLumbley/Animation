@@ -130,20 +130,6 @@ Public Class Form1
 
     Private FPSDisplay As New DisplayStructure(New Point(0, 0), "", New Font("Segoe UI", 25), 0.0F)
 
-    'Private Structure FrameCounterStructure
-    '    Public FrameCount As Integer
-    '    Public StartTime As DateTime
-    '    Public TimeElapsed As TimeSpan
-    '    Public SecondsElapsed As Double
-
-    '    Public Sub New(frameCount As Integer, startTime As Date, timeElapsed As TimeSpan, secondsElapsed As Double)
-    '        Me.FrameCount = frameCount
-    '        Me.StartTime = startTime
-    '        Me.TimeElapsed = timeElapsed
-    '        Me.SecondsElapsed = secondsElapsed
-    '    End Sub
-    'End Structure
-
     ' The FrameCounterStructure structure represents a counter for frames in an application, including the frame count, start time, elapsed time, and elapsed seconds.
     ' It provides a constructor to initialize these properties.
     Private Structure FrameCounterStructure
