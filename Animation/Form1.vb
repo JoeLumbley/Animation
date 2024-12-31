@@ -73,7 +73,7 @@ Public Class Form1
         End Function
     End Structure
 
-    Private Rect As New RectangleDouble(0, 0, 256, 256)
+    Private Rectangle As New RectangleDouble(0, 0, 256, 256)
 
     ' The DeltaTimeStructure structure represents the time difference between two frames in an application.
     ' It includes properties for the current frame's time, the last frame's time, and the elapsed time between them.
@@ -253,7 +253,7 @@ Public Class Form1
 
             .Clear(Color.Black)
 
-            .FillRectangle(Brushes.Purple, Rect.GetNearestX, Rect.GetNearestY, Rect.GetNearestWidth, Rect.GetNearestHeight)
+            .FillRectangle(Brushes.Purple, Rectangle.GetNearestX, Rectangle.GetNearestY, Rectangle.GetNearestWidth, Rectangle.GetNearestHeight)
 
             ' Draw frames per second display.
             .DrawString(FPSDisplay.Text & " FPS", FPSDisplay.Font, Brushes.MediumOrchid, FPSDisplay.Location)
@@ -290,15 +290,15 @@ Public Class Form1
     Private Sub MoveRectangle()
 
         ' Move the rectangle to the right.
-        Rect.X += Velocity * DeltaTime.ElapsedTime.TotalSeconds 'Δs = V * Δt
+        Rectangle.X += Velocity * DeltaTime.ElapsedTime.TotalSeconds 'Δs = V * Δt
         ' Displacement = Velocity x Delta Time
 
         ' Wraparound
         ' When the rectangle exits the right side of the client area.
-        If Rect.X > ClientRectangle.Right Then
+        If Rectangle.X > ClientRectangle.Right Then
 
             ' The rectangle reappears on the left side the client area.
-            Rect.X = ClientRectangle.Left - Rect.Width
+            Rectangle.X = ClientRectangle.Left - Rectangle.Width
 
         End If
 
@@ -355,7 +355,7 @@ Public Class Form1
     Private Sub ResizeRectangle()
 
         ' Center our rectangle vertically in the client area of our form.
-        Rect.Y = ClientRectangle.Height \ 2 - Rect.Height \ 2
+        Rectangle.Y = ClientRectangle.Height \ 2 - Rectangle.Height \ 2
 
     End Sub
 
