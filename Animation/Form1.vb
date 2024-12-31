@@ -79,10 +79,6 @@ Public Class Form1
 
     Private Buffer As BufferedGraphics
 
-
-
-
-
     Private Structure DeltaTimeStructure
         Public CurrentFrame As DateTime
         Public LastFrame As DateTime
@@ -153,8 +149,6 @@ Public Class Form1
     End Structure
 
     Private FrameCounter As New FrameCounterStructure(0, Now, TimeSpan.Zero, 0)
-
-    Private ReadOnly CWJFont As New Font("Segoe UI", 30)
 
     Private ReadOnly AlineCenter As New StringFormat With {.Alignment = StringAlignment.Center}
 
