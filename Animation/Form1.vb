@@ -112,19 +112,15 @@ Public Class Form1
         ' The font used for the display text.
         Public Font As Font
 
-        ' The value associated with the display element.
-        Public Value As Integer
-
         ' Constructor to initialize the DisplayStructure with specific values for location, text, font, and value.
-        Public Sub New(location As Point, text As String, font As Font, value As Double)
+        Public Sub New(location As Point, text As String, font As Font)
             Me.Location = location
             Me.Text = text
             Me.Font = font
-            Me.Value = value
         End Sub
     End Structure
 
-    Private FPSDisplay As New DisplayStructure(New Point(0, 0), "", New Font("Segoe UI", 25), 0.0F)
+    Private FPSDisplay As New DisplayStructure(New Point(0, 0), "--", New Font("Segoe UI", 25))
 
     ' The FrameCounterStructure structure represents a counter for frames in an application, including the frame count, start time, elapsed time, and elapsed seconds.
     ' It provides a constructor to initialize these properties.
@@ -260,7 +256,7 @@ Public Class Form1
             .FillRectangle(Brushes.Purple, Rect.GetNearestX, Rect.GetNearestY, Rect.GetNearestWidth, Rect.GetNearestHeight)
 
             ' Draw frames per second display.
-            .DrawString(FPSDisplay.Value.ToString & " FPS", FPSDisplay.Font, Brushes.MediumOrchid, FPSDisplay.Location)
+            .DrawString(FPSDisplay.Text.ToString & " FPS", FPSDisplay.Font, Brushes.MediumOrchid, FPSDisplay.Location)
 
         End With
 
@@ -346,7 +342,7 @@ Public Class Form1
 
         Else
 
-            FPSDisplay.Value = FrameCounter.FrameCount
+            FPSDisplay.Text = FrameCounter.FrameCount.ToString
 
             FrameCounter.FrameCount = 0
 
