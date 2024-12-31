@@ -79,40 +79,6 @@ Public Class Form1
 
     Private Buffer As BufferedGraphics
 
-    'Private Structure DeltaTimeStructure
-    '    Public CurrentFrame As DateTime
-    '    Public LastFrame As DateTime
-    '    Public Value As TimeSpan
-
-    '    Public Sub New(currentFrame As Date, lastFrame As Date, value As TimeSpan)
-    '        Me.CurrentFrame = currentFrame
-    '        Me.LastFrame = lastFrame
-    '        Me.Value = value
-    '    End Sub
-    'End Structure
-
-    ' The DeltaTimeStructure structure represents the time difference between two frames in an application.
-    ' It includes properties for the current frame's time, the last frame's time, and the time span between them.
-    ' It provides a constructor to initialize these properties.
-
-    'Private Structure DeltaTimeStructure
-    '    ' The time of the current frame.
-    '    Public CurrentFrame As DateTime
-
-    '    ' The time of the last frame.
-    '    Public LastFrame As DateTime
-
-    '    ' The time span representing the difference between the current and last frame times.
-    '    Public ElapsedTime As TimeSpan
-
-    '    ' Constructor to initialize the DeltaTimeStructure with specific values for the current frame, last frame, and the time span between them.
-    '    Public Sub New(currentFrame As Date, lastFrame As Date, elapsedTime As TimeSpan)
-    '        Me.CurrentFrame = currentFrame
-    '        Me.LastFrame = lastFrame
-    '        Me.ElapsedTime = elapsedTime
-    '    End Sub
-    'End Structure
-
     ' The DeltaTimeStructure structure represents the time difference between two frames in an application.
     ' It includes properties for the current frame's time, the last frame's time, and the elapsed time between them.
     ' It provides a constructor to initialize these properties.
@@ -134,7 +100,6 @@ Public Class Form1
             Me.ElapsedTime = elapsedTime
         End Sub
     End Structure
-
 
     Private DeltaTime As New DeltaTimeStructure(Now, Now, Now - Now)
 
