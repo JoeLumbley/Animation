@@ -75,10 +75,6 @@ Public Class Form1
 
     Private Rect As New RectangleDouble(0, 0, 256, 256)
 
-    Private Context As New BufferedGraphicsContext
-
-    Private Buffer As BufferedGraphics
-
     ' The DeltaTimeStructure structure represents the time difference between two frames in an application.
     ' It includes properties for the current frame's time, the last frame's time, and the elapsed time between them.
     ' It provides a constructor to initialize these properties.
@@ -154,13 +150,16 @@ Public Class Form1
         End Sub
     End Structure
 
-
     Private FrameCounter As New FrameCounterStructure(0, Now, TimeSpan.Zero, 0)
 
     Private ReadOnly AlineCenter As New StringFormat With {.Alignment = StringAlignment.Center}
 
     Private ReadOnly AlineCenterMiddle As New StringFormat With {.Alignment = StringAlignment.Center,
                                                                  .LineAlignment = StringAlignment.Center}
+
+    Private Context As New BufferedGraphicsContext
+
+    Private Buffer As BufferedGraphics
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -181,7 +180,6 @@ Public Class Form1
         End If
 
     End Sub
-
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
