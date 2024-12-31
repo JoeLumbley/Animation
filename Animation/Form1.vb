@@ -87,12 +87,37 @@ Public Class Form1
 
     Private Velocity As Double = 64.0F
 
+    'Private Structure DisplayStructure
+    '    Public Location As Point
+    '    Public Text As String
+    '    Public Font As Font
+    '    Public Value As Integer
+
+    '    Public Sub New(location As Point, text As String, font As Font, value As Double)
+    '        Me.Location = location
+    '        Me.Text = text
+    '        Me.Font = font
+    '        Me.Value = value
+    '    End Sub
+    'End Structure
+
+
+    ' The DisplayStructure structure represents a display element with a location, text, font, and value.
+    ' It provides a constructor to initialize these properties.
     Private Structure DisplayStructure
+        ' The location of the display element.
         Public Location As Point
+
+        ' The text to be displayed.
         Public Text As String
+
+        ' The font used for the display text.
         Public Font As Font
+
+        ' The value associated with the display element.
         Public Value As Integer
 
+        ' Constructor to initialize the DisplayStructure with specific values for location, text, font, and value.
         Public Sub New(location As Point, text As String, font As Font, value As Double)
             Me.Location = location
             Me.Text = text
@@ -100,6 +125,7 @@ Public Class Form1
             Me.Value = value
         End Sub
     End Structure
+
 
     Private FPSDisplay As New DisplayStructure(New Point(0, 0), "", New Font("Segoe UI", 25), 0.0F)
 
