@@ -256,7 +256,7 @@ Public Class Form1
             .FillRectangle(Brushes.Purple, Rect.GetNearestX, Rect.GetNearestY, Rect.GetNearestWidth, Rect.GetNearestHeight)
 
             ' Draw frames per second display.
-            .DrawString(FPSDisplay.Text.ToString & " FPS", FPSDisplay.Font, Brushes.MediumOrchid, FPSDisplay.Location)
+            .DrawString(FPSDisplay.Text & " FPS", FPSDisplay.Font, Brushes.MediumOrchid, FPSDisplay.Location)
 
         End With
 
