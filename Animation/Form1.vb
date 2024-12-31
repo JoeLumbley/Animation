@@ -79,11 +79,36 @@ Public Class Form1
 
     Private Buffer As BufferedGraphics
 
-    Private CurrentFrame As DateTime = Now 'Get current time.
 
-    Private LastFrame As DateTime = CurrentFrame 'Initialize last frame time to current time.
 
-    Private DeltaTime As TimeSpan = CurrentFrame - LastFrame 'Initialize delta time to 0
+
+
+    Private Structure DeltaTimeStructure
+        Public CurrentFrame As DateTime
+        Public LastFrame As DateTime
+        Public Value As TimeSpan
+
+        Public Sub New(currentFrame As Date, lastFrame As Date, value As TimeSpan)
+            Me.CurrentFrame = currentFrame
+            Me.LastFrame = lastFrame
+            Me.Value = value
+        End Sub
+    End Structure
+
+    Private DeltaTime As New DeltaTimeStructure(Now, Now, Now - Now)
+
+
+    'Private CurrentFrame As DateTime = Now 'Get current time.
+
+    'Private LastFrame As DateTime = DeltaTime.CurrentFrame 'Initialize last frame time to current time.
+
+    'Private DeltaTime As TimeSpan = CurrentFrame - LastFrame 'Initialize delta time to 0
+
+
+
+
+
+
 
     Private Velocity As Double = 64.0F
 
@@ -259,18 +284,18 @@ Public Class Form1
     Private Sub UpdateDeltaTime()
         ' Delta time (Δt) is the elapsed time since the last frame.
 
-        CurrentFrame = Now
+        DeltaTime.CurrentFrame = Now
 
-        DeltaTime = CurrentFrame - LastFrame ' Calculate delta time
+        DeltaTime.Value = DeltaTime.CurrentFrame - DeltaTime.LastFrame ' Calculate delta time
 
-        LastFrame = CurrentFrame ' Update last frame time
+        DeltaTime.LastFrame = DeltaTime.CurrentFrame ' Update last frame time
 
     End Sub
 
     Private Sub MoveRectangle()
 
         ' Move the rectangle to the right.
-        Rect.X += Velocity * DeltaTime.TotalSeconds 'Δs = V * Δt
+        Rect.X += Velocity * DeltaTime.Value.TotalSeconds 'Δs = V * Δt
         ' Displacement = Velocity x Delta Time
 
         ' Wraparound
