@@ -1,23 +1,24 @@
 # Animation
-**Animation** is the process of creating the illusion of movement by displaying a series of static images rapidly.
+Welcome to the Animation Application! This project showcases the fundamentals of creating smooth animations in a Visual Basic .NET environment. The application features a moving rectangle that glides across the screen, illustrating key concepts such as frame independence and real-time rendering.
+
+
 
 
 
 ![006](https://github.com/user-attachments/assets/dadacc95-b241-4549-81b1-d3b8432da0a0)
 
 
+In this app, you'll learn how to manage timing, handle graphics rendering, and implement basic animation principles. Whether you're a beginner looking to understand the basics of animation or an experienced developer seeking a refresher, this project provides a hands-on approach to mastering animation techniques.
 
 
 
 # Code Walkthrough
 
-
+Join us as we explore the code and uncover the magic behind bringing static images to life!
 
 ## Overview of Animation
 
 Animation is the art of creating the illusion of motion by displaying a series of static images in quick succession. In our app, we use animation to make it appear as though our rectangle is moving towards the right. We ensure that our animation runs smoothly on all devices by making it frame-independent, meaning it isn't affected by changes in frame rate.
-
-
 
 ## Code Structure
 
