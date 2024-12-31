@@ -82,7 +82,6 @@ Public Class Form1
     ' The DeltaTimeStructure structure represents the time difference between two frames in an application.
     ' It includes properties for the current frame's time, the last frame's time, and the elapsed time between them.
     ' It provides a constructor to initialize these properties.
-
     Private Structure DeltaTimeStructure
         ' The time of the current frame.
         Public CurrentFrame As DateTime
@@ -131,12 +130,36 @@ Public Class Form1
 
     Private FPSDisplay As New DisplayStructure(New Point(0, 0), "", New Font("Segoe UI", 25), 0.0F)
 
+    'Private Structure FrameCounterStructure
+    '    Public FrameCount As Integer
+    '    Public StartTime As DateTime
+    '    Public TimeElapsed As TimeSpan
+    '    Public SecondsElapsed As Double
+
+    '    Public Sub New(frameCount As Integer, startTime As Date, timeElapsed As TimeSpan, secondsElapsed As Double)
+    '        Me.FrameCount = frameCount
+    '        Me.StartTime = startTime
+    '        Me.TimeElapsed = timeElapsed
+    '        Me.SecondsElapsed = secondsElapsed
+    '    End Sub
+    'End Structure
+
+    ' The FrameCounterStructure structure represents a counter for frames in an application, including the frame count, start time, elapsed time, and elapsed seconds.
+    ' It provides a constructor to initialize these properties.
     Private Structure FrameCounterStructure
+        ' The number of frames counted.
         Public FrameCount As Integer
+
+        ' The start time of the frame counting.
         Public StartTime As DateTime
+
+        ' The time span representing the elapsed time since the start time.
         Public TimeElapsed As TimeSpan
+
+        ' The elapsed time in seconds.
         Public SecondsElapsed As Double
 
+        ' Constructor to initialize the FrameCounterStructure with specific values for frame count, start time, elapsed time, and elapsed seconds.
         Public Sub New(frameCount As Integer, startTime As Date, timeElapsed As TimeSpan, secondsElapsed As Double)
             Me.FrameCount = frameCount
             Me.StartTime = startTime
@@ -144,6 +167,7 @@ Public Class Form1
             Me.SecondsElapsed = secondsElapsed
         End Sub
     End Structure
+
 
     Private FrameCounter As New FrameCounterStructure(0, Now, TimeSpan.Zero, 0)
 
