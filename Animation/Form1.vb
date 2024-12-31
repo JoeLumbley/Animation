@@ -230,6 +230,39 @@ Public Class Form1
 
     End Sub
 
+    Private Sub UpdateDeltaTime()
+        ' Delta time ( Δt ) is the elapsed time since the last frame.
+
+        ' Set the current frame's time to the current system time.
+        DeltaTime.CurrentFrame = Now
+
+        ' Calculates the elapsed time ( delta time Δt ) between the current frame
+        ' and the last frame.
+        DeltaTime.ElapsedTime = DeltaTime.CurrentFrame - DeltaTime.LastFrame
+
+        ' Updates the last frame's time to the current frame's time for use in
+        ' the next update.
+        DeltaTime.LastFrame = DeltaTime.CurrentFrame
+
+    End Sub
+
+    Private Sub MoveRectangle()
+
+        ' Move the rectangle to the right.
+        Rectangle.X += Velocity * DeltaTime.ElapsedTime.TotalSeconds
+        ' Displacement = Velocity x Delta Time ( Δs = V * Δt )
+
+        ' Wraparound
+        ' When the rectangle exits the right side of the client area.
+        If Rectangle.X > ClientRectangle.Right Then
+
+            ' The rectangle reappears on the left side the client area.
+            Rectangle.X = ClientRectangle.Left - Rectangle.Width
+
+        End If
+
+    End Sub
+
     Private Sub InitializeBuffer()
 
         ' Set context to the context of this app.
@@ -283,34 +316,6 @@ Public Class Form1
             Buffer = Nothing ' Set to Nothing to avoid using a disposed object
 
             ' The buffer will be reallocated in OnPaint
-
-        End If
-
-    End Sub
-
-    Private Sub UpdateDeltaTime()
-        ' Delta time (Δt) is the elapsed time since the last frame.
-
-        DeltaTime.CurrentFrame = Now
-
-        DeltaTime.ElapsedTime = DeltaTime.CurrentFrame - DeltaTime.LastFrame ' Calculate delta time
-
-        DeltaTime.LastFrame = DeltaTime.CurrentFrame ' Update last frame time
-
-    End Sub
-
-    Private Sub MoveRectangle()
-
-        ' Move the rectangle to the right.
-        Rectangle.X += Velocity * DeltaTime.ElapsedTime.TotalSeconds 'Δs = V * Δt
-        ' Displacement = Velocity x Delta Time
-
-        ' Wraparound
-        ' When the rectangle exits the right side of the client area.
-        If Rectangle.X > ClientRectangle.Right Then
-
-            ' The rectangle reappears on the left side the client area.
-            Rectangle.X = ClientRectangle.Left - Rectangle.Width
 
         End If
 
