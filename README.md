@@ -1,5 +1,5 @@
 # Animation
-Welcome to the Animation Application! This project showcases the fundamentals of creating smooth animations in a Visual Basic .NET environment. The application features a moving rectangle that glides across the screen, illustrating key concepts such as frame independence and real-time rendering.
+This project showcases the fundamentals of creating smooth animations. The application features a moving rectangle that glides across the screen, illustrating key concepts such as frame independence and real-time rendering.
 
 
 
