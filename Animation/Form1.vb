@@ -1,36 +1,38 @@
-﻿'Animation
+﻿' Animation
 '
-'Animation is the art of creating the illusion of motion by displaying a series of static images in quick succession.
-'In our app, we use animation to make it appear as though our rectangle is moving towards the right.
-'To ensure that our animation runs smoothly on all devices, we have designed it to be frame independent.
-'This means that our animation is not affected by changes in the frame rate,
-'ensuring a consistent and seamless experience for all users.
+' Animation is the art of creating the illusion of motion by displaying a series
+' of static images in quick succession. In our app, we use animation to make it
+' appear as though our rectangle is moving towards the right.To ensure that our
+' animation runs smoothly on all devices, we have designed it to be frame
+' independent. This means that our animation is not affected by changes in the
+' frame rate, ensuring a consistent and seamless experience for all users.
 
-'MIT License
-'Copyright(c) 2023 Joseph W. Lumbley
+' MIT License
+' Copyright(c) 2023 Joseph W. Lumbley
 
-'Permission Is hereby granted, free Of charge, to any person obtaining a copy
-'of this software And associated documentation files (the "Software"), to deal
-'in the Software without restriction, including without limitation the rights
-'to use, copy, modify, merge, publish, distribute, sublicense, And/Or sell
-'copies of the Software, And to permit persons to whom the Software Is
-'furnished to do so, subject to the following conditions:
+' Permission Is hereby granted, free Of charge, to any person obtaining a copy
+' of this software And associated documentation files (the "Software"), to deal
+' in the Software without restriction, including without limitation the rights
+' to use, copy, modify, merge, publish, distribute, sublicense, And/Or sell
+' copies of the Software, And to permit persons to whom the Software Is
+' furnished to do so, subject to the following conditions:
 
-'The above copyright notice And this permission notice shall be included In all
-'copies Or substantial portions of the Software.
+' The above copyright notice And this permission notice shall be included In all
+' copies Or substantial portions of the Software.
 
-'THE SOFTWARE Is PROVIDED "AS IS", WITHOUT WARRANTY Of ANY KIND, EXPRESS Or
-'IMPLIED, INCLUDING BUT Not LIMITED To THE WARRANTIES Of MERCHANTABILITY,
-'FITNESS FOR A PARTICULAR PURPOSE And NONINFRINGEMENT. IN NO EVENT SHALL THE
-'AUTHORS Or COPYRIGHT HOLDERS BE LIABLE For ANY CLAIM, DAMAGES Or OTHER
-'LIABILITY, WHETHER In AN ACTION Of CONTRACT, TORT Or OTHERWISE, ARISING FROM,
-'OUT OF Or IN CONNECTION WITH THE SOFTWARE Or THE USE Or OTHER DEALINGS IN THE
-'SOFTWARE.
+' THE SOFTWARE Is PROVIDED "AS IS", WITHOUT WARRANTY Of ANY KIND, EXPRESS Or
+' IMPLIED, INCLUDING BUT Not LIMITED To THE WARRANTIES Of MERCHANTABILITY,
+' FITNESS FOR A PARTICULAR PURPOSE And NONINFRINGEMENT. IN NO EVENT SHALL THE
+' AUTHORS Or COPYRIGHT HOLDERS BE LIABLE For ANY CLAIM, DAMAGES Or OTHER
+' LIABILITY, WHETHER In AN ACTION Of CONTRACT, TORT Or OTHERWISE, ARISING FROM,
+' OUT OF Or IN CONNECTION WITH THE SOFTWARE Or THE USE Or OTHER DEALINGS IN THE
+' SOFTWARE.
 
 Public Class Form1
 
-    ' The RectangleDouble structure represents a rectangle with double-precision coordinates and dimensions.
-    ' It provides methods to round its attributes to the nearest integer values.
+    ' The RectangleDouble structure represents a rectangle with double-precision
+    ' coordinates and dimensions. It provides methods to round its attributes to
+    ' the nearest integer values.
     Public Structure RectangleDouble
         ' The X-coordinate of the rectangle.
         Public X As Double
@@ -44,7 +46,8 @@ Public Class Form1
         ' The height of the rectangle.
         Public Height As Double
 
-        ' Constructor to initialize the RectangleDouble structure with specific values for X, Y, Width, and Height.
+        ' Constructor to initialize the RectangleDouble structure with specific
+        ' values for X, Y, Width, and Height.
         Public Sub New(x As Double, y As Double, width As Double, height As Double)
             Me.X = x
             Me.Y = y
@@ -75,8 +78,9 @@ Public Class Form1
 
     Private Rectangle As New RectangleDouble(0, 0, 256, 256)
 
-    ' The DeltaTimeStructure structure represents the time difference between two frames in an application.
-    ' It includes properties for the current frame's time, the last frame's time, and the elapsed time between them.
+    ' The DeltaTimeStructure structure represents the time difference between
+    ' two frames in an application. It includes properties for the current
+    ' frame's time, the last frame's time, and the elapsed time between them.
     ' It provides a constructor to initialize these properties.
     Private Structure DeltaTimeStructure
         ' The time of the current frame.
@@ -85,10 +89,12 @@ Public Class Form1
         ' The time of the last frame.
         Public LastFrame As DateTime
 
-        ' The time span representing the difference between the current and last frame times.
+        ' The time span representing the difference between the current and last
+        ' frame times.
         Public ElapsedTime As TimeSpan
 
-        ' Constructor to initialize the DeltaTimeStructure with specific values for the current frame, last frame, and the time span between them.
+        ' Constructor to initialize the DeltaTimeStructure with specific values
+        ' for the current frame, last frame, and the time span between them.
         Public Sub New(currentFrame As Date, lastFrame As Date, elapsedTime As TimeSpan)
             Me.CurrentFrame = currentFrame
             Me.LastFrame = lastFrame
@@ -100,8 +106,9 @@ Public Class Form1
 
     Private Velocity As Double = 64.0F
 
-    ' The DisplayStructure structure represents a display element with a location, text, font, and value.
-    ' It provides a constructor to initialize these properties.
+    ' The DisplayStructure structure represents a display element with a
+    ' location, text, font, and value. It provides a constructor to initialize
+    ' these properties.
     Private Structure DisplayStructure
         ' The location of the display element.
         Public Location As Point
@@ -112,7 +119,8 @@ Public Class Form1
         ' The font used for the display text.
         Public Font As Font
 
-        ' Constructor to initialize the DisplayStructure with specific values for location, text, font, and value.
+        ' Constructor to initialize the DisplayStructure with specific values
+        ' for location, text, font, and value.
         Public Sub New(location As Point, text As String, font As Font)
             Me.Location = location
             Me.Text = text
@@ -122,8 +130,9 @@ Public Class Form1
 
     Private FPSDisplay As New DisplayStructure(New Point(0, 0), "--", New Font("Segoe UI", 25))
 
-    ' The FrameCounterStructure structure represents a counter for frames in an application, including the frame count, start time, elapsed time, and elapsed seconds.
-    ' It provides a constructor to initialize these properties.
+    ' The FrameCounterStructure structure represents a counter for frames in an
+    ' application, including the frame count, start time, elapsed time, and
+    ' elapsed seconds. It provides a constructor to initialize these properties.
     Private Structure FrameCounterStructure
         ' The number of frames counted.
         Public FrameCount As Integer
@@ -137,7 +146,8 @@ Public Class Form1
         ' The elapsed time in seconds.
         Public SecondsElapsed As Double
 
-        ' Constructor to initialize the FrameCounterStructure with specific values for frame count, start time, elapsed time, and elapsed seconds.
+        ' Constructor to initialize the FrameCounterStructure with specific
+        ' values for frame count, start time, elapsed time, and elapsed seconds.
         Public Sub New(frameCount As Integer, startTime As Date, timeElapsed As TimeSpan, secondsElapsed As Double)
             Me.FrameCount = frameCount
             Me.StartTime = startTime
@@ -148,10 +158,12 @@ Public Class Form1
 
     Private FrameCounter As New FrameCounterStructure(0, Now, TimeSpan.Zero, 0)
 
-    Private ReadOnly AlineCenter As New StringFormat With {.Alignment = StringAlignment.Center}
+    Private ReadOnly AlineCenter As New StringFormat With {
+                    .Alignment = StringAlignment.Center}
 
-    Private ReadOnly AlineCenterMiddle As New StringFormat With {.Alignment = StringAlignment.Center,
-                                                                 .LineAlignment = StringAlignment.Center}
+    Private ReadOnly AlineCenterMiddle As New StringFormat With {
+                    .Alignment = StringAlignment.Center,
+                    .LineAlignment = StringAlignment.Center}
 
     Private Context As New BufferedGraphicsContext
 
