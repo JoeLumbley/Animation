@@ -119,20 +119,6 @@ Public Class Form1
 
     Private FrameCounter As New FrameCounterStructure(0, Now, TimeSpan.Zero, 0)
 
-    'Private FrameCount As Integer = 0
-
-    'Private StartTime As DateTime = Now 'Get current time.
-
-    'Private TimeElapsed As TimeSpan
-
-    'Private SecondsElapsed As Double = 0
-
-    'Private FPS As Integer = 0
-
-    'Private ReadOnly FPSFont As New Font("Segoe UI", 25)
-
-    'Private FPS_Postion As New Point(0, 0)
-
     Private ReadOnly CWJFont As New Font("Segoe UI", 30)
 
     Private ReadOnly AlineCenter As New StringFormat With {.Alignment = StringAlignment.Center}
