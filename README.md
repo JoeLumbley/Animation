@@ -11,93 +11,114 @@
 
 # Code Walkthrough
 
-This code demonstrates how to create a simple animation in a Windows Forms application using Visual Basic .NET.
 
-The animation consists of a rectangle that moves horizontally across the screen, giving the illusion of motion. 
 
-This walkthrough will break down the code line by line.
+## Overview of Animation
 
-## Table of Contents
+Animation is the art of creating the illusion of motion by displaying a series of static images in quick succession. In our app, we use animation to make it appear as though our rectangle is moving towards the right. We ensure that our animation runs smoothly on all devices by making it frame-independent, meaning it isn't affected by changes in frame rate.
 
-1. [Animation Basics](#animation-basics)
-2. [Code Structure](#code-structure)
-3. [Line-by-Line Explanation](#line-by-line-explanation)
-4. [Conclusion](#conclusion)
 
----
-
-## Animation Basics
-
-**Animation** is the process of creating the illusion of movement by displaying a series of static images rapidly. In this app, we animate a rectangle moving to the right. The animation is designed to be frame-independent, meaning it will run smoothly regardless of the device's frame rate.
 
 ## Code Structure
 
-The code is structured as follows:
-
-- **Imports**: Libraries needed for drawing and numerical operations.
-- **Class Definition**: Contains all the properties and methods for our form.
-- **Event Handlers**: Respond to user actions like loading the form and resizing it.
-- **Rendering Methods**: Handle the drawing and updating of the animation.
-
-## Line-by-Line Explanation
-
-### Imports
-
-```vb
-Imports System.Drawing.Drawing2D
-Imports System.Numerics
-```
-- These lines import necessary libraries for advanced drawing and mathematical operations.
-
-### Class Definition
+### Class Declaration
 
 ```vb
 Public Class Form1
 ```
-- This defines a new class called `Form1`, which represents our main application window.
+- This line defines a class named `Form1`, which represents our main application window.
 
-### Variables Declaration
-
-```vb
-Private Context As New BufferedGraphicsContext
-Private Buffer As BufferedGraphics
-Private FrameCount As Integer = 0
-Private StartTime As DateTime = Now
-Private TimeElapsed As TimeSpan
-Private SecondsElapsed As Double = 0
-Private FPS As Integer = 0
-```
-- **Context**: Manages the graphics buffer for smoother rendering.
-- **Buffer**: Stores the graphics to be displayed.
-- **FrameCount**: Counts frames to calculate frames per second (FPS).
-- **StartTime**: Records when the animation starts.
-- **TimeElapsed**: Measures the time that has passed.
-- **SecondsElapsed**: Stores the total seconds elapsed.
-- **FPS**: Holds the frames per second value.
-
-### Rectangle and Position
+### RectangleDouble Structure
 
 ```vb
-Private Rect As New Rectangle(0, 100, 256, 256)
-Private RectPostion As New Vector2(Rect.X, Rect.Y)
+Public Structure RectangleDouble
+    Public X As Double
+    Public Y As Double
+    Public Width As Double
+    Public Height As Double
 ```
-- **Rect**: Defines a rectangle starting at (0, 100) with a width and height of 256 pixels.
-- **RectPostion**: Stores the current position of the rectangle using a vector.
+- Here, we define a structure called `RectangleDouble` that holds the properties of a rectangle: its position (`X`, `Y`) and its dimensions (`Width`, `Height`).
 
-### Frame Timing
+#### Constructor
 
 ```vb
-Private CurrentFrame As DateTime = Now
-Private LastFrame As DateTime = CurrentFrame
-Private DeltaTime As TimeSpan = CurrentFrame - LastFrame
-Private Velocity As Single = 100.0F
+Public Sub New(x As Double, y As Double, width As Double, height As Double)
+    Me.X = x
+    Me.Y = y
+    Me.Width = width
+    Me.Height = height
+End Sub
 ```
-- **CurrentFrame**: Current time for the frame.
-- **LastFrame**: Time of the previous frame.
-- **DeltaTime**: Time difference between frames, used to maintain smooth movement.
-- **Velocity**: Speed at which the rectangle moves (100 pixels per second).
+- This constructor initializes a new rectangle with specified values for its properties.
 
-### Form Load and Resize Events
+#### Methods to Get Nearest Integer Values
+
+```vb
+Public Function GetNearestX() As Integer
+    Return Math.Round(X)
+End Function
+```
+- This method rounds the `X` coordinate to the nearest integer. Similar methods exist for `Y`, `Width`, and `Height`.
+
+### Rectangle Instance
+
+```vb
+Private Rectangle As New RectangleDouble(0, 0, 256, 256)
+```
+- This line creates a new rectangle starting at position (0,0) with a width and height of 256 pixels.
+
+### DeltaTimeStructure
+
+```vb
+Private Structure DeltaTimeStructure
+    Public CurrentFrame As DateTime
+    Public LastFrame As DateTime
+    Public ElapsedTime As TimeSpan
+```
+- This structure tracks the timing information for our animation, including the current and last frame times and the elapsed time between them.
+
+#### Constructor
+
+```vb
+Public Sub New(currentFrame As Date, lastFrame As Date, elapsedTime As TimeSpan)
+    Me.CurrentFrame = currentFrame
+    Me.LastFrame = lastFrame
+    Me.ElapsedTime = elapsedTime
+End Sub
+```
+- Initializes the timing structure with the current and last frame times.
+
+### Velocity
+
+```vb
+Private Velocity As Double = 64.0F
+```
+- This variable sets the speed of the rectangle's movement to 64 pixels per second.
+
+### DisplayStructure
+
+```vb
+Private Structure DisplayStructure
+    Public Location As Point
+    Public Text As String
+    Public Font As Font
+```
+- This structure holds information about display elements, including their location, text, and font.
+
+### FrameCounterStructure
+
+```vb
+Private Structure FrameCounterStructure
+    Public FrameCount As Integer
+    Public StartTime As DateTime
+    Public TimeElapsed As TimeSpan
+    Public SecondsElapsed As Double
+```
+- This structure counts the frames rendered and tracks the timing for calculating frames per second (FPS).
+
+### Initialization Methods
+
+#### Load Event
 
 ```vb
 Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -106,16 +127,18 @@ End Sub
 ```
 - This method initializes the application when the form loads.
 
+#### Resize Event
+
 ```vb
 Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
     If Not WindowState = FormWindowState.Minimized Then
-        FPS_Postion.Y = ClientRectangle.Bottom - 75
-        RectPostion.Y = ClientRectangle.Height \ 2 - Rect.Height \ 2
+        ResizeFPS()
+        ResizeRectangle()
         DisposeBuffer()
     End If
 End Sub
 ```
-- Adjusts the position of the FPS display and centers the rectangle when the form is resized.
+- This method handles resizing the window, ensuring the FPS display and rectangle size are adjusted accordingly.
 
 ### Timer Tick Event
 
@@ -127,9 +150,9 @@ Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
     End If
 End Sub
 ```
-- This method is called at regular intervals to update the animation and refresh the display.
+- This event is triggered at regular intervals to update the animation frame and redraw the form.
 
-### Paint Events
+### OnPaint Method
 
 ```vb
 Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
@@ -140,9 +163,9 @@ Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
     MyBase.OnPaint(e)
 End Sub
 ```
-- Handles the painting of the form. It allocates the buffer, draws the current frame, and renders it.
+- This method handles the rendering of the graphics. It allocates a buffer, draws the current frame, and updates the frame counter.
 
-### Update Frame Method
+### UpdateFrame Method
 
 ```vb
 Private Sub UpdateFrame()
@@ -150,69 +173,31 @@ Private Sub UpdateFrame()
     MoveRectangle()
 End Sub
 ```
-- Updates the time since the last frame and moves the rectangle accordingly.
+- This method updates the timing and moves the rectangle based on the elapsed time.
 
-### Rectangle Movement
+### MoveRectangle Method
 
 ```vb
 Private Sub MoveRectangle()
-    RectPostion.X += Velocity * DeltaTime.TotalSeconds
-    If RectPostion.X > ClientRectangle.Right Then
-        RectPostion.X = ClientRectangle.Left - Rect.Width
+    Rectangle.X += Velocity * DeltaTime.ElapsedTime.TotalSeconds
+    If Rectangle.X > ClientRectangle.Right Then
+        Rectangle.X = ClientRectangle.Left - Rectangle.Width
     End If
 End Sub
 ```
-- Moves the rectangle to the right based on the velocity and delta time. If it moves off the screen, it reappears on the left.
-
-### Frame Counter Update
-
-```vb
-Private Sub UpdateFrameCounter()
-    TimeElapsed = Now.Subtract(StartTime)
-    SecondsElapsed = TimeElapsed.TotalSeconds
-    If SecondsElapsed < 1 Then
-        FrameCount += 1
-    Else
-        FPS = FrameCount
-        FrameCount = 0
-        StartTime = Now
-    End If
-End Sub
-```
-- Counts frames to calculate the FPS, resetting every second.
+- This method updates the rectangle's position based on its velocity and the elapsed time. If it moves off the right edge, it reappears on the left.
 
 
-### Conclusion
-This code provides a foundational understanding of creating animations in a Windows Forms application. By breaking down each section, beginners can grasp how animation works, from initializing graphics to updating and rendering frames. Feel free to experiment with the code to see how changes affect the animation!
+
+
+
+
+This application demonstrates the principles of animation using a simple rectangle. By understanding how to manage timing and movement, you can create engaging graphics in your applications!
+
+Feel free to experiment with the code and adjust parameters to see how they affect the animation. Happy coding!
+
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Frame Independent
-
-
-To ensure that our animation runs smoothly on all devices, we have designed it to be frame independent.
-
-This means that our animation is not affected by changes in the frame rate,
-ensuring a consistent and seamless experience for all users.
-
-
-
 
 
 ## Time-Based Motion
@@ -322,4 +307,13 @@ FillRectangle(Brushes.Purple, Rect)
 The integer value is then used to draw our rectangle on our form using the FillRectangle function.
 
 
+
+## License Information
+
+This code is shared under the MIT License, allowing you to use, modify, and distribute it freely, as long as you include the original copyright notice.
+
+```plaintext
+MIT License
+Copyright(c) 2023 Joseph W. Lumbley
+```
 
