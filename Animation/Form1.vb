@@ -298,10 +298,17 @@ Public Class Form1
 
             .Clear(Color.Black)
 
-            .FillRectangle(Brushes.Purple, Rectangle.GetNearestX, Rectangle.GetNearestY, Rectangle.GetNearestWidth, Rectangle.GetNearestHeight)
+            .FillRectangle(Brushes.Purple,
+                           Rectangle.GetNearestX,
+                           Rectangle.GetNearestY,
+                           Rectangle.GetNearestWidth,
+                           Rectangle.GetNearestHeight)
 
             ' Draw frames per second display.
-            .DrawString(FPSDisplay.Text & " FPS", FPSDisplay.Font, Brushes.MediumOrchid, FPSDisplay.Location)
+            .DrawString(FPSDisplay.Text & " FPS",
+                        FPSDisplay.Font,
+                        Brushes.MediumOrchid,
+                        FPSDisplay.Location)
 
         End With
 
