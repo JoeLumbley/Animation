@@ -28,100 +28,82 @@
 ' OUT OF Or IN CONNECTION WITH THE SOFTWARE Or THE USE Or OTHER DEALINGS IN THE
 ' SOFTWARE.
 
+
+
+
+
 Public Class Form1
 
-    ' The RectangleDouble structure represents a rectangle with double-precision
-    ' coordinates and dimensions. It provides methods to round its attributes to
-    ' the nearest integer values.
+    Private Context As New BufferedGraphicsContext
+
+    Private Buffer As BufferedGraphics
+
+    Private MinimumMaxBufferSize As New Size(1280, 720)
+
+    ' The RectangleDouble structure represents a rectangle with
+    ' double-precision coordinates and dimensions.
     Public Structure RectangleDouble
-        ' The X-coordinate of the rectangle.
-        Public X As Double
 
-        ' The Y-coordinate of the rectangle.
-        Public Y As Double
+        Public X, Y, Width, Height As Double
 
-        ' The width of the rectangle.
-        Public Width As Double
-
-        ' The height of the rectangle.
-        Public Height As Double
-
-        ' Constructor to initialize the RectangleDouble structure with specific
-        ' values for X, Y, Width, and Height.
         Public Sub New(x As Double, y As Double, width As Double, height As Double)
+
             Me.X = x
             Me.Y = y
             Me.Width = width
             Me.Height = height
         End Sub
 
-        ' Function to get the nearest integer value of X.
+        ' Methods to round attributes to
+        ' the nearest integer values.
         Public Function GetNearestX() As Integer
+
             Return Math.Round(X)
         End Function
-
-        ' Function to get the nearest integer value of Y.
         Public Function GetNearestY() As Integer
+
             Return Math.Round(Y)
         End Function
-
-        ' Function to get the nearest integer value of Width.
         Public Function GetNearestWidth() As Integer
+
             Return Math.Round(Width)
         End Function
-
-        ' Function to get the nearest integer value of Height.
         Public Function GetNearestHeight() As Integer
+
             Return Math.Round(Height)
         End Function
     End Structure
 
     Private Rectangle As New RectangleDouble(0, 0, 256, 256)
 
-    ' The DeltaTimeStructure structure represents the time difference between
-    ' two frames in an application. It includes properties for the current
-    ' frame's time, the last frame's time, and the elapsed time between them.
-    ' It provides a constructor to initialize these properties.
+    ' The DeltaTimeStructure represents the time difference
+    ' between two frames.
     Private Structure DeltaTimeStructure
-        ' The time of the current frame.
+
         Public CurrentFrame As DateTime
-
-        ' The time of the last frame.
         Public LastFrame As DateTime
-
-        ' The time span representing the difference between the current and last
-        ' frame times.
         Public ElapsedTime As TimeSpan
 
-        ' Constructor to initialize the DeltaTimeStructure with specific values
-        ' for the current frame, last frame, and the time span between them.
         Public Sub New(currentFrame As Date, lastFrame As Date, elapsedTime As TimeSpan)
+
             Me.CurrentFrame = currentFrame
             Me.LastFrame = lastFrame
             Me.ElapsedTime = elapsedTime
         End Sub
     End Structure
 
-    Private DeltaTime As New DeltaTimeStructure(Now, Now, Now - Now)
+    Private DeltaTime As New DeltaTimeStructure(DateTime.Now, DateTime.Now, TimeSpan.Zero)
 
     Private Velocity As Double = 64.0F
 
-    ' The DisplayStructure structure represents a display element with a
-    ' location, text, font, and value. It provides a constructor to initialize
-    ' these properties.
     Private Structure DisplayStructure
-        ' The location of the display element.
+
         Public Location As Point
-
-        ' The text to be displayed.
         Public Text As String
-
-        ' The font used for the display text.
         Public Font As Font
 
-        ' Constructor to initialize the DisplayStructure with specific values
-        ' for location, text, font, and value.
         Public Sub New(location As Point, text As String, font As Font)
+
             Me.Location = location
             Me.Text = text
             Me.Font = font
@@ -130,25 +112,15 @@ Public Class Form1
 
     Private FPSDisplay As New DisplayStructure(New Point(0, 0), "--", New Font("Segoe UI", 25))
 
-    ' The FrameCounterStructure structure represents a counter for frames in an
-    ' application, including the frame count, start time, elapsed time, and
-    ' elapsed seconds. It provides a constructor to initialize these properties.
     Private Structure FrameCounterStructure
-        ' The number of frames counted.
+
         Public FrameCount As Integer
-
-        ' The start time of the frame counting.
         Public StartTime As DateTime
-
-        ' The time span representing the elapsed time since the start time.
         Public TimeElapsed As TimeSpan
-
-        ' The elapsed time in seconds.
         Public SecondsElapsed As Double
 
-        ' Constructor to initialize the FrameCounterStructure with specific
-        ' values for frame count, start time, elapsed time, and elapsed seconds.
         Public Sub New(frameCount As Integer, startTime As Date, timeElapsed As TimeSpan, secondsElapsed As Double)
+
             Me.FrameCount = frameCount
             Me.StartTime = startTime
             Me.TimeElapsed = timeElapsed
@@ -156,22 +128,19 @@ Public Class Form1
         End Sub
     End Structure
 
-    Private FrameCounter As New FrameCounterStructure(0, Now, TimeSpan.Zero, 0)
+    Private FrameCounter As New FrameCounterStructure(0, DateTime.Now, TimeSpan.Zero, 0)
 
-    Private ReadOnly AlineCenter As New StringFormat With {
-                    .Alignment = StringAlignment.Center}
+    Private ReadOnly AlineCenter As New StringFormat With
+    {.Alignment = StringAlignment.Center}
 
-    Private ReadOnly AlineCenterMiddle As New StringFormat With {
-                    .Alignment = StringAlignment.Center,
-                    .LineAlignment = StringAlignment.Center}
-
-    Private Context As New BufferedGraphicsContext
-
-    Private Buffer As BufferedGraphics
+    Private ReadOnly AlineCenterMiddle As New StringFormat With
+    {.Alignment = StringAlignment.Center, .LineAlignment = StringAlignment.Center}
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         InitializeApp()
+
+        Debug.Print($"Running...{DateTime.Now}")
 
     End Sub
 
@@ -208,7 +177,7 @@ Public Class Form1
         DrawFrame()
 
         ' Show buffer on form.
-        Buffer.Render(e.Graphics)
+        Buffer?.Render(e.Graphics)
 
         UpdateFrameCounter()
 
@@ -265,11 +234,19 @@ Public Class Form1
 
     Private Sub InitializeBuffer()
 
-        ' Set context to the context of this app.
         Context = BufferedGraphicsManager.Current
 
-        ' Set buffer size to the primary working area.
-        Context.MaximumBuffer = Screen.PrimaryScreen.WorkingArea.Size
+        If Screen.PrimaryScreen IsNot Nothing Then
+
+            Context.MaximumBuffer = Screen.PrimaryScreen.WorkingArea.Size
+
+        Else
+
+            Context.MaximumBuffer = MinimumMaxBufferSize
+
+            Debug.Print($"Primary screen not detected.")
+
+        End If
 
         AllocateBuffer()
 
@@ -280,13 +257,8 @@ Public Class Form1
         If Buffer Is Nothing Then
 
             Buffer = Context.Allocate(CreateGraphics(), ClientRectangle)
-
-            With Buffer.Graphics
-
-                .CompositingMode = Drawing2D.CompositingMode.SourceOver
-                .TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
-
-            End With
+            Buffer.Graphics.CompositingMode = Drawing2D.CompositingMode.SourceOver
+            Buffer.Graphics.TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
 
         End If
 
@@ -294,23 +266,19 @@ Public Class Form1
 
     Private Sub DrawFrame()
 
-        With Buffer.Graphics
+        Buffer?.Graphics.Clear(Color.Black)
 
-            .Clear(Color.Black)
-
-            .FillRectangle(Brushes.Purple,
+        Buffer?.Graphics.FillRectangle(Brushes.Purple,
                            Rectangle.GetNearestX,
                            Rectangle.GetNearestY,
                            Rectangle.GetNearestWidth,
                            Rectangle.GetNearestHeight)
 
-            ' Draw frames per second display.
-            .DrawString(FPSDisplay.Text & " FPS",
+        ' Draw frames per second display.
+        Buffer?.Graphics.DrawString(FPSDisplay.Text & " FPS",
                         FPSDisplay.Font,
                         Brushes.MediumOrchid,
                         FPSDisplay.Location)
-
-        End With
 
     End Sub
 
@@ -389,6 +357,9 @@ Public Class Form1
         FPSDisplay.Location.Y = ClientRectangle.Bottom - 75
 
     End Sub
+
+
+
 
 End Class
 
