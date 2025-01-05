@@ -4,8 +4,8 @@ This project showcases the fundamentals of creating smooth animations. The appli
 
 
 
+![009](https://github.com/user-attachments/assets/de7d6624-896d-4641-8c71-af121ecee5ff)
 
-![006](https://github.com/user-attachments/assets/dadacc95-b241-4549-81b1-d3b8432da0a0)
 
 
 In this app, you'll learn how to manage timing, handle graphics rendering, and implement basic animation principles. Whether you're a beginner looking to understand the basics of animation or an experienced developer seeking a refresher, this project provides a hands-on approach to mastering animation techniques.
