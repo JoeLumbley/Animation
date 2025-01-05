@@ -279,7 +279,7 @@ Public Class Form1
         ' Draw frames per second display.
         Buffer?.Graphics.DrawString(FPSDisplay.Text & " FPS",
                                     FPSDisplay.Font,
-                                    Brushes.MediumPurple,
+                                    Brushes.LightPink,
                                     FPSDisplay.Location)
 
     End Sub
