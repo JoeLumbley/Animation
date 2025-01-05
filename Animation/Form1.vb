@@ -270,17 +270,17 @@ Public Class Form1
 
         Buffer?.Graphics.Clear(Color.Black)
 
-        Buffer?.Graphics.FillRectangle(Brushes.Purple,
-                           Rectangle.GetNearestX,
-                           Rectangle.GetNearestY,
-                           Rectangle.GetNearestWidth,
-                           Rectangle.GetNearestHeight)
+        Buffer?.Graphics.FillRectangle(Brushes.Orchid,
+                                       Rectangle.GetNearestX,
+                                       Rectangle.GetNearestY,
+                                       Rectangle.GetNearestWidth,
+                                       Rectangle.GetNearestHeight)
 
         ' Draw frames per second display.
         Buffer?.Graphics.DrawString(FPSDisplay.Text & " FPS",
-                        FPSDisplay.Font,
-                        Brushes.MediumOrchid,
-                        FPSDisplay.Location)
+                                    FPSDisplay.Font,
+                                    Brushes.MediumPurple,
+                                    FPSDisplay.Location)
 
     End Sub
 
@@ -304,7 +304,7 @@ Public Class Form1
 
         InitializeBuffer()
 
-        Timer1.Interval = 10
+        Timer1.Interval = 15
 
         Timer1.Start()
 
