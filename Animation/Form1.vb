@@ -132,12 +132,6 @@ Public Class Form1
 
     Private FrameCounter As New FrameCounterStructure(0, DateTime.Now, TimeSpan.Zero, 0)
 
-    Private ReadOnly AlineCenter As New StringFormat With
-    {.Alignment = StringAlignment.Center}
-
-    Private ReadOnly AlineCenterMiddle As New StringFormat With
-    {.Alignment = StringAlignment.Center, .LineAlignment = StringAlignment.Center}
-
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         InitializeApp()
