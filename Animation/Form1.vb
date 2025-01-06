@@ -30,9 +30,7 @@
 
 ' https://github.com/JoeLumbley/Animation
 
-
-
-
+Option Explicit On
 
 Public Class Form1
 
@@ -40,7 +38,15 @@ Public Class Form1
 
     Private Buffer As BufferedGraphics
 
-    Private MinimumMaxBufferSize As New Size(1280, 720)
+    Private ReadOnly MinimumMaxBufferSize As New Size(1280, 720)
+
+    Private ReadOnly BackgroundColor As Color = Color.Black
+
+    Private ReadOnly RectangleBrush As New SolidBrush(Color.Orchid)
+
+    Private ReadOnly FpsDisplayBrush As New SolidBrush(Color.MediumOrchid)
+
+    Private ReadOnly FpsIdentifier As New String(" FPS")
 
     ' The RectangleDouble structure represents a rectangle with
     ' double-precision coordinates and dimensions.
@@ -262,18 +268,18 @@ Public Class Form1
 
     Private Sub DrawFrame()
 
-        Buffer?.Graphics.Clear(Color.Black)
+        Buffer?.Graphics.Clear(BackgroundColor)
 
-        Buffer?.Graphics.FillRectangle(Brushes.Orchid,
+        Buffer?.Graphics.FillRectangle(RectangleBrush,
                                        Rectangle.GetNearestX,
                                        Rectangle.GetNearestY,
                                        Rectangle.GetNearestWidth,
                                        Rectangle.GetNearestHeight)
 
         ' Draw frames per second display.
-        Buffer?.Graphics.DrawString(FPSDisplay.Text & " FPS",
+        Buffer?.Graphics.DrawString(FPSDisplay.Text,
                                     FPSDisplay.Font,
-                                    Brushes.LightPink,
+                                    FpsDisplayBrush,
                                     FPSDisplay.Location)
 
     End Sub
@@ -330,7 +336,7 @@ Public Class Form1
 
         Else
 
-            FPSDisplay.Text = FrameCounter.FrameCount.ToString
+            FPSDisplay.Text = $"{FrameCounter.FrameCount}{FpsIdentifier}"
 
             FrameCounter.FrameCount = 0
 
