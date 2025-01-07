@@ -240,15 +240,21 @@ End Sub
 
 
 
-This walkthrough covers the main components of the animation project. Feel free to experiment with the code, adjust parameters, and see how they affect the animation! Happy coding!
+This walkthrough covers the main components of the animation project. Feel free to experiment with the code, adjust parameters, and see how they affect the animation! 
 
 ---
 
-For more information visit [GitHub repository](https://github.com/JoeLumbley/Animation).
 
 
 
 
+## Related Projects
+
+If you're interested in exploring a similar project, check out **Animation C#**, which is a port of this animation project. You can find the C# version in its repository: [Animation C# Repository](https://github.com/JoeLumbley/Animation-CS). 
+
+For more information about the original project, visit the [Animation Repository](https://github.com/JoeLumbley/Animation). 
+
+Happy coding!
 
 
 
