@@ -360,7 +360,8 @@ Public Class Form1
     Private Sub ResizeFPS()
 
         ' Place the FPS display at the bottom of the client area.
-        FPSDisplay.Location.Y = ClientRectangle.Bottom - 75
+        FPSDisplay.Location = New Point(FPSDisplay.Location.X,
+                                        ClientRectangle.Bottom - 75)
 
     End Sub
 
