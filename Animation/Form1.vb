@@ -32,6 +32,10 @@
 
 Option Explicit On
 
+
+
+
+
 Public Class Form1
 
     Private Context As New BufferedGraphicsContext
