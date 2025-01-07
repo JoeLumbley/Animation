@@ -238,10 +238,10 @@ End Sub
 
 ---
 
-### Conclusion
 
-This walkthrough covers the main components of the animation project. Understanding how each part works together will help you grasp the principles of animation and graphics rendering in Visual Basic .NET. Feel free to experiment with the code, adjust parameters, and see how they affect the animation! Happy coding!
+
+This walkthrough covers the main components of the animation project. Feel free to experiment with the code, adjust parameters, and see how they affect the animation! Happy coding!
 
 ---
 
-For more information or to contribute, visit our [GitHub repository](https://github.com/JoeLumbley/Animation).
+For more information visit [GitHub repository](https://github.com/JoeLumbley/Animation).
