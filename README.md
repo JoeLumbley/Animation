@@ -245,3 +245,28 @@ This walkthrough covers the main components of the animation project. Feel free 
 ---
 
 For more information visit [GitHub repository](https://github.com/JoeLumbley/Animation).
+
+
+
+
+
+
+
+
+![012](https://github.com/user-attachments/assets/d50c1b9e-690e-422e-8be5-620a96b295ab)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
