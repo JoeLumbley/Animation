@@ -23,7 +23,7 @@ Animation is the art of creating the illusion of motion by displaying a series o
 
 
 
-## Code Breakdown
+## The Breakdown
 
 ```vb
 Option Explicit On
