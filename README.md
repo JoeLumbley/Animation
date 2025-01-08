@@ -12,7 +12,7 @@ In this app, you'll learn how to manage timing, handle graphics rendering, and i
 
 ---
 
-# Animation Code Walkthrough
+# Code Walkthrough
 
 Welcome to the Animation project! In this lesson, we will break down the code line by line, helping you understand how it works. This project demonstrates the fundamentals of creating smooth animations using a Windows Form application. Let's dive right in!
 
