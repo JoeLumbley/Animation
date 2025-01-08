@@ -119,7 +119,6 @@ Public Class Form1
 
         End Sub
 
-
     End Structure
 
     Private Rectangle As New RectangleDouble(0.0F, 0.0F, 256.0F, 256.0F, 32.0F, New SolidBrush(Color.Orchid))
@@ -207,8 +206,6 @@ Public Class Form1
         If Not WindowState = FormWindowState.Minimized Then
 
             ResizeFPS()
-
-            'ResizeRectangle()
 
             Rectangle.CenterVertically(ClientRectangle)
 
@@ -370,13 +367,6 @@ Public Class Form1
         End If
 
     End Sub
-
-    'Private Sub ResizeRectangle()
-
-    '    ' Center our rectangle vertically in the client area of our form.
-    '    Rectangle.Y = ClientRectangle.Height \ 2 - Rectangle.Height \ 2
-
-    'End Sub
 
     Private Sub ResizeFPS()
 
