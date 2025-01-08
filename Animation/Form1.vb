@@ -46,7 +46,7 @@ Public Class Form1
 
     Private BackgroundColor As Color = Color.Black
 
-    Private FpsDisplayBrush As New SolidBrush(Color.MediumOrchid)
+    'Private FpsDisplayBrush As New SolidBrush(Color.MediumOrchid)
 
     Private ReadOnly FpsIdentifier As New String(" FPS")
 
@@ -159,16 +159,18 @@ Public Class Form1
         Public Location As Point
         Public Text As String
         Public Font As Font
+        Public Brush As Brush
 
-        Public Sub New(location As Point, text As String, font As Font)
+        Public Sub New(location As Point, text As String, font As Font, brush As Brush)
 
             Me.Location = location
             Me.Text = text
             Me.Font = font
+            Me.Brush = brush
         End Sub
     End Structure
 
-    Private FPSDisplay As New DisplayStructure(New Point(0, 0), "--", New Font("Segoe UI", 25))
+    Private FPSDisplay As New DisplayStructure(New Point(0, 0), "--", New Font("Segoe UI", 25), New SolidBrush(Color.MediumOrchid))
 
     Private Structure FrameCounterStructure
 
@@ -315,7 +317,7 @@ Public Class Form1
         ' Draw frames per second display.
         Buffer?.Graphics.DrawString(FPSDisplay.Text,
                                     FPSDisplay.Font,
-                                    FpsDisplayBrush,
+                                    FPSDisplay.Brush,
                                     FPSDisplay.Location)
 
     End Sub
