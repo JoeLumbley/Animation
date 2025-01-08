@@ -10,23 +10,18 @@ This project showcases the fundamentals of creating smooth animations. The appli
 
 In this app, you'll learn how to manage timing, handle graphics rendering, and implement basic animation principles. Whether you're a beginner looking to understand the basics of animation or an experienced developer seeking a refresher, this project provides a hands-on approach to mastering animation techniques.
 
-
+---
 
 # Animation Code Walkthrough
 
 Welcome to the Animation project! In this lesson, we will break down the code line by line, helping you understand how it works. This project demonstrates the fundamentals of creating smooth animations using a Windows Form application. Let's dive right in!
 
----
 
-## Overview
 
 Animation is the art of creating the illusion of motion by displaying a series of static images in quick succession. In our app, we use animation to make it appear as though our rectangle is moving towards the right. To ensure that our animation runs smoothly on all devices, we have designed it to be frame-independent. This means that our animation is not affected by changes in the frame rate, ensuring a consistent and seamless experience for all users.
 
-### License Information
 
-This code is shared under the MIT License, which allows you to use, modify, and distribute it freely, as long as you include the original copyright notice.
 
----
 
 ## Code Breakdown
 
@@ -54,11 +49,12 @@ Private Buffer As BufferedGraphics
 #### Screen Size and Colors
 
 ```vb
-Private ReadOnly MinimumMaxBufferSize As New Size(1280, 720)
-Private ReadOnly BackgroundColor As Color = Color.Black
-Private ReadOnly RectangleBrush As New SolidBrush(Color.Orchid)
-Private ReadOnly FpsDisplayBrush As New SolidBrush(Color.MediumOrchid)
-Private ReadOnly FpsIdentifier As New String(" FPS")
+    Private ReadOnly MinimumMaxBufferSize As New Size(1280, 720)
+    Private BackgroundColor As Color = Color.Black
+    Private RectangleBrush As New SolidBrush(Color.Orchid)
+    Private FpsDisplayBrush As New SolidBrush(Color.MediumOrchid)
+    Private ReadOnly FpsIdentifier As New String(" FPS")
+
 ```
 - `MinimumMaxBufferSize` sets the minimum size for our graphics buffer.
 - `BackgroundColor` defines the color of the background (black).
@@ -238,9 +234,62 @@ End Sub
 
 ---
 
-## More on DeltaTime
 
-### Introduction to DeltaTime
+
+
+# Exercises
+
+Here are some exercises you can try to enhance your understanding of the animation project:
+
+
+1. **Change Rectangle Size**
+   - Modify the dimensions of the rectangle in the `RectangleDouble` structure.
+   - **Task**: Experiment with different width and height values. Observe how the animation changes with larger or smaller rectangles.
+
+2. **Change Rectangle Color**
+   - Update the `RectangleBrush` color in the initialization section.
+   - **Task**: Choose different colors (e.g., red, blue, green) for the rectangle. How does the visual impact change with different colors?
+
+3. **Adjust Rectangle Velocity**
+   - Locate the variable that defines the rectangle's velocity.
+   - **Task**: Increase or decrease the velocity value. How does this affect the speed at which the rectangle moves across the screen?
+
+4. **Add Multiple Rectangles**
+   - Create additional instances of `RectangleDouble` to represent multiple rectangles.
+   - **Task**: Animate them independently or in a pattern (e.g., staggered movement). How does this change the overall animation?
+
+5. **Implement User Controls**
+   - Add keyboard controls to change the rectangle's size, color, or velocity while the application is running.
+   - **Task**: Use keys (e.g., arrow keys for velocity, 'C' for color change) to interactively modify the rectangle's properties. 
+
+6. **Create a Bouncing Effect**
+   - Modify the `MoveRectangle` method to make the rectangle bounce off the edges of the window.
+   - **Task**: Instead of wrapping around, change the direction when it hits the edge. What changes do you need to make in the code?
+
+7. **Change Background Color**
+   - Modify the `BackgroundColor` variable to change the background of the form.
+   - **Task**: Experiment with different background colors and observe how they affect the visibility of the rectangle.
+
+These exercises will help you to better understand the concepts of animation and improve your programming skills in Visual Basic .NET. Feel free to experiment and combine these tasks for more complex behaviors!
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+# More on DeltaTime
+
 DeltaTime is a critical concept in game development and animation that refers to the time elapsed between the current frame and the last frame. It ensures smooth and consistent motion, regardless of frame rate variations.
 
 ### Importance of DeltaTime
@@ -299,7 +348,6 @@ End Sub
 - **Large Frame Drops**: Sudden drops in frame rate can lead to large DeltaTime values, causing movements to appear jerky or too fast.
 - **Complex Calculations**: Overusing DeltaTime in complex calculations can lead to performance issues.
 
-### Conclusion
 DeltaTime is an essential concept for achieving smooth and consistent animations in game development. By understanding and implementing DeltaTime effectively, developers can create a more enjoyable and fluid user experience.
 
 ### Further Reading
@@ -310,13 +358,18 @@ Feel free to ask if you have any specific questions or need further clarificatio
 
 This walkthrough covers the main components of the animation project. Feel free to experiment with the code, adjust parameters, and see how they affect the animation! 
 
+
+
+
+
+
+
 ---
 
 
 
 
-
-## Related Projects
+# Related Projects
 
 If you're interested in exploring a similar project, check out **Animation C#**, which is a port of this animation project. You can find the C# version in its repository: [Animation C# Repository](https://github.com/JoeLumbley/Animation-CS). 
 
@@ -330,9 +383,11 @@ Happy coding!
 ![012](https://github.com/user-attachments/assets/d50c1b9e-690e-422e-8be5-620a96b295ab)
 
 
+---
 
+# License Information
 
-
+This code is shared under the MIT License, which allows you to use, modify, and distribute it freely, as long as you include the original copyright notice.
 
 
 
