@@ -49,11 +49,12 @@ Private Buffer As BufferedGraphics
 #### Screen Size and Colors
 
 ```vb
-Private ReadOnly MinimumMaxBufferSize As New Size(1280, 720)
-Private ReadOnly BackgroundColor As Color = Color.Black
-Private ReadOnly RectangleBrush As New SolidBrush(Color.Orchid)
-Private ReadOnly FpsDisplayBrush As New SolidBrush(Color.MediumOrchid)
-Private ReadOnly FpsIdentifier As New String(" FPS")
+    Private ReadOnly MinimumMaxBufferSize As New Size(1280, 720)
+    Private BackgroundColor As Color = Color.Black
+    Private RectangleBrush As New SolidBrush(Color.Orchid)
+    Private FpsDisplayBrush As New SolidBrush(Color.MediumOrchid)
+    Private ReadOnly FpsIdentifier As New String(" FPS")
+
 ```
 - `MinimumMaxBufferSize` sets the minimum size for our graphics buffer.
 - `BackgroundColor` defines the color of the background (black).
