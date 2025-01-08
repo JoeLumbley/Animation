@@ -233,9 +233,62 @@ End Sub
 
 ---
 
-## More on DeltaTime
 
-### Introduction to DeltaTime
+
+
+# Exercises
+
+Here are some exercises you can try to enhance your understanding of the animation project:
+
+
+1. **Change Rectangle Size**
+   - Modify the dimensions of the rectangle in the `RectangleDouble` structure.
+   - **Task**: Experiment with different width and height values. Observe how the animation changes with larger or smaller rectangles.
+
+2. **Change Rectangle Color**
+   - Update the `RectangleBrush` color in the initialization section.
+   - **Task**: Choose different colors (e.g., red, blue, green) for the rectangle. How does the visual impact change with different colors?
+
+3. **Adjust Rectangle Velocity**
+   - Locate the variable that defines the rectangle's velocity.
+   - **Task**: Increase or decrease the velocity value. How does this affect the speed at which the rectangle moves across the screen?
+
+4. **Add Multiple Rectangles**
+   - Create additional instances of `RectangleDouble` to represent multiple rectangles.
+   - **Task**: Animate them independently or in a pattern (e.g., staggered movement). How does this change the overall animation?
+
+5. **Implement User Controls**
+   - Add keyboard controls to change the rectangle's size, color, or velocity while the application is running.
+   - **Task**: Use keys (e.g., arrow keys for velocity, 'C' for color change) to interactively modify the rectangle's properties. 
+
+6. **Create a Bouncing Effect**
+   - Modify the `MoveRectangle` method to make the rectangle bounce off the edges of the window.
+   - **Task**: Instead of wrapping around, change the direction when it hits the edge. What changes do you need to make in the code?
+
+7. **Change Background Color**
+   - Modify the `BackgroundColor` variable to change the background of the form.
+   - **Task**: Experiment with different background colors and observe how they affect the visibility of the rectangle.
+
+These exercises will help you to better understand the concepts of animation and improve your programming skills in Visual Basic .NET. Feel free to experiment and combine these tasks for more complex behaviors!
+
+
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+# More on DeltaTime
+
 DeltaTime is a critical concept in game development and animation that refers to the time elapsed between the current frame and the last frame. It ensures smooth and consistent motion, regardless of frame rate variations.
 
 ### Importance of DeltaTime
@@ -294,7 +347,6 @@ End Sub
 - **Large Frame Drops**: Sudden drops in frame rate can lead to large DeltaTime values, causing movements to appear jerky or too fast.
 - **Complex Calculations**: Overusing DeltaTime in complex calculations can lead to performance issues.
 
-### Conclusion
 DeltaTime is an essential concept for achieving smooth and consistent animations in game development. By understanding and implementing DeltaTime effectively, developers can create a more enjoyable and fluid user experience.
 
 ### Further Reading
@@ -305,46 +357,10 @@ Feel free to ask if you have any specific questions or need further clarificatio
 
 This walkthrough covers the main components of the animation project. Feel free to experiment with the code, adjust parameters, and see how they affect the animation! 
 
----
 
 
 
 
-
-## Exercises
-
-Here are some exercises you can try to enhance your understanding of the animation project:
-
-
-1. **Change Rectangle Size**
-   - Modify the dimensions of the rectangle in the `RectangleDouble` structure.
-   - **Task**: Experiment with different width and height values. Observe how the animation changes with larger or smaller rectangles.
-
-2. **Change Rectangle Color**
-   - Update the `RectangleBrush` color in the initialization section.
-   - **Task**: Choose different colors (e.g., red, blue, green) for the rectangle. How does the visual impact change with different colors?
-
-3. **Adjust Rectangle Velocity**
-   - Locate the variable that defines the rectangle's velocity.
-   - **Task**: Increase or decrease the velocity value. How does this affect the speed at which the rectangle moves across the screen?
-
-4. **Add Multiple Rectangles**
-   - Create additional instances of `RectangleDouble` to represent multiple rectangles.
-   - **Task**: Animate them independently or in a pattern (e.g., staggered movement). How does this change the overall animation?
-
-5. **Implement User Controls**
-   - Add keyboard controls to change the rectangle's size, color, or velocity while the application is running.
-   - **Task**: Use keys (e.g., arrow keys for velocity, 'C' for color change) to interactively modify the rectangle's properties. 
-
-6. **Create a Bouncing Effect**
-   - Modify the `MoveRectangle` method to make the rectangle bounce off the edges of the window.
-   - **Task**: Instead of wrapping around, change the direction when it hits the edge. What changes do you need to make in the code?
-
-7. **Change Background Color**
-   - Modify the `BackgroundColor` variable to change the background of the form.
-   - **Task**: Experiment with different background colors and observe how they affect the visibility of the rectangle.
-
-These exercises will help you to better understand the concepts of animation and improve your programming skills in Visual Basic .NET. Feel free to experiment and combine these tasks for more complex behaviors!
 
 
 ---
@@ -352,7 +368,7 @@ These exercises will help you to better understand the concepts of animation and
 
 
 
-## Related Projects
+# Related Projects
 
 If you're interested in exploring a similar project, check out **Animation C#**, which is a port of this animation project. You can find the C# version in its repository: [Animation C# Repository](https://github.com/JoeLumbley/Animation-CS). 
 
@@ -368,7 +384,7 @@ Happy coding!
 
 ---
 
-### License Information
+# License Information
 
 This code is shared under the MIT License, which allows you to use, modify, and distribute it freely, as long as you include the original copyright notice.
 
