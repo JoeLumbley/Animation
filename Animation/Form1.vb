@@ -50,7 +50,7 @@ Public Class Form1
 
     ' The RectangleDouble structure represents a rectangle with
     ' double-precision coordinates and dimensions.
-    Public Structure RectangleDouble
+    Private Structure RectangleDouble
 
         Public X, Y, Width, Height, Velocity As Double
         Public Brush As Brush
@@ -111,6 +111,14 @@ Public Class Form1
             Wraparound(clientRectangle)
 
         End Sub
+
+        Public Sub CenterVertically(ByVal clientRectangle As Rectangle)
+
+            ' Center our rectangle vertically in the client area of our form.
+            Y = clientRectangle.Height \ 2 - Height \ 2
+
+        End Sub
+
 
     End Structure
 
@@ -200,7 +208,9 @@ Public Class Form1
 
             ResizeFPS()
 
-            ResizeRectangle()
+            'ResizeRectangle()
+
+            Rectangle.CenterVertically(ClientRectangle)
 
             DisposeBuffer()
 
@@ -245,28 +255,9 @@ Public Class Form1
 
         DeltaTime.Update()
 
-        'MoveRectangle()
-
         Rectangle.MoveRightAndWraparound(ClientRectangle, DeltaTime.ElapsedTime)
 
     End Sub
-
-    'Private Sub MoveRectangle()
-
-    '    ' Move the rectangle to the right.
-    '    Rectangle.X += Velocity * DeltaTime.ElapsedTime.TotalSeconds
-    '    ' Displacement = Velocity x Delta Time ( Δs = V * Δt )
-
-    '    ' Wraparound
-    '    ' When the rectangle exits the right side of the client area.
-    '    If Rectangle.X > ClientRectangle.Right Then
-
-    '        ' The rectangle reappears on the left side the client area.
-    '        Rectangle.X = ClientRectangle.Left - Rectangle.Width
-
-    '    End If
-
-    'End Sub
 
     Private Sub InitializeBuffer()
 
@@ -380,12 +371,12 @@ Public Class Form1
 
     End Sub
 
-    Private Sub ResizeRectangle()
+    'Private Sub ResizeRectangle()
 
-        ' Center our rectangle vertically in the client area of our form.
-        Rectangle.Y = ClientRectangle.Height \ 2 - Rectangle.Height \ 2
+    '    ' Center our rectangle vertically in the client area of our form.
+    '    Rectangle.Y = ClientRectangle.Height \ 2 - Rectangle.Height \ 2
 
-    End Sub
+    'End Sub
 
     Private Sub ResizeFPS()
 
