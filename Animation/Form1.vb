@@ -57,14 +57,14 @@ Public Class Form1
         Public X, Y, Width, Height, Velocity As Double
         Public Brush As Brush
 
-        Public Sub New(x As Double, y As Double, width As Double, height As Double, velocity As Double, Brush As Brush)
+        Public Sub New(x As Double, y As Double, width As Double, height As Double, velocity As Double, brush As Brush)
 
             Me.X = x
             Me.Y = y
             Me.Width = width
             Me.Height = height
             Me.Velocity = velocity
-            Me.Brush = Brush
+            Me.Brush = brush
         End Sub
 
         ' Methods to round attributes to
