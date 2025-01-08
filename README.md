@@ -302,7 +302,7 @@ DeltaTime is a critical concept in game development and animation that refers to
 2. **Calculate Elapsed Time**: Subtract the last recorded time from the current time to get the DeltaTime.
 3. **Apply DeltaTime**: Use this value to adjust movements, animations, and other time-dependent calculations.
 
-### Example Code Snippet (Visual Basic .NET)
+### Example Code
 Here’s a simplified example illustrating how to implement DeltaTime in a Windows Forms application:
 
 ```vb
