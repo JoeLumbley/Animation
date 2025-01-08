@@ -52,41 +52,140 @@ Public Class Form1
 
     Private ReadOnly FpsIdentifier As New String(" FPS")
 
+    '' The RectangleDouble structure represents a rectangle with
+    '' double-precision coordinates and dimensions.
+    'Public Structure RectangleDouble
+
+    '    Public X, Y, Width, Height As Double
+
+    '    Public Sub New(x As Double, y As Double, width As Double, height As Double)
+
+    '        Me.X = x
+    '        Me.Y = y
+    '        Me.Width = width
+    '        Me.Height = height
+    '    End Sub
+
+    '    ' Methods to round attributes to
+    '    ' the nearest integer values.
+    '    Public Function GetNearestX() As Integer
+
+    '        Return Math.Round(X)
+    '    End Function
+    '    Public Function GetNearestY() As Integer
+
+    '        Return Math.Round(Y)
+    '    End Function
+    '    Public Function GetNearestWidth() As Integer
+
+    '        Return Math.Round(Width)
+    '    End Function
+    '    Public Function GetNearestHeight() As Integer
+
+    '        Return Math.Round(Height)
+    '    End Function
+
+    '    Public Sub MoveRectangle()
+
+    '        ' Move the rectangle to the right.
+    '        X += Velocity * DeltaTime.ElapsedTime.TotalSeconds
+    '        ' Displacement = Velocity x Delta Time ( Δs = V * Δt )
+
+    '        ' Wraparound
+    '        ' When the rectangle exits the right side of the client area.
+    '        If Rectangle.X > My.ClientRectangle.Right Then
+
+    '            ' The rectangle reappears on the left side the client area.
+    '            Rectangle.X = ClientRectangle.Left - Rectangle.Width
+
+    '        End If
+
+    '    End Sub
+
+    'End Structure
+
+
     ' The RectangleDouble structure represents a rectangle with
     ' double-precision coordinates and dimensions.
     Public Structure RectangleDouble
 
         Public X, Y, Width, Height As Double
+        Public Velocity As Double
 
-        Public Sub New(x As Double, y As Double, width As Double, height As Double)
-
+        Public Sub New(x As Double, y As Double, width As Double, height As Double, velocity As Double)
             Me.X = x
             Me.Y = y
             Me.Width = width
             Me.Height = height
+            Me.Velocity = velocity
         End Sub
 
         ' Methods to round attributes to
         ' the nearest integer values.
         Public Function GetNearestX() As Integer
-
             Return Math.Round(X)
         End Function
-        Public Function GetNearestY() As Integer
 
+        Public Function GetNearestY() As Integer
             Return Math.Round(Y)
         End Function
-        Public Function GetNearestWidth() As Integer
 
+        Public Function GetNearestWidth() As Integer
             Return Math.Round(Width)
         End Function
-        Public Function GetNearestHeight() As Integer
 
+        Public Function GetNearestHeight() As Integer
             Return Math.Round(Height)
         End Function
+
+        Public Sub MoveRightAndWraparound(ByVal clientRectangle As Rectangle, ByVal deltaTime As TimeSpan)
+
+            MoveRight(deltaTime)
+
+            Wraparound(clientRectangle)
+
+            '' Move the rectangle to the right.
+            'X += Velocity * deltaTime.TotalSeconds
+            '' Displacement = Velocity x Delta Time ( Δs = V * Δt )
+
+            '' Wraparound
+            '' When the rectangle exits the right side of the client area.
+            'If X > clientRectangle.Right Then
+
+            '    ' The rectangle reappears on the left side of the client area.
+            '    X = clientRectangle.Left - Width
+
+            'End If
+
+        End Sub
+
+        Public Sub MoveRight(ByVal deltaTime As TimeSpan)
+
+            ' Move the rectangle to the right.
+            X += Velocity * deltaTime.TotalSeconds
+            ' Displacement = Velocity x Delta Time ( Δs = V * Δt )
+
+        End Sub
+
+        Public Sub Wraparound(ByVal clientRectangle As Rectangle)
+
+            ' Wraparound
+            ' When the rectangle exits the right side of the client area.
+            If X > clientRectangle.Right Then
+
+                ' The rectangle reappears on the left side of the client area.
+                X = clientRectangle.Left - Width
+
+            End If
+
+        End Sub
+
+
+
     End Structure
 
-    Private Rectangle As New RectangleDouble(0, 0, 256, 256)
+
+    Private Rectangle As New RectangleDouble(0, 0, 256, 256, 64)
 
     ' The DeltaTimeStructure represents the time difference
     ' between two frames.
@@ -217,26 +316,28 @@ Public Class Form1
 
         DeltaTime.Update()
 
-        MoveRectangle()
+        'MoveRectangle()
+
+        Rectangle.MoveRightAndWraparound(ClientRectangle, DeltaTime.ElapsedTime)
 
     End Sub
 
-    Private Sub MoveRectangle()
+    'Private Sub MoveRectangle()
 
-        ' Move the rectangle to the right.
-        Rectangle.X += Velocity * DeltaTime.ElapsedTime.TotalSeconds
-        ' Displacement = Velocity x Delta Time ( Δs = V * Δt )
+    '    ' Move the rectangle to the right.
+    '    Rectangle.X += Velocity * DeltaTime.ElapsedTime.TotalSeconds
+    '    ' Displacement = Velocity x Delta Time ( Δs = V * Δt )
 
-        ' Wraparound
-        ' When the rectangle exits the right side of the client area.
-        If Rectangle.X > ClientRectangle.Right Then
+    '    ' Wraparound
+    '    ' When the rectangle exits the right side of the client area.
+    '    If Rectangle.X > ClientRectangle.Right Then
 
-            ' The rectangle reappears on the left side the client area.
-            Rectangle.X = ClientRectangle.Left - Rectangle.Width
+    '        ' The rectangle reappears on the left side the client area.
+    '        Rectangle.X = ClientRectangle.Left - Rectangle.Width
 
-        End If
+    '    End If
 
-    End Sub
+    'End Sub
 
     Private Sub InitializeBuffer()
 
