@@ -46,8 +46,6 @@ Public Class Form1
 
     Private BackgroundColor As Color = Color.Black
 
-    'Private FpsDisplayBrush As New SolidBrush(Color.MediumOrchid)
-
     Private ReadOnly FpsIdentifier As New String(" FPS")
 
     ' The RectangleDouble structure represents a rectangle with
@@ -151,8 +149,6 @@ Public Class Form1
     End Structure
 
     Private DeltaTime As New DeltaTimeStructure(DateTime.Now, DateTime.Now, TimeSpan.Zero)
-
-    'Private Velocity As Double = 64.0F
 
     Private Structure DisplayStructure
 
