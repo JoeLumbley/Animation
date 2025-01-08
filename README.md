@@ -315,9 +315,11 @@ This walkthrough covers the main components of the animation project. Feel free 
 
 
 
+
+## Exercises
+
 Here are some exercises you can try to enhance your understanding of the animation project:
 
-### Exercises
 
 1. **Change Rectangle Size**
    - Modify the dimensions of the rectangle in the `RectangleDouble` structure.
@@ -346,8 +348,6 @@ Here are some exercises you can try to enhance your understanding of the animati
 7. **Change Background Color**
    - Modify the `BackgroundColor` variable to change the background of the form.
    - **Task**: Experiment with different background colors and observe how they affect the visibility of the rectangle.
-
-### Conclusion
 
 These exercises will help you to better understand the concepts of animation and improve your programming skills in Visual Basic .NET. Feel free to experiment and combine these tasks for more complex behaviors!
 
