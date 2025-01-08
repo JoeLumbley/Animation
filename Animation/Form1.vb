@@ -102,6 +102,24 @@ Public Class Form1
             Me.LastFrame = lastFrame
             Me.ElapsedTime = elapsedTime
         End Sub
+
+
+        Public Sub Update()
+            ' Delta time ( Δt ) is the elapsed time since the last frame.
+
+            ' Set the current frame's time to the current system time.
+            CurrentFrame = Now
+
+            ' Calculates the elapsed time ( delta time Δt ) between the current frame
+            ' and the last frame.
+            ElapsedTime = CurrentFrame - LastFrame
+
+            ' Updates the last frame's time to the current frame's time for use in
+            ' the next update.
+            LastFrame = CurrentFrame
+
+        End Sub
+
     End Structure
 
     Private DeltaTime As New DeltaTimeStructure(DateTime.Now, DateTime.Now, TimeSpan.Zero)
@@ -199,27 +217,29 @@ Public Class Form1
 
     Private Sub UpdateFrame()
 
-        UpdateDeltaTime()
+        'UpdateDeltaTime()
+
+        DeltaTime.Update()
 
         MoveRectangle()
 
     End Sub
 
-    Private Sub UpdateDeltaTime()
-        ' Delta time ( Δt ) is the elapsed time since the last frame.
+    'Private Sub UpdateDeltaTime()
+    '    ' Delta time ( Δt ) is the elapsed time since the last frame.
 
-        ' Set the current frame's time to the current system time.
-        DeltaTime.CurrentFrame = Now
+    '    ' Set the current frame's time to the current system time.
+    '    DeltaTime.CurrentFrame = Now
 
-        ' Calculates the elapsed time ( delta time Δt ) between the current frame
-        ' and the last frame.
-        DeltaTime.ElapsedTime = DeltaTime.CurrentFrame - DeltaTime.LastFrame
+    '    ' Calculates the elapsed time ( delta time Δt ) between the current frame
+    '    ' and the last frame.
+    '    DeltaTime.ElapsedTime = DeltaTime.CurrentFrame - DeltaTime.LastFrame
 
-        ' Updates the last frame's time to the current frame's time for use in
-        ' the next update.
-        DeltaTime.LastFrame = DeltaTime.CurrentFrame
+    '    ' Updates the last frame's time to the current frame's time for use in
+    '    ' the next update.
+    '    DeltaTime.LastFrame = DeltaTime.CurrentFrame
 
-    End Sub
+    'End Sub
 
     Private Sub MoveRectangle()
 
