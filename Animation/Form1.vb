@@ -52,65 +52,11 @@ Public Class Form1
 
     Private ReadOnly FpsIdentifier As New String(" FPS")
 
-    '' The RectangleDouble structure represents a rectangle with
-    '' double-precision coordinates and dimensions.
-    'Public Structure RectangleDouble
-
-    '    Public X, Y, Width, Height As Double
-
-    '    Public Sub New(x As Double, y As Double, width As Double, height As Double)
-
-    '        Me.X = x
-    '        Me.Y = y
-    '        Me.Width = width
-    '        Me.Height = height
-    '    End Sub
-
-    '    ' Methods to round attributes to
-    '    ' the nearest integer values.
-    '    Public Function GetNearestX() As Integer
-
-    '        Return Math.Round(X)
-    '    End Function
-    '    Public Function GetNearestY() As Integer
-
-    '        Return Math.Round(Y)
-    '    End Function
-    '    Public Function GetNearestWidth() As Integer
-
-    '        Return Math.Round(Width)
-    '    End Function
-    '    Public Function GetNearestHeight() As Integer
-
-    '        Return Math.Round(Height)
-    '    End Function
-
-    '    Public Sub MoveRectangle()
-
-    '        ' Move the rectangle to the right.
-    '        X += Velocity * DeltaTime.ElapsedTime.TotalSeconds
-    '        ' Displacement = Velocity x Delta Time ( Δs = V * Δt )
-
-    '        ' Wraparound
-    '        ' When the rectangle exits the right side of the client area.
-    '        If Rectangle.X > My.ClientRectangle.Right Then
-
-    '            ' The rectangle reappears on the left side the client area.
-    '            Rectangle.X = ClientRectangle.Left - Rectangle.Width
-
-    '        End If
-
-    '    End Sub
-
-    'End Structure
-
-
     ' The RectangleDouble structure represents a rectangle with
     ' double-precision coordinates and dimensions.
     Public Structure RectangleDouble
 
-        Public X, Y, Width, Height As Double
-        Public Velocity As Double
+        Public X, Y, Width, Height, Velocity As Double
 
         Public Sub New(x As Double, y As Double, width As Double, height As Double, velocity As Double)
             Me.X = x
@@ -221,7 +167,7 @@ Public Class Form1
 
     Private DeltaTime As New DeltaTimeStructure(DateTime.Now, DateTime.Now, TimeSpan.Zero)
 
-    Private Velocity As Double = 64.0F
+    'Private Velocity As Double = 64.0F
 
     Private Structure DisplayStructure
 
