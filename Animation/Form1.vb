@@ -46,8 +46,6 @@ Public Class Form1
 
     Private BackgroundColor As Color = Color.Black
 
-    'Private RectangleBrush As New SolidBrush(Color.Orchid)
-
     Private FpsDisplayBrush As New SolidBrush(Color.MediumOrchid)
 
     Private ReadOnly FpsIdentifier As New String(" FPS")
