@@ -103,9 +103,7 @@ Public Class Form1
             Me.ElapsedTime = elapsedTime
         End Sub
 
-
         Public Sub Update()
-            ' Delta time ( Δt ) is the elapsed time since the last frame.
 
             ' Set the current frame's time to the current system time.
             CurrentFrame = Now
