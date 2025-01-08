@@ -46,7 +46,7 @@ Public Class Form1
 
     Private BackgroundColor As Color = Color.Black
 
-    Private RectangleBrush As New SolidBrush(Color.Orchid)
+    'Private RectangleBrush As New SolidBrush(Color.Orchid)
 
     Private FpsDisplayBrush As New SolidBrush(Color.MediumOrchid)
 
@@ -57,14 +57,16 @@ Public Class Form1
     Public Structure RectangleDouble
 
         Public X, Y, Width, Height, Velocity As Double
+        Public Brush As Brush
 
-        Public Sub New(x As Double, y As Double, width As Double, height As Double, velocity As Double)
+        Public Sub New(x As Double, y As Double, width As Double, height As Double, velocity As Double, Brush As Brush)
 
             Me.X = x
             Me.Y = y
             Me.Width = width
             Me.Height = height
             Me.Velocity = velocity
+            Me.Brush = Brush
         End Sub
 
         ' Methods to round attributes to
@@ -116,7 +118,7 @@ Public Class Form1
 
     End Structure
 
-    Private Rectangle As New RectangleDouble(0.0F, 0.0F, 256.0F, 256.0F, 32.0F)
+    Private Rectangle As New RectangleDouble(0.0F, 0.0F, 256.0F, 256.0F, 32.0F, New SolidBrush(Color.Orchid))
 
     ' The DeltaTimeStructure represents the time difference
     ' between two frames.
@@ -306,7 +308,7 @@ Public Class Form1
 
         Buffer?.Graphics.Clear(BackgroundColor)
 
-        Buffer?.Graphics.FillRectangle(RectangleBrush,
+        Buffer?.Graphics.FillRectangle(Rectangle.Brush,
                                        Rectangle.GetNearestX,
                                        Rectangle.GetNearestY,
                                        Rectangle.GetNearestWidth,
