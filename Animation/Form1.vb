@@ -382,3 +382,12 @@ End Class
 
 ' Monica is our an AI assistant.
 ' https://monica.im/
+
+' No sacrifice, no victory. - The Witwicky family motto
+
+' or in Latin Absque sui detrimento non datur victoria
+
+' Victory is not gained without harm to oneself.
+' A powerful reminder that every success often comes with its own set of
+' challenges and sacrifices. It’s like a call to embrace the journey,
+' with all its ups and downs.
