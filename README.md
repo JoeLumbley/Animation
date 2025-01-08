@@ -10,23 +10,18 @@ This project showcases the fundamentals of creating smooth animations. The appli
 
 In this app, you'll learn how to manage timing, handle graphics rendering, and implement basic animation principles. Whether you're a beginner looking to understand the basics of animation or an experienced developer seeking a refresher, this project provides a hands-on approach to mastering animation techniques.
 
-
+---
 
 # Animation Code Walkthrough
 
 Welcome to the Animation project! In this lesson, we will break down the code line by line, helping you understand how it works. This project demonstrates the fundamentals of creating smooth animations using a Windows Form application. Let's dive right in!
 
----
 
-## Overview
 
 Animation is the art of creating the illusion of motion by displaying a series of static images in quick succession. In our app, we use animation to make it appear as though our rectangle is moving towards the right. To ensure that our animation runs smoothly on all devices, we have designed it to be frame-independent. This means that our animation is not affected by changes in the frame rate, ensuring a consistent and seamless experience for all users.
 
-### License Information
 
-This code is shared under the MIT License, which allows you to use, modify, and distribute it freely, as long as you include the original copyright notice.
 
----
 
 ## Code Breakdown
 
@@ -371,9 +366,11 @@ Happy coding!
 ![012](https://github.com/user-attachments/assets/d50c1b9e-690e-422e-8be5-620a96b295ab)
 
 
+---
 
+### License Information
 
-
+This code is shared under the MIT License, which allows you to use, modify, and distribute it freely, as long as you include the original copyright notice.
 
 
 
