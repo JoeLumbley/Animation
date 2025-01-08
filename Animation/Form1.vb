@@ -44,11 +44,11 @@ Public Class Form1
 
     Private ReadOnly MinimumMaxBufferSize As New Size(1280, 720)
 
-    Private ReadOnly BackgroundColor As Color = Color.Black
+    Private BackgroundColor As Color = Color.Black
 
-    Private ReadOnly RectangleBrush As New SolidBrush(Color.Orchid)
+    Private RectangleBrush As New SolidBrush(Color.Orchid)
 
-    Private ReadOnly FpsDisplayBrush As New SolidBrush(Color.MediumOrchid)
+    Private FpsDisplayBrush As New SolidBrush(Color.MediumOrchid)
 
     Private ReadOnly FpsIdentifier As New String(" FPS")
 
