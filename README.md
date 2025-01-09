@@ -12,82 +12,102 @@ In this app, you'll learn how to manage timing, handle graphics rendering, and i
 
 ---
 
-# Code Walkthrough
-
-Welcome to the Animation project! In this lesson, we will break down the code line by line, helping you understand how it works. This project demonstrates the fundamentals of creating smooth animations using a Windows Form application. Let's dive right in!
 
 
+# Project Walkthrough
 
-Animation is the art of creating the illusion of motion by displaying a series of static images in quick succession. In our app, we use animation to make it appear as though our rectangle is moving towards the right. To ensure that our animation runs smoothly on all devices, we have designed it to be **frame-independent**. This means that our animation is not affected by changes in the frame rate, ensuring a consistent and seamless experience for all users.
+Welcome to the Animation project! In this lesson, we'll break down the code line by line, helping you understand how it works. This project demonstrates the fundamentals of creating smooth animations using a Windows Form application. Let's dive right in!
+
+Animation is the art of creating the illusion of motion by displaying a series of static images in quick succession. In our app, we use animation to make it appear as though our rectangle is moving towards the right. To ensure that our animation runs smoothly on all devices, we have designed it to be frame-independent. This means that our animation is not affected by changes in the frame rate, ensuring a consistent and seamless experience for all users.
 
 
 
+## Code Walkthrough
 
-## The Breakdown
+### Setting Up the Environment
 
 ```vb
 Option Explicit On
 ```
-- This line ensures that all variables must be declared before they are used. It helps prevent errors caused by typos in variable names.
+This line ensures that all variables must be declared before they are used. This helps prevent errors caused by typos in variable names.
+
+### The Form Class
 
 ```vb
 Public Class Form1
 ```
-- This line defines a new class named `Form1`, which represents our main application window. All the code inside this class will define the behavior and appearance of our form.
+This line defines a new class named `Form1`, which represents our main application window. All the code inside this class will define the behavior and appearance of our form.
 
-### Variables and Structures
-
-#### Buffered Graphics Context
+### Buffered Graphics
 
 ```vb
 Private Context As New BufferedGraphicsContext
 Private Buffer As BufferedGraphics
+Private ReadOnly MinimumMaxBufferSize As New Size(1280, 720)
+Private BackgroundColor As Color = Color.Black
+Private ReadOnly FpsIdentifier As New String(" FPS")
 ```
-- `Context` is an instance of `BufferedGraphicsContext`, which manages the buffered graphics.
-- `Buffer` is an instance of `BufferedGraphics`, which will hold our drawing operations before rendering them on the screen.
-
-#### Screen Size and Colors
-
-```vb
-    Private ReadOnly MinimumMaxBufferSize As New Size(1280, 720)
-    Private BackgroundColor As Color = Color.Black
-    Private RectangleBrush As New SolidBrush(Color.Orchid)
-    Private FpsDisplayBrush As New SolidBrush(Color.MediumOrchid)
-    Private ReadOnly FpsIdentifier As New String(" FPS")
-
-```
-- `MinimumMaxBufferSize` sets the minimum size for our graphics buffer.
-- `BackgroundColor` defines the color of the background (black).
-- `RectangleBrush` defines the color of the rectangle (orchid).
-- `FpsDisplayBrush` defines the color for the frames per second (FPS) display (medium orchid).
-- `FpsIdentifier` is a string that will be appended to our FPS count for display purposes.
+- `Context`: This variable manages the buffered graphics.
+- `Buffer`: This holds our drawing operations before rendering them on the screen.
+- `MinimumMaxBufferSize`: Sets the minimum size for our graphics buffer.
+- `BackgroundColor`: Defines the color of the background (black).
+- `FpsIdentifier`: A string that will be appended to our FPS count for display purposes.
 
 ### Rectangle Structure
 
 ```vb
-Public Structure RectangleDouble
-    Public X, Y, Width, Height As Double
+Private Structure RectangleDouble
+    Public X, Y, Width, Height, Velocity As Double
+    Public Brush As Brush
 ```
-- This defines a structure named `RectangleDouble` that represents a rectangle with double-precision coordinates and dimensions.
+This defines a structure named `RectangleDouble` that represents a rectangle with double-precision coordinates and dimensions. The properties `X`, `Y`, `Width`, `Height`, and `Velocity` define the rectangle's position and size, while `Brush` determines the color used to fill the rectangle.
+
+#### Constructor
 
 ```vb
-Public Sub New(x As Double, y As Double, width As Double, height As Double)
+Public Sub New(x As Double, y As Double, width As Double, height As Double, velocity As Double, brush As Brush)
     Me.X = x
     Me.Y = y
     Me.Width = width
     Me.Height = height
+    Me.Velocity = velocity
+    Me.Brush = brush
 End Sub
 ```
-- This is the constructor for the `RectangleDouble` structure. It initializes a new rectangle with specified values for its `X`, `Y`, `Width`, and `Height`.
+This constructor initializes a new rectangle with specified values for its position, size, velocity, and color.
 
-#### Rounding Methods
+#### Methods for Movement
 
 ```vb
-Public Function GetNearestX() As Integer
-    Return Math.Round(X)
-End Function
+Public Sub MoveRight(ByVal deltaTime As TimeSpan)
+    X += Velocity * deltaTime.TotalSeconds
+End Sub
 ```
-- This method rounds the `X` coordinate to the nearest integer. Similar methods exist for `Y`, `Width`, and `Height`.
+This method moves the rectangle to the right based on its velocity and the elapsed time since the last frame. The formula used is **Displacement = Velocity x Delta Time**.
+
+```vb
+Public Sub Wraparound(ByVal clientRectangle As Rectangle)
+    If X > clientRectangle.Right Then
+        X = clientRectangle.Left - Width
+    End If
+End Sub
+```
+This method checks if the rectangle has exited the right side of the client area. If it has, it reappears on the left side.
+
+```vb
+Public Sub MoveRightAndWraparound(ByVal clientRectangle As Rectangle, ByVal deltaTime As TimeSpan)
+    MoveRight(deltaTime)
+    Wraparound(clientRectangle)
+End Sub
+```
+This method combines the movement and wraparound logic, making it easy to call both in one function.
+
+```vb
+Public Sub CenterVertically(ByVal clientRectangle As Rectangle)
+    Y = clientRectangle.Height \ 2 - Height \ 2
+End Sub
+```
+This method centers the rectangle vertically in the client area of our form.
 
 ### Delta Time Structure
 
@@ -97,7 +117,9 @@ Private Structure DeltaTimeStructure
     Public LastFrame As DateTime
     Public ElapsedTime As TimeSpan
 ```
-- This structure tracks the timing information for our animation, including the current and last frame times and the elapsed time between them.
+This structure tracks the timing information for our animation, including the current and last frame times and the elapsed time between them.
+
+#### Constructor and Update Method
 
 ```vb
 Public Sub New(currentFrame As Date, lastFrame As Date, elapsedTime As TimeSpan)
@@ -106,21 +128,29 @@ Public Sub New(currentFrame As Date, lastFrame As Date, elapsedTime As TimeSpan)
     Me.ElapsedTime = elapsedTime
 End Sub
 ```
-- This constructor initializes the `DeltaTimeStructure` with the current and last frame times.
+This constructor initializes the `DeltaTimeStructure` with the current and last frame times.
 
-### Other Structures
+```vb
+Public Sub Update()
+    CurrentFrame = Now
+    ElapsedTime = CurrentFrame - LastFrame
+    LastFrame = CurrentFrame
+End Sub
+```
+The `Update` method sets the current frame's time to the current system time, calculates the elapsed time since the last frame, and updates the last frame's time for the next update.
 
-#### Display Structure
+### Display Structure
 
 ```vb
 Private Structure DisplayStructure
     Public Location As Point
     Public Text As String
     Public Font As Font
+    Public Brush As Brush
 ```
-- This structure holds information about display elements, including their location, text, and font.
+This structure holds information about display elements, including their location, text, and font.
 
-#### Frame Counter Structure
+### Frame Counter Structure
 
 ```vb
 Private Structure FrameCounterStructure
@@ -129,13 +159,9 @@ Private Structure FrameCounterStructure
     Public TimeElapsed As TimeSpan
     Public SecondsElapsed As Double
 ```
-- This structure counts the frames rendered and tracks the timing for calculating frames per second (FPS).
+This structure counts the frames rendered and tracks the timing for calculating frames per second (FPS).
 
----
-
-### Event Handlers
-
-#### Form Load Event
+### Form Load Event
 
 ```vb
 Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -143,22 +169,20 @@ Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     Debug.Print($"Running...{DateTime.Now}")
 End Sub
 ```
-- This method initializes the application when the form loads. It calls `InitializeApp()` to set up the necessary components and prints the current time to the debug console.
+This method initializes the application when the form loads, calling `InitializeApp()` to set up the necessary components and printing the current time to the debug console.
 
-#### Form Resize Event
+### Form Resize Event
 
 ```vb
 Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
     If Not WindowState = FormWindowState.Minimized Then
         ResizeFPS()
-        ResizeRectangle()
+        Rectangle.CenterVertically(ClientRectangle)
         DisposeBuffer()
     End If
 End Sub
 ```
-- This method handles resizing the window. It adjusts the FPS display and rectangle size accordingly, ensuring everything looks good when the window is resized.
-
----
+This method handles resizing the window. It adjusts the FPS display and rectangle size accordingly, ensuring everything looks good when the window is resized.
 
 ### Timer Tick Event
 
@@ -170,13 +194,9 @@ Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
     End If
 End Sub
 ```
-- This event is triggered at regular intervals (every 15 milliseconds). It updates the animation frame and redraws the form.
+This event is triggered at regular intervals (every 15 milliseconds). It updates the animation frame and redraws the form.
 
----
-
-### Painting the Frame
-
-#### OnPaint Method
+### OnPaint Method
 
 ```vb
 Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
@@ -187,50 +207,42 @@ Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
     MyBase.OnPaint(e)
 End Sub
 ```
-- This method handles the rendering of graphics. It allocates a buffer, draws the current frame, and updates the frame counter. The buffer is then rendered onto the form.
+This method handles the rendering of graphics. It allocates a buffer, draws the current frame, and updates the frame counter.
 
-#### Drawing the Frame
+### Drawing the Frame
 
 ```vb
 Private Sub DrawFrame()
     Buffer?.Graphics.Clear(BackgroundColor)
-    Buffer?.Graphics.FillRectangle(RectangleBrush, Rectangle.GetNearestX, Rectangle.GetNearestY, Rectangle.GetNearestWidth, Rectangle.GetNearestHeight)
-    Buffer?.Graphics.DrawString(FPSDisplay.Text, FPSDisplay.Font, FpsDisplayBrush, FPSDisplay.Location)
+    Buffer?.Graphics.FillRectangle(Rectangle.Brush, Rectangle.GetNearestX, Rectangle.GetNearestY, Rectangle.GetNearestWidth, Rectangle.GetNearestHeight)
+    Buffer?.Graphics.DrawString(FPSDisplay.Text, FPSDisplay.Font, FPSDisplay.Brush, FPSDisplay.Location)
 End Sub
 ```
-- This method clears the buffer with the background color, fills a rectangle with the specified brush, and draws the FPS display string.
+This method clears the buffer with the background color, fills a rectangle with the specified brush, and draws the FPS display string.
 
----
-
-### Updating the Animation
-
-#### MoveRectangle Method
+### Updating the Frame Counter
 
 ```vb
-Private Sub MoveRectangle()
-    Rectangle.X += Velocity * DeltaTime.ElapsedTime.TotalSeconds
-    If Rectangle.X > ClientRectangle.Right Then
-        Rectangle.X = ClientRectangle.Left - Rectangle.Width
+Private Sub UpdateFrameCounter()
+    FrameCounter.TimeElapsed = Now.Subtract(FrameCounter.StartTime)
+    FrameCounter.SecondsElapsed = FrameCounter.TimeElapsed.TotalSeconds
+    If FrameCounter.SecondsElapsed < 1 Then
+        FrameCounter.FrameCount += 1
+    Else
+        FPSDisplay.Text = $"{FrameCounter.FrameCount}{FpsIdentifier}"
+        FrameCounter.FrameCount = 0
+        FrameCounter.StartTime = Now
     End If
 End Sub
 ```
-- This method updates the rectangle's position based on its velocity and the elapsed time. If the rectangle moves off the right edge, it reappears on the left.
+This method keeps track of how many frames have been rendered in the last second and updates the FPS display accordingly.
 
----
+### Conclusion
 
-### Initialization Methods
+This walkthrough covers the main components of the animation project. Feel free to experiment with the code, adjust parameters, and see how they affect the animation! Understanding these principles will help you master animation techniques in Visual Basic .NET. Happy coding!
 
-#### InitializeApp Method
 
-```vb
-Private Sub InitializeApp()
-    InitializeForm()
-    InitializeBuffer()
-    Timer1.Interval = 15
-    Timer1.Start()
-End Sub
-```
-- This method initializes the application, setting up the form and buffer, and starts the timer.
+
 
 ---
 
@@ -385,11 +397,16 @@ Happy coding!
 
 ---
 
+
+
 # License Information
 
-This code is shared under the MIT License, which allows you to use, modify, and distribute it freely, as long as you include the original copyright notice.
+This project is shared under the MIT License, which allows you to use, modify, and distribute it freely, as long as you include the original copyright notice.
 
-
+```plaintext
+MIT License
+Copyright(c) 2023 Joseph W. Lumbley
+```
 
 
 
