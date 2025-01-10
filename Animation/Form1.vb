@@ -196,6 +196,7 @@ Public Class Form1
         Public StartTime As DateTime
         Public TimeElapsed As TimeSpan
         Public SecondsElapsed As Double
+        Public FPS As String
 
         Public Sub New(frameCount As Integer, startTime As Date,
                        timeElapsed As TimeSpan, secondsElapsed As Double)
@@ -205,6 +206,29 @@ Public Class Form1
             Me.TimeElapsed = timeElapsed
             Me.SecondsElapsed = secondsElapsed
         End Sub
+
+        Public Sub Update()
+
+            TimeElapsed = Now.Subtract(StartTime)
+
+            'SecondsElapsed = TimeElapsed.TotalSeconds
+
+            If TimeElapsed.TotalSeconds < 1 Then
+
+                FrameCount += 1
+
+            Else
+
+                FPS = $"{FrameCount} FPS"
+
+                FrameCount = 0
+
+                StartTime = Now
+
+            End If
+
+        End Sub
+
     End Structure
 
     Private FrameCounter As New FrameCounterStructure(0, DateTime.Now,
@@ -253,11 +277,19 @@ Public Class Form1
         ' Show buffer on form.
         Buffer?.Render(e.Graphics)
 
-        UpdateFrameCounter()
+        'UpdateFrameCounter()
+        FrameCounter.Update()
 
         EraseFrame()
 
         MyBase.OnPaint(e)
+
+        'If Not FrameCounter.SecondsElapsed < 1 Then
+
+        '    FPSDisplay.Text = $"{FrameCounter.FrameCount}{FpsIdentifier}"
+
+
+        'End If
 
     End Sub
 
@@ -273,6 +305,9 @@ Public Class Form1
 
         Rectangle.MoveRightAndWraparound(ClientRectangle,
                                          DeltaTime.ElapsedTime)
+
+        FPSDisplay.Text = FrameCounter.FPS
+
 
     End Sub
 
@@ -376,27 +411,27 @@ Public Class Form1
 
     End Sub
 
-    Private Sub UpdateFrameCounter()
+    'Private Sub UpdateFrameCounter()
 
-        FrameCounter.TimeElapsed = Now.Subtract(FrameCounter.StartTime)
+    '    FrameCounter.TimeElapsed = Now.Subtract(FrameCounter.StartTime)
 
-        FrameCounter.SecondsElapsed = FrameCounter.TimeElapsed.TotalSeconds
+    '    FrameCounter.SecondsElapsed = FrameCounter.TimeElapsed.TotalSeconds
 
-        If FrameCounter.SecondsElapsed < 1 Then
+    '    If FrameCounter.SecondsElapsed < 1 Then
 
-            FrameCounter.FrameCount += 1
+    '        FrameCounter.FrameCount += 1
 
-        Else
+    '    Else
 
-            FPSDisplay.Text = $"{FrameCounter.FrameCount}{FpsIdentifier}"
+    '        FPSDisplay.Text = $"{FrameCounter.FrameCount}{FpsIdentifier}"
 
-            FrameCounter.FrameCount = 0
+    '        FrameCounter.FrameCount = 0
 
-            FrameCounter.StartTime = Now
+    '        FrameCounter.StartTime = Now
 
-        End If
+    '    End If
 
-    End Sub
+    'End Sub
 
     Private Sub ResizeFPS()
 
