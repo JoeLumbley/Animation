@@ -70,19 +70,25 @@ Public Class Form1
         ' the nearest integer values.
         Public Function GetNearestX() As Integer
 
-            Return Math.Round(X)
+            Return RoundToNearest(X)
         End Function
         Public Function GetNearestY() As Integer
 
-            Return Math.Round(Y)
+            Return RoundToNearest(Y)
         End Function
         Public Function GetNearestWidth() As Integer
 
-            Return Math.Round(Width)
+            Return RoundToNearest(Width)
         End Function
         Public Function GetNearestHeight() As Integer
 
-            Return Math.Round(Height)
+            Return RoundToNearest(Height)
+        End Function
+
+        ' Generic method to round attributes to the nearest integer values.
+        Private Function RoundToNearest(ByVal value As Double) As Integer
+
+            Return CInt(Math.Round(value))
         End Function
 
         Public Sub MoveRight(ByVal deltaTime As TimeSpan)
