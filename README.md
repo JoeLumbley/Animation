@@ -65,7 +65,8 @@ This defines a structure named `RectangleDouble` that represents a rectangle wit
 #### Constructor
 
 ```vb
-Public Sub New(x As Double, y As Double, width As Double, height As Double, velocity As Double, brush As Brush)
+Public Sub New(x As Double, y As Double, width As Double, height As Double,
+               velocity As Double, brush As Brush)
     Me.X = x
     Me.Y = y
     Me.Width = width
