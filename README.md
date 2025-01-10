@@ -124,7 +124,8 @@ This structure tracks the timing information for our animation, including the cu
 #### Constructor and Update Method
 
 ```vb
-Public Sub New(currentFrame As Date, lastFrame As Date, elapsedTime As TimeSpan)
+Public Sub New(currentFrame As Date, lastFrame As Date,
+               elapsedTime As TimeSpan)
     Me.CurrentFrame = currentFrame
     Me.LastFrame = lastFrame
     Me.ElapsedTime = elapsedTime
