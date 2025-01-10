@@ -65,7 +65,8 @@ This defines a structure named `RectangleDouble` that represents a rectangle wit
 #### Constructor
 
 ```vb
-Public Sub New(x As Double, y As Double, width As Double, height As Double, velocity As Double, brush As Brush)
+Public Sub New(x As Double, y As Double, width As Double, height As Double,
+               velocity As Double, brush As Brush)
     Me.X = x
     Me.Y = y
     Me.Width = width
@@ -95,7 +96,8 @@ End Sub
 This method checks if the rectangle has exited the right side of the client area. If it has, it reappears on the left side.
 
 ```vb
-Public Sub MoveRightAndWraparound(ByVal clientRectangle As Rectangle, ByVal deltaTime As TimeSpan)
+Public Sub MoveRightAndWraparound(ByVal clientRectangle As Rectangle,
+                                  ByVal deltaTime As TimeSpan)
     MoveRight(deltaTime)
     Wraparound(clientRectangle)
 End Sub
@@ -122,7 +124,8 @@ This structure tracks the timing information for our animation, including the cu
 #### Constructor and Update Method
 
 ```vb
-Public Sub New(currentFrame As Date, lastFrame As Date, elapsedTime As TimeSpan)
+Public Sub New(currentFrame As Date, lastFrame As Date,
+               elapsedTime As TimeSpan)
     Me.CurrentFrame = currentFrame
     Me.LastFrame = lastFrame
     Me.ElapsedTime = elapsedTime
@@ -213,9 +216,20 @@ This method handles the rendering of graphics. It allocates a buffer, draws the 
 
 ```vb
 Private Sub DrawFrame()
+
     Buffer?.Graphics.Clear(BackgroundColor)
-    Buffer?.Graphics.FillRectangle(Rectangle.Brush, Rectangle.GetNearestX, Rectangle.GetNearestY, Rectangle.GetNearestWidth, Rectangle.GetNearestHeight)
-    Buffer?.Graphics.DrawString(FPSDisplay.Text, FPSDisplay.Font, FPSDisplay.Brush, FPSDisplay.Location)
+
+    Buffer?.Graphics.FillRectangle(Rectangle.Brush,
+                                   Rectangle.GetNearestX,
+                                   Rectangle.GetNearestY,
+                                   Rectangle.GetNearestWidth,
+                                   Rectangle.GetNearestHeight)
+
+    Buffer?.Graphics.DrawString(FPSDisplay.Text,
+                                FPSDisplay.Font,
+                                FPSDisplay.Brush,
+                                FPSDisplay.Location)
+
 End Sub
 ```
 This method clears the buffer with the background color, fills a rectangle with the specified brush, and draws the FPS display string.
