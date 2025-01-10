@@ -55,7 +55,8 @@ Public Class Form1
         Public X, Y, Width, Height, Velocity As Double
         Public Brush As Brush
 
-        Public Sub New(x As Double, y As Double, width As Double, height As Double, velocity As Double, brush As Brush)
+        Public Sub New(x As Double, y As Double, width As Double, height As Double,
+                       velocity As Double, brush As Brush)
 
             Me.X = x
             Me.Y = y
@@ -104,7 +105,8 @@ Public Class Form1
 
         End Sub
 
-        Public Sub MoveRightAndWraparound(ByVal clientRectangle As Rectangle, ByVal deltaTime As TimeSpan)
+        Public Sub MoveRightAndWraparound(ByVal clientRectangle As Rectangle,
+                                          ByVal deltaTime As TimeSpan)
 
             MoveRight(deltaTime)
 
@@ -121,7 +123,8 @@ Public Class Form1
 
     End Structure
 
-    Private Rectangle As New RectangleDouble(0.0F, 0.0F, 256.0F, 256.0F, 32.0F, New SolidBrush(Color.Orchid))
+    Private Rectangle As New RectangleDouble(0.0F, 0.0F, 256.0F, 256.0F, 32.0F,
+                                             New SolidBrush(Color.Orchid))
 
     ' The DeltaTimeStructure represents the time difference
     ' between two frames.
@@ -131,7 +134,8 @@ Public Class Form1
         Public LastFrame As DateTime
         Public ElapsedTime As TimeSpan
 
-        Public Sub New(currentFrame As Date, lastFrame As Date, elapsedTime As TimeSpan)
+        Public Sub New(currentFrame As Date, lastFrame As Date,
+                       elapsedTime As TimeSpan)
 
             Me.CurrentFrame = currentFrame
             Me.LastFrame = lastFrame
@@ -143,19 +147,20 @@ Public Class Form1
             ' Set the current frame's time to the current system time.
             CurrentFrame = Now
 
-            ' Calculates the elapsed time ( delta time Δt ) between the current frame
-            ' and the last frame.
+            ' Calculates the elapsed time ( delta time Δt ) between the
+            ' current frame and the last frame.
             ElapsedTime = CurrentFrame - LastFrame
 
-            ' Updates the last frame's time to the current frame's time for use in
-            ' the next update.
+            ' Updates the last frame's time to the current frame's time for
+            ' use in the next update.
             LastFrame = CurrentFrame
 
         End Sub
 
     End Structure
 
-    Private DeltaTime As New DeltaTimeStructure(DateTime.Now, DateTime.Now, TimeSpan.Zero)
+    Private DeltaTime As New DeltaTimeStructure(DateTime.Now, DateTime.Now,
+                                                TimeSpan.Zero)
 
     Private Structure DisplayStructure
 
@@ -164,7 +169,8 @@ Public Class Form1
         Public Font As Font
         Public Brush As Brush
 
-        Public Sub New(location As Point, text As String, font As Font, brush As Brush)
+        Public Sub New(location As Point, text As String, font As Font,
+                       brush As Brush)
 
             Me.Location = location
             Me.Text = text
@@ -173,7 +179,10 @@ Public Class Form1
         End Sub
     End Structure
 
-    Private FPSDisplay As New DisplayStructure(New Point(0, 0), "--", New Font("Segoe UI", 25), New SolidBrush(Color.MediumOrchid))
+    Private FPSDisplay As New DisplayStructure(New Point(0, 0),
+                                                          "--",
+                                      New Font("Segoe UI", 25),
+                            New SolidBrush(Color.MediumOrchid))
 
     Private Structure FrameCounterStructure
 
@@ -182,7 +191,8 @@ Public Class Form1
         Public TimeElapsed As TimeSpan
         Public SecondsElapsed As Double
 
-        Public Sub New(frameCount As Integer, startTime As Date, timeElapsed As TimeSpan, secondsElapsed As Double)
+        Public Sub New(frameCount As Integer, startTime As Date,
+                       timeElapsed As TimeSpan, secondsElapsed As Double)
 
             Me.FrameCount = frameCount
             Me.StartTime = startTime
@@ -191,7 +201,8 @@ Public Class Form1
         End Sub
     End Structure
 
-    Private FrameCounter As New FrameCounterStructure(0, DateTime.Now, TimeSpan.Zero, 0)
+    Private FrameCounter As New FrameCounterStructure(0, DateTime.Now,
+                                                      TimeSpan.Zero, 0)
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -238,6 +249,8 @@ Public Class Form1
 
         UpdateFrameCounter()
 
+        EraseFrame()
+
         MyBase.OnPaint(e)
 
     End Sub
@@ -252,7 +265,8 @@ Public Class Form1
 
         DeltaTime.Update()
 
-        Rectangle.MoveRightAndWraparound(ClientRectangle, DeltaTime.ElapsedTime)
+        Rectangle.MoveRightAndWraparound(ClientRectangle,
+                                         DeltaTime.ElapsedTime)
 
     End Sub
 
@@ -281,16 +295,20 @@ Public Class Form1
         If Buffer Is Nothing Then
 
             Buffer = Context.Allocate(CreateGraphics(), ClientRectangle)
-            Buffer.Graphics.CompositingMode = Drawing2D.CompositingMode.SourceOver
-            Buffer.Graphics.TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAlias
+
+            Buffer.Graphics.CompositingMode =
+                    Drawing2D.CompositingMode.SourceOver
+
+            Buffer.Graphics.TextRenderingHint =
+                 Drawing.Text.TextRenderingHint.AntiAlias
+
+            Buffer.Graphics.Clear(BackgroundColor)
 
         End If
 
     End Sub
 
     Private Sub DrawFrame()
-
-        Buffer?.Graphics.Clear(BackgroundColor)
 
         Buffer?.Graphics.FillRectangle(Rectangle.Brush,
                                        Rectangle.GetNearestX,
@@ -303,6 +321,12 @@ Public Class Form1
                                     FPSDisplay.Font,
                                     FPSDisplay.Brush,
                                     FPSDisplay.Location)
+
+    End Sub
+
+    Private Sub EraseFrame()
+
+        Buffer?.Graphics.Clear(BackgroundColor)
 
     End Sub
 
