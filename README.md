@@ -96,7 +96,8 @@ End Sub
 This method checks if the rectangle has exited the right side of the client area. If it has, it reappears on the left side.
 
 ```vb
-Public Sub MoveRightAndWraparound(ByVal clientRectangle As Rectangle, ByVal deltaTime As TimeSpan)
+Public Sub MoveRightAndWraparound(ByVal clientRectangle As Rectangle,
+                                  ByVal deltaTime As TimeSpan)
     MoveRight(deltaTime)
     Wraparound(clientRectangle)
 End Sub
