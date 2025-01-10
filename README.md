@@ -216,9 +216,20 @@ This method handles the rendering of graphics. It allocates a buffer, draws the 
 
 ```vb
 Private Sub DrawFrame()
+
     Buffer?.Graphics.Clear(BackgroundColor)
-    Buffer?.Graphics.FillRectangle(Rectangle.Brush, Rectangle.GetNearestX, Rectangle.GetNearestY, Rectangle.GetNearestWidth, Rectangle.GetNearestHeight)
-    Buffer?.Graphics.DrawString(FPSDisplay.Text, FPSDisplay.Font, FPSDisplay.Brush, FPSDisplay.Location)
+
+    Buffer?.Graphics.FillRectangle(Rectangle.Brush,
+                                   Rectangle.GetNearestX,
+                                   Rectangle.GetNearestY,
+                                   Rectangle.GetNearestWidth,
+                                   Rectangle.GetNearestHeight)
+
+    Buffer?.Graphics.DrawString(FPSDisplay.Text,
+                                FPSDisplay.Font,
+                                FPSDisplay.Brush,
+                                FPSDisplay.Location)
+
 End Sub
 ```
 This method clears the buffer with the background color, fills a rectangle with the specified brush, and draws the FPS display string.
