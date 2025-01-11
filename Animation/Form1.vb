@@ -277,19 +277,11 @@ Public Class Form1
         ' Show buffer on form.
         Buffer?.Render(e.Graphics)
 
-        'UpdateFrameCounter()
         FrameCounter.Update()
 
         EraseFrame()
 
         MyBase.OnPaint(e)
-
-        'If Not FrameCounter.SecondsElapsed < 1 Then
-
-        '    FPSDisplay.Text = $"{FrameCounter.FrameCount}{FpsIdentifier}"
-
-
-        'End If
 
     End Sub
 
@@ -307,7 +299,6 @@ Public Class Form1
                                          DeltaTime.ElapsedTime)
 
         FPSDisplay.Text = FrameCounter.FPS
-
 
     End Sub
 
@@ -410,28 +401,6 @@ Public Class Form1
         Me.WindowState = FormWindowState.Maximized
 
     End Sub
-
-    'Private Sub UpdateFrameCounter()
-
-    '    FrameCounter.TimeElapsed = Now.Subtract(FrameCounter.StartTime)
-
-    '    FrameCounter.SecondsElapsed = FrameCounter.TimeElapsed.TotalSeconds
-
-    '    If FrameCounter.SecondsElapsed < 1 Then
-
-    '        FrameCounter.FrameCount += 1
-
-    '    Else
-
-    '        FPSDisplay.Text = $"{FrameCounter.FrameCount}{FpsIdentifier}"
-
-    '        FrameCounter.FrameCount = 0
-
-    '        FrameCounter.StartTime = Now
-
-    '    End If
-
-    'End Sub
 
     Private Sub ResizeFPS()
 
