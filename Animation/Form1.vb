@@ -46,8 +46,6 @@ Public Class Form1
 
     Private BackgroundColor As Color = Color.Black
 
-    'Private ReadOnly FpsIdentifier As New String(" FPS")
-
     ' The RectangleDouble structure represents a rectangle with
     ' double-precision coordinates and dimensions.
     Private Structure RectangleDouble
@@ -184,8 +182,6 @@ Public Class Form1
             Me.Brush = brush
         End Sub
 
-
-
         Public Sub MoveToPosition(ByVal clientRectangle As Rectangle)
 
             ' Place the FPS display at the bottom of the client area.
@@ -193,9 +189,6 @@ Public Class Form1
                                  clientRectangle.Bottom - 75)
 
         End Sub
-
-
-
 
     End Structure
 
@@ -417,15 +410,6 @@ Public Class Form1
         Me.WindowState = FormWindowState.Maximized
 
     End Sub
-
-    'Private Sub ResizeFPS()
-
-    '    ' Place the FPS display at the bottom of the client area.
-    '    FPSDisplay.Location = New Point(FPSDisplay.Location.X,
-    '                                    ClientRectangle.Bottom - 75)
-
-    'End Sub
-
 
 End Class
 
