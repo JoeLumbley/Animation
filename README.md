@@ -277,51 +277,6 @@ End Sub
 
 ---
 
-### Drawing the Frame
-
-```vb
-Private Sub DrawFrame()
-    Buffer?.Graphics.FillRectangle(Rectangle.Brush, Rectangle.GetNearestX, Rectangle.GetNearestY, Rectangle.GetNearestWidth, Rectangle.GetNearestHeight)
-    Buffer?.Graphics.DrawString(FPSDisplay.Text, FPSDisplay.Font, FPSDisplay.Brush, FPSDisplay.Location)
-End Sub
-```
-- **What It Does**: This method clears the buffer with the background color, fills a rectangle with the specified brush, and draws the FPS display string.
-- **Why It Matters**: This is the core of what you see on the screen; it updates the visual representation of the rectangle and the FPS.
-
----
-
-## Conclusion
-
-This walkthrough covers the main components of the animation project. Feel free to experiment with the code, adjust parameters, and see how they affect the animation! Understanding these principles will help you master animation techniques in Visual Basic .NET.
-
-### Exercises
-
-Here are some exercises you can try to enhance your understanding of the animation project:
-1. **Change Rectangle Size**: Modify the dimensions of the rectangle in the `RectangleDouble` structure.
-2. **Change Rectangle Color**: Update the `RectangleBrush` color in the initialization section.
-3. **Adjust Rectangle Velocity**: Locate the variable that defines the rectangle's velocity and modify it.
-4. **Add Multiple Rectangles**: Create additional instances of `RectangleDouble` to represent multiple rectangles.
-5. **Implement User Controls**: Add keyboard controls to change the rectangle's size, color, or velocity while the application is running.
-6. **Create a Bouncing Effect**: Modify the `MoveRectangle` method to make the rectangle bounce off the edges of the window.
-7. **Change Background Color**: Modify the `BackgroundColor` variable to change the background of the form.
-
-These exercises will help you better understand the concepts of animation and improve your programming skills in Visual Basic .NET. Happy coding!
-
----
-
-## Review
-
-This lesson has been carefully crafted to ensure clarity and correctness. Each section provides detailed explanations of the code, making it accessible for beginners. If you have any questions or need further clarification, feel free to ask!
-
-
-
-
-
-
-
-
-
-
 
 
 
