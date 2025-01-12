@@ -341,7 +341,7 @@ Public Class Form1
             Buffer.Graphics.TextRenderingHint =
                  Drawing.Text.TextRenderingHint.AntiAlias
 
-            Buffer.Graphics.Clear(BackgroundColor)
+            EraseFrame()
 
         End If
 
@@ -349,6 +349,7 @@ Public Class Form1
 
     Private Sub DrawFrame()
 
+        ' Draw rectangle.
         Buffer?.Graphics.FillRectangle(Rectangle.Brush,
                                        Rectangle.GetNearestX,
                                        Rectangle.GetNearestY,
