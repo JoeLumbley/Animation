@@ -253,8 +253,6 @@ Public Class Form1
 
         If Not WindowState = FormWindowState.Minimized Then
 
-            'ResizeFPS()
-
             FPSDisplay.MoveToPosition(ClientRectangle)
 
             Rectangle.CenterVertically(ClientRectangle)
