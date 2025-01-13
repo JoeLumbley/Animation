@@ -271,16 +271,11 @@ Public Class Form1
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
-        'If Not WindowState = FormWindowState.Minimized Then
-
         UpdateFrame()
 
         Invalidate() ' Calls OnPaint Sub
 
-        'End If
-
     End Sub
-
 
     Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
 
