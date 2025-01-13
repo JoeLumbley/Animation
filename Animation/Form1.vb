@@ -202,23 +202,19 @@ Public Class Form1
         Public FrameCount As Integer
         Public StartTime As DateTime
         Public TimeElapsed As TimeSpan
-        Public SecondsElapsed As Double
         Public FPS As String
 
         Public Sub New(frameCount As Integer, startTime As Date,
-                       timeElapsed As TimeSpan, secondsElapsed As Double)
+                       timeElapsed As TimeSpan)
 
             Me.FrameCount = frameCount
             Me.StartTime = startTime
             Me.TimeElapsed = timeElapsed
-            Me.SecondsElapsed = secondsElapsed
         End Sub
 
         Public Sub Update()
 
             TimeElapsed = Now.Subtract(StartTime)
-
-            'SecondsElapsed = TimeElapsed.TotalSeconds
 
             If TimeElapsed.TotalSeconds < 1 Then
 
@@ -239,7 +235,7 @@ Public Class Form1
     End Structure
 
     Private FrameCounter As New FrameCounterStructure(0, DateTime.Now,
-                                                      TimeSpan.Zero, 0)
+                                                      TimeSpan.Zero)
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
