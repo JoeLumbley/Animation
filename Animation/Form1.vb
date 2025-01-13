@@ -210,6 +210,7 @@ Public Class Form1
             Me.FrameCount = frameCount
             Me.StartTime = startTime
             Me.TimeElapsed = timeElapsed
+            Me.FPS = "--"
         End Sub
 
         Public Sub Update()
