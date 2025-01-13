@@ -259,21 +259,28 @@ Public Class Form1
 
             DisposeBuffer()
 
+            Timer1.Enabled = True
+
+        Else
+
+            Timer1.Enabled = False
+
         End If
 
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
-        If Not WindowState = FormWindowState.Minimized Then
+        'If Not WindowState = FormWindowState.Minimized Then
 
-            UpdateFrame()
+        UpdateFrame()
 
-            Invalidate() ' Calls OnPaint Sub
+        Invalidate() ' Calls OnPaint Sub
 
-        End If
+        'End If
 
     End Sub
+
 
     Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
 
