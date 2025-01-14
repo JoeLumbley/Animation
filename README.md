@@ -287,12 +287,25 @@ End Sub
 
 ```vb
 Private Sub DrawFrame()
-    Buffer?.Graphics.FillRectangle(Rectangle.Brush, Rectangle.GetNearestX, Rectangle.GetNearestY, Rectangle.GetNearestWidth, Rectangle.GetNearestHeight)
-    Buffer?.Graphics.DrawString(FPSDisplay.Text, FPSDisplay.Font, FPSDisplay.Brush, FPSDisplay.Location)
+
+    Buffer?.Graphics.FillRectangle(Rectangle.Brush,
+                                   Rectangle.GetNearestX,
+                                   Rectangle.GetNearestY,
+                                   Rectangle.GetNearestWidth,
+                                   Rectangle.GetNearestHeight)
+
+    Buffer?.Graphics.DrawString(FPSDisplay.Text,
+                                FPSDisplay.Font,
+                                FPSDisplay.Brush,
+                                FPSDisplay.Location)
+
 End Sub
+
 ```
 - **What It Does**: This method fills the rectangle with the specified brush at its current position and dimensions, and it draws the FPS display string on the buffer.
 - **Why It Matters**: This is where the visual representation of the rectangle and the FPS is updated on the screen. However, it does **not** clear the buffer; that function is handled by the `EraseFrame` method.
+
+---
 
 ### Erasing the Frame
 
@@ -300,6 +313,7 @@ End Sub
 Private Sub EraseFrame()
     Buffer?.Graphics.Clear(BackgroundColor)
 End Sub
+
 ```
 - **What It Does**: This method clears the buffer with the background color defined by `BackgroundColor`.
 - **Why It Matters**: Clearing the buffer is essential to prepare for the next frame. It ensures that previous drawings do not persist, allowing for a clean slate for the new frame rendering.
@@ -369,7 +383,7 @@ These exercises will help you to better understand the concepts of animation and
 
 
 
-## More on DeltaTime
+# More on DeltaTime
 
 DeltaTime is a critical concept in game development and animation that refers to the time elapsed between the current frame and the last frame. This concept is essential for ensuring smooth and consistent motion, particularly in an era where games run on various hardware configurations with differing frame rates. Understanding DeltaTime allows developers to create fluid animations and responsive gameplay, enhancing the overall user experience.
 
