@@ -185,8 +185,8 @@ Public Class Form1
         Public Sub MoveToPosition(ByVal clientRectangle As Rectangle)
 
             ' Place the FPS display at the bottom of the client area.
-            Location = New Point(Location.X,
-                                 clientRectangle.Bottom - 75)
+            Location.X = Location.X
+            Location.Y = clientRectangle.Bottom - 75
 
         End Sub
 
