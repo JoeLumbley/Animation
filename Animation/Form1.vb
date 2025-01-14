@@ -205,7 +205,7 @@ Public Class Form1
         Public FPS As String
 
         Public Shared Sub InitializeStructure(
-                              ByRef structureInstance As FrameCounterStructure)
+                          ByRef structureInstance As FrameCounterStructure)
             structureInstance.FrameCount = 0
             structureInstance.StartTime = DateTime.Now
             structureInstance.TimeElapsed = TimeSpan.Zero
