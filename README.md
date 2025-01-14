@@ -384,40 +384,65 @@ DeltaTime is a critical concept in game development and animation that refers to
 3. **Apply DeltaTime**: Use this value to adjust movements, animations, and other time-dependent calculations.
 
 ### Example Code
-Here’s a simplified example illustrating how to implement DeltaTime in a Windows Forms application. Each step is commented for clarity:
+Here’s a simplified example illustrating how to implement DeltaTime in a Windows Forms application.
 
 ```vb
-Private Structure DeltaTimeStructure
-    Public CurrentFrame As DateTime
-    Public LastFrame As DateTime
-    Public ElapsedTime As TimeSpan
 
-    ' Constructor to initialize the DeltaTime structure
-    Public Sub New(currentFrame As DateTime, lastFrame As DateTime)
-        Me.CurrentFrame = currentFrame
-        Me.LastFrame = lastFrame
-        Me.ElapsedTime = CurrentFrame - LastFrame
+    ' The DeltaTimeStructure represents the time difference
+    ' between two frames.
+    Private Structure DeltaTimeStructure
+
+        Public CurrentFrame As DateTime
+        Public LastFrame As DateTime
+        Public ElapsedTime As TimeSpan
+
+        Public Sub New(currentFrame As Date, lastFrame As Date,
+                       elapsedTime As TimeSpan)
+
+            Me.CurrentFrame = currentFrame
+            Me.LastFrame = lastFrame
+            Me.ElapsedTime = elapsedTime
+        End Sub
+
+        Public Sub Update()
+
+            ' Set the current frame's time to the current system time.
+            CurrentFrame = Now
+
+            ' Calculates the elapsed time ( delta time Δt ) between the
+            ' current frame and the last frame.
+            ElapsedTime = CurrentFrame - LastFrame
+
+            ' Updates the last frame's time to the current frame's time for
+            ' use in the next update.
+            LastFrame = CurrentFrame
+
+        End Sub
+
+    End Structure
+
+    Private DeltaTime As New DeltaTimeStructure(DateTime.Now, DateTime.Now,
+                                                TimeSpan.Zero)
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+
+      DeltaTime.Update()
+
+      Rectangle.MoveRight(DeltaTime.ElapsedTime)
+
+      ' Render the frame
+      Invalidate() ' Calls OnPaint Sub
+
     End Sub
-End Structure
 
-Private DeltaTime As DeltaTimeStructure
+    Public Sub MoveRight(ByVal deltaTime As TimeSpan)
 
-' Timer Tick Event
-Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-    Dim currentTime As DateTime = DateTime.Now
-    DeltaTime = New DeltaTimeStructure(currentTime, DeltaTime.CurrentFrame)
+      ' Move the rectangle to the right.
+      X += Velocity * deltaTime.TotalSeconds
+      ' Displacement = Velocity x Delta Time ( Δs = V * Δt )
 
-    ' Update game objects based on DeltaTime.ElapsedTime
-    UpdateGameObjects(DeltaTime.ElapsedTime.TotalSeconds)
+    End Sub
 
-    ' Render the frame
-    Invalidate()
-End Sub
-
-Private Sub UpdateGameObjects(deltaTime As Double)
-    ' Example: Move an object based on its speed
-    Object.Position += Object.Speed * deltaTime
-End Sub
 ```
 
 ### Best Practices
