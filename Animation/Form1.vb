@@ -204,14 +204,21 @@ Public Class Form1
         Public TimeElapsed As TimeSpan
         Public FPS As String
 
-        Public Sub New(frameCount As Integer, startTime As Date,
-                       timeElapsed As TimeSpan)
+        'Public Sub New()
 
-            Me.FrameCount = frameCount
-            Me.StartTime = startTime
-            Me.TimeElapsed = timeElapsed
-            Me.FPS = "--"
+        '    FrameCount = 0
+        '    StartTime = DateTime.Now
+        '    TimeElapsed = TimeSpan.Zero
+        '    FPS = "--"
+        'End Sub
+
+        Public Shared Sub InitializeStructure(ByRef structureInstance As FrameCounterStructure)
+            structureInstance.FrameCount = 0
+            structureInstance.StartTime = DateTime.Now
+            structureInstance.TimeElapsed = TimeSpan.Zero
+            structureInstance.FPS = "--"
         End Sub
+
 
         Public Sub Update()
 
@@ -235,8 +242,7 @@ Public Class Form1
 
     End Structure
 
-    Private FrameCounter As New FrameCounterStructure(0, DateTime.Now,
-                                                      TimeSpan.Zero)
+    Private FrameCounter As New FrameCounterStructure()
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
